@@ -33,12 +33,14 @@ export class Login {
       return;
     }
 
-    const validEmail = 'admin@igreja.com';
-    const validPassword = '123456';
+    // Demo authentication only.
+    // Production authentication should be handled by a secure backend.
+    const demoEmail = 'admin@churchconnect.demo';
+    const demoPassword = 'demo123';
 
     if (
-      this.email.trim() === validEmail &&
-      this.password === validPassword
+      this.email.trim() === demoEmail &&
+      this.password === demoPassword
     ) {
       localStorage.setItem('church_admin_authenticated', 'true');
 
