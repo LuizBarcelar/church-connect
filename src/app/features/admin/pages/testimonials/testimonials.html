@@ -1,0 +1,191 @@
+@if (showForm) {
+  <app-testimonial-form
+    [testimonial]="selectedTestimonial"
+    (saved)="saveTestimonial($event)"
+    (cancelled)="closeForm()"
+  />
+} @else {
+  <section class="admin-page">
+    <header class="page-header">
+      <div>
+        <span class="section-label">GERENCIAMENTO DE CONTEÚDO</span>
+
+        <h1>Testemunhos</h1>
+
+        <p>
+          Gerencie as histórias e experiências compartilhadas pela comunidade.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="createTestimonial()"
+      >
+        <span class="button-icon">+</span>
+        Novo testemunho
+      </button>
+    </header>
+
+    @if (showDeleteMessage) {
+      <div class="success-message">
+        Testemunho excluído com sucesso.
+      </div>
+    }
+
+    <section class="summary-grid">
+      <article class="summary-card">
+        <div class="summary-icon">◈</div>
+
+        <div>
+          <span class="summary-label">Total de testemunhos</span>
+          <strong>{{ testimonialList.length }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon">✓</div>
+
+        <div>
+          <span class="summary-label">Publicados</span>
+          <strong>{{ testimonialList.length }}</strong>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon">◌</div>
+
+        <div>
+          <span class="summary-label">Categorias</span>
+          <strong>{{ testimonialCategories }}</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="content-card">
+      <div class="content-card-header">
+        <div>
+          <h2>Testemunhos cadastrados</h2>
+          <p>Visualize e gerencie os relatos disponíveis no site.</p>
+        </div>
+
+        <div class="search-wrapper">
+          <span class="search-icon">⌕</span>
+
+          <input
+            type="search"
+            [(ngModel)]="searchTerm"
+            placeholder="Buscar testemunho..."
+            aria-label="Buscar testemunho"
+          />
+        </div>
+      </div>
+
+      @if (filteredTestimonials.length > 0) {
+        <div class="table-wrapper">
+          <table class="testimonials-table">
+            <thead>
+              <tr>
+                <th>Testemunho</th>
+                <th>Categoria</th>
+                <th>Localização</th>
+                <th>Prévia</th>
+                <th class="actions-column">Ações</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (testimonial of filteredTestimonials; track testimonial.id) {
+                <tr>
+                  <td>
+                    <div class="testimonial-person">
+                      <div class="testimonial-avatar">
+                        @if (testimonial.imageUrl) {
+                          <img
+                            [src]="testimonial.imageUrl"
+                            [alt]="testimonial.name"
+                          />
+                        } @else {
+                          <span>{{ testimonial.initials }}</span>
+                        }
+                      </div>
+
+                      <div>
+                        <strong>{{ testimonial.name }}</strong>
+                        <span>{{ testimonial.title }}</span>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span class="category-badge">
+                      {{ testimonial.category }}
+                    </span>
+                  </td>
+
+                  <td>{{ testimonial.location }}</td>
+
+                  <td>
+                    <p class="testimonial-preview">
+                      {{ getPreviewText(testimonial) }}
+                    </p>
+                  </td>
+
+                  <td>
+                    <div class="table-actions">
+                      <button
+                        type="button"
+                        class="action-button edit"
+                        (click)="editTestimonial(testimonial)"
+                      >
+                        Editar
+                      </button>
+
+                      <button
+                        type="button"
+                        class="action-button delete"
+                        (click)="deleteTestimonial(testimonial)"
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      } @else {
+        <div class="empty-state">
+          <div class="empty-icon">⌕</div>
+
+          <h3>Nenhum testemunho encontrado</h3>
+
+          <p>
+            Tente buscar por outro nome, categoria ou localização.
+          </p>
+        </div>
+      }
+    </section>
+
+    @if (selectedTestimonial) {
+      <section class="selected-preview">
+        <div>
+          <span class="section-label">TESTEMUNHO SELECIONADO</span>
+          <h2>{{ selectedTestimonial.name }}</h2>
+          <p>
+            A edição completa será implementada na próxima etapa.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="selectedTestimonial = null"
+        >
+          Fechar
+        </button>
+      </section>
+    }
+  </section>
+}

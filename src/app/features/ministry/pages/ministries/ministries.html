@@ -1,0 +1,43 @@
+<section class="ministries-page">
+
+  <section class="ministries-hero">
+    <div class="container">
+      <span class="section-label">MINISTÉRIOS</span>
+
+      <h1>
+        Há um lugar para <span>você.</span>
+      </h1>
+
+      <p>
+        Descubra os espaços de comunhão, crescimento e serviço
+        que fazem parte da nossa comunidade.
+      </p>
+    </div>
+  </section>
+
+  <section class="ministries-list">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="section-label">NOSSA COMUNIDADE</span>
+
+        <h2>
+          Caminhando juntos na <span>fé.</span>
+        </h2>
+
+        <p>
+          Cada ministério possui uma missão especial e oferece
+          oportunidades para servir, aprender e crescer.
+        </p>
+      </div>
+
+      <div class="ministries-grid">
+        @for (ministry of ministries; track ministry.id) {
+          <app-ministry-card [ministry]="ministry" />
+        }
+      </div>
+
+    </div>
+  </section>
+
+</section>

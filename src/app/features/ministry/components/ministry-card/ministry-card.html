@@ -1,0 +1,47 @@
+<article class="ministry-card">
+
+  <div class="ministry-image">
+
+    @if (ministry().imageUrl) {
+      <img
+        [src]="ministry().imageUrl"
+        [alt]="'Ministério de ' + ministry().name"
+      />
+    } @else {
+      <div class="image-placeholder">
+        <span>{{ ministry().name }}</span>
+      </div>
+    }
+
+    <span class="ministry-badge">
+      MINISTÉRIO
+    </span>
+
+  </div>
+
+  <div class="ministry-content">
+
+    <h3>
+      {{ ministry().name }}
+    </h3>
+
+    <p>
+      {{ ministry().description }}
+    </p>
+
+    <a
+      class="ministry-link"
+      [routerLink]="ministry().route"
+    >
+      <span class="link-text">
+        Conhecer ministério
+      </span>
+
+      <span class="link-arrow">
+        →
+      </span>
+    </a>
+
+  </div>
+
+</article>

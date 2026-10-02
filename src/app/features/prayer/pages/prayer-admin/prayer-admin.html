@@ -1,0 +1,587 @@
+<section class="prayer-admin-page">
+
+  <!-- =========================
+       INTRODUÇÃO
+  ========================== -->
+
+  <div class="page-intro">
+
+    <div>
+
+      <span class="section-label">
+        PEDIDOS DE ORAÇÃO
+      </span>
+
+      <h1>
+        Acompanhamento de orações
+      </h1>
+
+      <p>
+        Acompanhe os pedidos enviados pela comunidade
+        e cuide de cada solicitação com atenção.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ESTATÍSTICAS
+  ========================== -->
+
+  <div class="stats-grid">
+
+    <!-- TOTAL -->
+
+    <article class="stat-card">
+
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          TOTAL
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="HandHeart"
+            [size]="20"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ totalRequests }}
+      </strong>
+
+      <span class="stat-description">
+        Pedidos recebidos
+      </span>
+
+    </article>
+
+
+    <!-- PENDENTES -->
+
+    <article class="stat-card pending">
+
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          PENDENTES
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="Clock3"
+            [size]="20"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ pendingRequests }}
+      </strong>
+
+      <span class="stat-description">
+        Aguardando acompanhamento
+      </span>
+
+    </article>
+
+
+    <!-- ATENDIDOS -->
+
+    <article class="stat-card answered">
+
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          ATENDIDOS
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="CheckCircle2"
+            [size]="20"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ answeredRequests }}
+      </strong>
+
+      <span class="stat-description">
+        Pedidos acompanhados
+      </span>
+
+    </article>
+
+  </div>
+
+
+  <!-- =========================
+       LISTAGEM
+  ========================== -->
+
+  <article class="requests-panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <span class="panel-label">
+          SOLICITAÇÕES
+        </span>
+
+        <h2>
+          Pedidos recebidos
+        </h2>
+
+      </div>
+
+      <span class="request-count">
+        {{ totalRequests }}
+        {{ totalRequests === 1 ? 'pedido' : 'pedidos' }}
+      </span>
+
+    </div>
+
+
+    @if (requests.length === 0) {
+
+      <!-- VAZIO -->
+
+      <div class="empty-state">
+
+        <span class="empty-icon">
+          <lucide-icon
+            [img]="HandHeart"
+            [size]="27"
+          />
+        </span>
+
+        <h3>
+          Nenhum pedido recebido
+        </h3>
+
+        <p>
+          Quando alguém enviar um pedido de oração,
+          ele aparecerá nesta área.
+        </p>
+
+      </div>
+
+    } @else {
+
+      <!-- LISTA -->
+
+      <div class="request-list">
+
+        @for (request of requests; track request.id) {
+
+          <article
+            class="request-card"
+            [class.request-answered]="request.status === 'answered'"
+          >
+
+            <div class="request-main">
+
+              <div class="request-avatar">
+                {{ request.name.charAt(0).toUpperCase() }}
+              </div>
+
+
+              <div class="request-info">
+
+                <div class="request-name-row">
+
+                  <h3>
+                    {{ request.name }}
+                  </h3>
+
+                  <span
+                    class="status-badge"
+                    [class.status-answered]="
+                      request.status === 'answered'
+                    "
+                  >
+
+                    @if (request.status === 'pending') {
+
+                      <lucide-icon
+                        [img]="Clock3"
+                        [size]="12"
+                      />
+
+                      Pendente
+
+                    } @else {
+
+                      <lucide-icon
+                        [img]="Check"
+                        [size]="12"
+                      />
+
+                      Atendido
+
+                    }
+
+                  </span>
+
+                </div>
+
+
+                <span class="request-date">
+                  {{ request.createdAt | date:'dd/MM/yyyy HH:mm' }}
+                </span>
+
+
+                <p class="request-preview">
+                  {{ request.message }}
+                </p>
+
+
+                @if (request.isPrivate) {
+
+                  <span class="private-badge">
+
+                    <lucide-icon
+                      [img]="LockKeyhole"
+                      [size]="12"
+                    />
+
+                    Pedido privado
+
+                  </span>
+
+                }
+
+              </div>
+
+            </div>
+
+
+            <!-- AÇÕES -->
+
+            <div class="request-actions">
+
+              <button
+                type="button"
+                class="icon-action view-action"
+                title="Visualizar pedido"
+                (click)="viewRequest(request)"
+              >
+
+                <lucide-icon
+                  [img]="Eye"
+                  [size]="17"
+                />
+
+                <span>
+                  Ver pedido
+                </span>
+
+              </button>
+
+
+              @if (request.status === 'pending') {
+
+                <button
+                  type="button"
+                  class="icon-action complete-action"
+                  title="Marcar como atendido"
+                  (click)="markAsAnswered(request)"
+                >
+
+                  <lucide-icon
+                    [img]="CheckCircle2"
+                    [size]="17"
+                  />
+
+                  <span>
+                    Atendido
+                  </span>
+
+                </button>
+
+              } @else {
+
+                <button
+                  type="button"
+                  class="icon-action reopen-action"
+                  title="Reabrir pedido"
+                  (click)="markAsPending(request)"
+                >
+
+                  <lucide-icon
+                    [img]="RotateCcw"
+                    [size]="16"
+                  />
+
+                  <span>
+                    Reabrir
+                  </span>
+
+                </button>
+
+              }
+
+
+              <button
+                type="button"
+                class="icon-action delete-action"
+                title="Excluir pedido"
+                (click)="deleteRequest(request)"
+              >
+
+                <lucide-icon
+                  [img]="Trash2"
+                  [size]="16"
+                />
+
+                <span class="action-label-desktop">
+                  Excluir
+                </span>
+
+              </button>
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+
+    }
+
+  </article>
+
+
+  <!-- =========================
+       MODAL
+  ========================== -->
+
+  @if (selectedRequest) {
+
+    <div
+      class="modal-overlay"
+      (click)="closeRequest()"
+    >
+
+      <article
+        class="request-modal"
+        (click)="$event.stopPropagation()"
+      >
+
+        <!-- MODAL HEADER -->
+
+        <div class="modal-header">
+
+          <div>
+
+            <span class="modal-label">
+              PEDIDO DE ORAÇÃO
+            </span>
+
+            <h2>
+              {{ selectedRequest.name }}
+            </h2>
+
+            <span class="modal-date">
+              {{ selectedRequest.createdAt | date:'dd/MM/yyyy HH:mm' }}
+            </span>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="modal-close"
+            aria-label="Fechar pedido"
+            (click)="closeRequest()"
+          >
+
+            <lucide-icon
+              [img]="X"
+              [size]="19"
+            />
+
+          </button>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="modal-meta">
+
+          @if (selectedRequest.status === 'pending') {
+
+            <span class="status-badge">
+
+              <lucide-icon
+                [img]="Clock3"
+                [size]="12"
+              />
+
+              Pendente
+
+            </span>
+
+          } @else {
+
+            <span class="status-badge status-answered">
+
+              <lucide-icon
+                [img]="Check"
+                [size]="12"
+              />
+
+              Atendido
+
+            </span>
+
+          }
+
+
+          @if (selectedRequest.isPrivate) {
+
+            <span class="private-badge">
+
+              <lucide-icon
+                [img]="LockKeyhole"
+                [size]="12"
+              />
+
+              Pedido privado
+
+            </span>
+
+          }
+
+        </div>
+
+
+        <!-- CONTATO -->
+
+        @if (selectedRequest.email) {
+
+          <div class="modal-contact">
+
+            <span>
+              CONTATO
+            </span>
+
+            <strong>
+              {{ selectedRequest.email }}
+            </strong>
+
+          </div>
+
+        }
+
+
+        <!-- PEDIDO -->
+
+        <div class="modal-message">
+
+          <span>
+            MENSAGEM
+          </span>
+
+          <p>
+            {{ selectedRequest.message }}
+          </p>
+
+        </div>
+
+
+        @if (selectedRequest.isPrivate) {
+
+          <div class="privacy-notice">
+
+            <lucide-icon
+              [img]="LockKeyhole"
+              [size]="16"
+            />
+
+            <div>
+              <strong>
+                Pedido privado
+              </strong>
+
+              <span>
+                Esta solicitação foi marcada como privada
+                pela pessoa que a enviou.
+              </span>
+            </div>
+
+          </div>
+
+        }
+
+
+        <!-- MODAL ACTIONS -->
+
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="secondary-action"
+            (click)="closeRequest()"
+          >
+            Fechar
+          </button>
+
+
+          @if (selectedRequest.status === 'pending') {
+
+            <button
+              type="button"
+              class="primary-action"
+              (click)="markAsAnswered(selectedRequest)"
+            >
+
+              <lucide-icon
+                [img]="CheckCircle2"
+                [size]="17"
+              />
+
+              Marcar como atendido
+
+            </button>
+
+          } @else {
+
+            <button
+              type="button"
+              class="primary-action"
+              (click)="markAsPending(selectedRequest)"
+            >
+
+              <lucide-icon
+                [img]="RotateCcw"
+                [size]="16"
+              />
+
+              Reabrir pedido
+
+            </button>
+
+          }
+
+        </div>
+
+      </article>
+
+    </div>
+
+  }
+
+</section>

@@ -1,0 +1,244 @@
+<section class="church-location">
+
+  <div class="container">
+
+    <!-- CABEÇALHO -->
+    <div class="location-header">
+
+      <span class="section-label">
+        NOS VISITE
+      </span>
+
+      <h2>
+        Será uma alegria
+        <span>receber você.</span>
+      </h2>
+
+      <p>
+        Venha conhecer nossa igreja, participar dos nossos cultos
+        e viver momentos de fé e comunhão conosco.
+      </p>
+
+    </div>
+
+
+    <!-- CONTEÚDO -->
+    <div class="location-grid">
+
+      <!-- INFORMAÇÕES -->
+      <div class="location-info">
+
+
+        <!-- ENDEREÇO -->
+        <article class="location-card">
+
+          <div class="location-icon">
+            <span>⌖</span>
+          </div>
+
+          <div class="location-card-content">
+
+            <span class="location-label">
+              NOSSO ENDEREÇO
+            </span>
+
+            <h3>
+              {{ church.name }}
+            </h3>
+
+            <p>
+              {{ church.address.block }},
+              {{ church.address.set }},
+              {{ church.address.lot }}
+            </p>
+
+            <p>
+              {{ church.address.neighborhood }}
+            </p>
+
+            <p>
+              {{ church.address.city }} -
+              {{ church.address.state }}
+            </p>
+
+            <small>
+              CEP {{ church.address.cep }}
+            </small>
+
+          </div>
+
+        </article>
+
+
+        <!-- CULTOS -->
+        <article class="location-card schedule-card">
+
+          <div class="location-icon">
+            <span>◷</span>
+          </div>
+
+          <div class="location-card-content schedule-content">
+
+            <span class="location-label">
+              CULTOS E REUNIÕES
+            </span>
+
+            <h3>
+              Nossos horários
+            </h3>
+
+            <div class="schedule-list">
+
+              @for (service of church.services; track service.day) {
+
+                <div class="schedule-item">
+
+                  <strong>
+                    {{ service.day }}
+                  </strong>
+
+                  <span>
+                    {{ service.times.join(' • ') }}
+                  </span>
+
+                </div>
+
+              }
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- CONTATO -->
+        @if (church.contact.whatsapp || church.contact.email) {
+
+          <article class="location-card">
+
+            <div class="location-icon">
+              <span>✦</span>
+            </div>
+
+            <div class="location-card-content">
+
+              <span class="location-label">
+                ENTRE EM CONTATO
+              </span>
+
+              <h3>
+                Fale conosco
+              </h3>
+
+              @if (church.contact.whatsapp) {
+
+                <p>
+                  WhatsApp
+                </p>
+
+                <a
+                  [href]="getWhatsappUrl(church.contact.whatsapp)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact-link"
+                >
+                  {{ church.contact.whatsapp }}
+                  <span>↗</span>
+                </a>
+
+              }
+
+              @if (church.contact.email) {
+
+                <p class="contact-title">
+                  E-mail
+                </p>
+
+                <a
+                  [href]="'mailto:' + church.contact.email"
+                  class="contact-link"
+                >
+                  {{ church.contact.email }}
+                </a>
+
+              }
+
+            </div>
+
+          </article>
+
+        }
+
+
+        <!-- BOTÃO -->
+        <a
+          [href]="mapsUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="maps-button"
+        >
+          <span class="maps-icon">
+            ⌖
+          </span>
+
+          <span>
+            Como chegar
+          </span>
+
+          <span class="maps-arrow">
+            →
+          </span>
+        </a>
+
+      </div>
+
+
+      <!-- MAPA -->
+      <div class="map-wrapper">
+
+        <div class="map-container">
+
+          <iframe
+            [src]="mapEmbedUrl"
+            title="Localização da igreja"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+
+        </div>
+
+
+        <!-- CARD SOBRE O MAPA -->
+        <div class="map-info">
+
+          <span class="map-info-icon">
+            ⌖
+          </span>
+
+          <div>
+
+            <strong>
+              Estamos em {{ church.address.city }}
+            </strong>
+
+            <small>
+              {{ church.address.neighborhood }}
+              •
+              {{ church.address.city }} -
+              {{ church.address.state }}
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

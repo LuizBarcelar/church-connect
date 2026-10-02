@@ -1,0 +1,217 @@
+@if (events.length > 0) {
+
+  <section class="weekly-events">
+
+    <div class="container">
+
+      <!-- CABEÇALHO -->
+      <header class="events-header">
+
+        <div class="events-heading">
+
+          <div class="section-label">
+            <span class="label-line"></span>
+            <span>PROGRAMAÇÃO DA SEMANA</span>
+          </div>
+
+          <h2>
+            Momentos especiais
+            <span>para vivermos juntos.</span>
+          </h2>
+
+        </div>
+
+        <p class="events-intro">
+          Confira os encontros e programações especiais
+          preparados para esta semana.
+        </p>
+
+      </header>
+
+
+      <!-- CARROSSEL -->
+      <div class="events-carousel">
+
+        <!-- SETA ESQUERDA -->
+        <button
+          type="button"
+          class="carousel-button carousel-button-left"
+          aria-label="Ver programação anterior"
+          (click)="scrollEvents('left')"
+        >
+          ‹
+        </button>
+
+
+        <!-- TRILHO DOS EVENTOS -->
+        <div
+          #eventsTrack
+          class="events-track"
+          (scroll)="handleScroll()"
+        >
+
+          @for (
+            event of carouselEvents;
+            track $index;
+            let index = $index
+          ) {
+
+            <article
+              class="event-banner"
+              [class.event-banner-no-image]="!event.imageUrl"
+            >
+
+              <!-- IMAGEM -->
+              @if (event.imageUrl) {
+
+                <img
+                  class="event-image"
+                  [src]="event.imageUrl"
+                  [alt]="event.title"
+                />
+
+              }
+
+
+              <!-- FUNDO PARA EVENTO SEM IMAGEM -->
+              <div class="event-background"></div>
+
+
+              <!-- OVERLAY -->
+              <div class="event-overlay"></div>
+
+
+              <!-- CONTEÚDO -->
+              <div class="event-content">
+
+                <div class="event-top">
+
+                  <span class="event-special">
+
+                    <lucide-icon
+                      [img]="Sparkles"
+                      [size]="15"
+                    />
+
+                    EVENTO ESPECIAL
+
+                  </span>
+
+                  <span class="event-number">
+                    0{{ (index % events.length) + 1 }}
+                  </span>
+
+                </div>
+
+
+                <div class="event-main">
+
+                  <div class="event-date-box">
+
+                    <span class="event-day">
+                      {{
+                        event.date
+                          | date:'dd':'':'pt-BR'
+                      }}
+                    </span>
+
+                    <span class="event-month">
+                      {{
+                        event.date
+                          | date:'MMM':'':'pt-BR'
+                      }}
+                    </span>
+
+                  </div>
+
+
+                  <div class="event-info">
+
+                    <div class="event-meta">
+
+                      <span>
+                        <lucide-icon
+                          [img]="CalendarDays"
+                          [size]="16"
+                        />
+
+                        {{
+                          event.date
+                            | date:'EEEE, dd/MM':'':'pt-BR'
+                        }}
+                      </span>
+
+
+                      @if (event.time) {
+
+                        <span>
+                          <lucide-icon
+                            [img]="Clock3"
+                            [size]="16"
+                          />
+
+                          {{ event.time }}
+                        </span>
+
+                      }
+
+                    </div>
+
+
+                    <h3>
+                      {{ event.title }}
+                    </h3>
+
+
+                    @if (event.description) {
+
+                      <p>
+                        {{ event.description }}
+                      </p>
+
+                    }
+
+
+                    <a
+                      [routerLink]="['/eventos', event.id]"
+                      class="event-link"
+                    >
+                      Mais informações
+
+                      <lucide-icon
+                        [img]="ArrowRight"
+                        [size]="17"
+                      />
+
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+
+        <!-- SETA DIREITA -->
+        <button
+          type="button"
+          class="carousel-button carousel-button-right"
+          aria-label="Ver próxima programação"
+          (click)="scrollEvents('right')"
+        >
+          ›
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+}

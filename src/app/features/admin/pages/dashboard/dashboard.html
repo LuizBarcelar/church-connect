@@ -1,0 +1,660 @@
+<section class="dashboard">
+
+  <!-- INTRODUÇÃO -->
+  <div class="dashboard-intro">
+
+    <div>
+      <span class="section-label">
+        RESUMO DA GESTÃO
+      </span>
+
+      <h2>
+        Bem-vindo ao Church Connect.
+      </h2>
+
+      <p>
+        Acompanhe os principais dados e informações
+        da comunidade em um só lugar.
+      </p>
+    </div>
+
+    <span class="dashboard-date">
+      {{ currentDate | date:'dd/MM/yyyy' }}
+    </span>
+
+  </div>
+
+
+  <!-- ESTATÍSTICAS -->
+  <div class="stats-grid">
+
+    <!-- MEMBROS -->
+    <a
+      routerLink="/admin/membros"
+      class="stat-card stat-link"
+    >
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          MEMBROS
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="Users"
+            [size]="19"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ totalMembers }}
+      </strong>
+
+      <span class="stat-description">
+        Pessoas cadastradas
+      </span>
+    </a>
+
+
+    <!-- ANIVERSÁRIOS -->
+    <a
+      routerLink="/admin/membros"
+      class="stat-card stat-link"
+    >
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          ANIVERSÁRIOS
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="Cake"
+            [size]="19"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ birthdayMembers.length }}
+      </strong>
+
+      <span class="stat-description">
+        Em {{ birthdayMonthName }}
+      </span>
+    </a>
+
+
+    <!-- TESTEMUNHOS -->
+    <a
+      routerLink="/admin/testemunhos"
+      class="stat-card stat-link"
+    >
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          TESTEMUNHOS
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="MessageSquareQuote"
+            [size]="19"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ totalTestimonials }}
+      </strong>
+
+      <span class="stat-description">
+        Histórias publicadas
+      </span>
+    </a>
+
+
+    <!-- OBRAS -->
+    <a
+      routerLink="/admin/missoes"
+      class="stat-card stat-link"
+    >
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          OBRAS
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="Globe2"
+            [size]="19"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ totalMissions }}
+      </strong>
+
+      <span class="stat-description">
+        Projetos cadastrados
+      </span>
+    </a>
+
+
+    <!-- PEDIDOS DE ORAÇÃO -->
+    <a
+      routerLink="/admin/oracoes"
+      class="stat-card stat-link prayer-stat-card"
+    >
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          PEDIDOS DE ORAÇÃO
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="HandHeart"
+            [size]="19"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ totalPrayerRequests }}
+      </strong>
+
+      <span class="stat-description">
+        {{ pendingPrayerRequests }} pendentes
+      </span>
+    </a>
+
+  </div>
+
+
+  <!-- SEGUNDA LINHA -->
+  <div class="dashboard-grid">
+
+    <!-- RESUMO DOS MEMBROS -->
+    <article class="dashboard-panel">
+
+      <div class="panel-heading">
+
+        <div>
+          <span class="panel-label">
+            MEMBROS
+          </span>
+
+          <h3>
+            Resumo da comunidade
+          </h3>
+        </div>
+
+        <a
+          routerLink="/admin/membros"
+          class="panel-link"
+        >
+          Ver membros
+        </a>
+
+      </div>
+
+
+      <div class="member-summary">
+
+        <div class="member-summary-card">
+
+          <span class="summary-icon">
+            <lucide-icon
+              [img]="Users"
+              [size]="20"
+            />
+          </span>
+
+          <div>
+            <strong>
+              {{ totalMembers }}
+            </strong>
+
+            <span>
+              Total de membros
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="member-summary-card">
+
+          <span class="summary-icon">
+            <lucide-icon
+              [img]="Droplets"
+              [size]="20"
+            />
+          </span>
+
+          <div>
+            <strong>
+              {{ baptizedMembers }}
+            </strong>
+
+            <span>
+              Membros batizados
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="member-summary-card">
+
+          <span class="summary-icon">
+            <lucide-icon
+              [img]="HeartHandshake"
+              [size]="20"
+            />
+          </span>
+
+          <div>
+            <strong>
+              {{ ministryMembers }}
+            </strong>
+
+            <span>
+              Atuando em ministérios
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ANIVERSARIANTES -->
+    <article class="dashboard-panel">
+
+      <div class="panel-heading">
+
+        <div>
+          <span class="panel-label">
+            COMUNIDADE
+          </span>
+
+          <h3>
+            Aniversariantes
+          </h3>
+        </div>
+
+        <a
+          routerLink="/admin/membros"
+          class="panel-link"
+        >
+          Ver todos
+        </a>
+
+      </div>
+
+
+      @if (birthdayMembers.length > 0) {
+
+        <div class="birthday-dashboard-list">
+
+          @for (member of birthdayMembers; track member.id) {
+
+            <a
+              [routerLink]="['/admin/membros', member.id]"
+              class="birthday-dashboard-item"
+            >
+
+              <div class="birthday-dashboard-avatar">
+
+                @if (member.photoUrl) {
+
+                  <img
+                    [src]="member.photoUrl"
+                    [alt]="member.fullName"
+                  />
+
+                } @else {
+
+                  <span>
+                    {{ getInitials(member.fullName) }}
+                  </span>
+
+                }
+
+              </div>
+
+
+              <div class="birthday-dashboard-info">
+
+                <strong>
+                  {{ member.fullName }}
+                </strong>
+
+                <span>
+                  {{ member.birthDate | date:'dd/MM' }}
+                </span>
+
+              </div>
+
+
+              @if (isBirthdayToday(member)) {
+
+                <span class="birthday-today-badge">
+                  Hoje
+                </span>
+
+              }
+
+            </a>
+
+          }
+
+        </div>
+
+      } @else {
+
+        <div class="dashboard-empty">
+
+          <span class="empty-icon">
+            <lucide-icon
+              [img]="Cake"
+              [size]="22"
+            />
+          </span>
+
+          <p>
+            Não há aniversariantes em
+            {{ birthdayMonthName }}.
+          </p>
+
+        </div>
+
+      }
+
+    </article>
+
+  </div>
+
+
+  <!-- RESUMO DO SISTEMA -->
+  <div class="dashboard-grid bottom-grid">
+
+    <!-- CONTEÚDOS -->
+    <article class="dashboard-panel">
+
+      <div class="panel-heading">
+
+        <div>
+          <span class="panel-label">
+            ESTRUTURA
+          </span>
+
+          <h3>
+            Conteúdos cadastrados
+          </h3>
+        </div>
+
+      </div>
+
+
+      <div class="content-summary">
+
+        <a
+          routerLink="/admin/testemunhos"
+          class="content-summary-item"
+        >
+
+          <span class="content-summary-icon">
+            <lucide-icon
+              [img]="MessageSquareQuote"
+              [size]="18"
+            />
+          </span>
+
+          <div>
+            <strong>
+              {{ totalTestimonials }}
+            </strong>
+
+            <span>
+              Testemunhos
+            </span>
+          </div>
+
+          <lucide-icon
+            class="summary-arrow"
+            [img]="ArrowRight"
+            [size]="17"
+          />
+
+        </a>
+
+
+        <a
+          routerLink="/admin/missoes"
+          class="content-summary-item"
+        >
+
+          <span class="content-summary-icon">
+            <lucide-icon
+              [img]="Globe2"
+              [size]="18"
+            />
+          </span>
+
+          <div>
+            <strong>
+              {{ totalMissions }}
+            </strong>
+
+            <span>
+              Obras e missões
+            </span>
+          </div>
+
+          <lucide-icon
+            class="summary-arrow"
+            [img]="ArrowRight"
+            [size]="17"
+          />
+
+        </a>
+
+
+        <a
+          routerLink="/admin/ministerios"
+          class="content-summary-item"
+        >
+
+          <span class="content-summary-icon">
+            <lucide-icon
+              [img]="Church"
+              [size]="18"
+            />
+          </span>
+
+          <div>
+            <strong>
+              {{ totalMinistries }}
+            </strong>
+
+            <span>
+              Ministérios
+            </span>
+          </div>
+
+          <lucide-icon
+            class="summary-arrow"
+            [img]="ArrowRight"
+            [size]="17"
+          />
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- AÇÕES RÁPIDAS -->
+    <article class="dashboard-panel">
+
+      <div class="panel-heading">
+
+        <div>
+          <span class="panel-label">
+            ATALHOS
+          </span>
+
+          <h3>
+            Ações rápidas
+          </h3>
+        </div>
+
+      </div>
+
+
+      <div class="quick-actions">
+
+        <a
+          routerLink="/admin/testemunhos"
+          class="quick-action"
+        >
+
+          <span class="quick-action-icon">
+            <lucide-icon
+              [img]="MessageSquareQuote"
+              [size]="18"
+            />
+          </span>
+
+          <span>
+            <strong>
+              Gerenciar testemunhos
+            </strong>
+
+            <small>
+              Adicionar ou editar histórias
+            </small>
+          </span>
+
+          <lucide-icon
+            class="quick-action-arrow"
+            [img]="ArrowRight"
+            [size]="17"
+          />
+
+        </a>
+
+
+        <a
+          routerLink="/admin/missoes"
+          class="quick-action"
+        >
+
+          <span class="quick-action-icon">
+            <lucide-icon
+              [img]="Globe2"
+              [size]="18"
+            />
+          </span>
+
+          <span>
+            <strong>
+              Gerenciar obras
+            </strong>
+
+            <small>
+              Atualizar projetos missionários
+            </small>
+          </span>
+
+          <lucide-icon
+            class="quick-action-arrow"
+            [img]="ArrowRight"
+            [size]="17"
+          />
+
+        </a>
+
+
+        <a
+          routerLink="/admin/membros"
+          class="quick-action"
+        >
+
+          <span class="quick-action-icon">
+            <lucide-icon
+              [img]="Users"
+              [size]="18"
+            />
+          </span>
+
+          <span>
+            <strong>
+              Gerenciar membros
+            </strong>
+
+            <small>
+              Cadastrar e acompanhar membros
+            </small>
+          </span>
+
+          <lucide-icon
+            class="quick-action-arrow"
+            [img]="ArrowRight"
+            [size]="17"
+          />
+
+        </a>
+
+
+        <a
+          routerLink="/admin/ministerios"
+          class="quick-action"
+        >
+
+          <span class="quick-action-icon">
+            <lucide-icon
+              [img]="Church"
+              [size]="18"
+            />
+          </span>
+
+          <span>
+            <strong>
+              Gerenciar ministérios
+            </strong>
+
+            <small>
+              Administrar áreas da igreja
+            </small>
+          </span>
+
+          <lucide-icon
+            class="quick-action-arrow"
+            [img]="ArrowRight"
+            [size]="17"
+          />
+
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>

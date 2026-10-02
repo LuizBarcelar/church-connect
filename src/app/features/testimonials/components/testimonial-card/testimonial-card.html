@@ -1,0 +1,60 @@
+<article class="testimonial-card">
+
+  <div class="testimonial-image">
+
+    @if (testimonial().imageUrl) {
+      <img
+        [src]="testimonial().imageUrl"
+        [alt]="'Foto de ' + testimonial().name"
+      />
+    } @else {
+      <div class="image-placeholder">
+        <span>{{ testimonial().initials }}</span>
+      </div>
+    }
+
+    <span class="testimonial-category">
+      {{ testimonial().category }}
+    </span>
+
+  </div>
+
+  <div class="testimonial-content">
+
+    <h3>
+      {{ testimonial().title }}
+    </h3>
+
+    <p>
+      {{ testimonial().content[0] }}
+    </p>
+
+    <div class="testimonial-author">
+
+      <div class="author-avatar">
+        {{ testimonial().initials }}
+      </div>
+
+      <div class="author-info">
+        <strong>
+          {{ testimonial().name }}
+        </strong>
+
+        <small>
+          {{ testimonial().location }}
+        </small>
+      </div>
+
+    </div>
+
+    <a
+      class="testimonial-link"
+      [routerLink]="['/testemunhos', testimonial().id]"
+    >
+      <span class="link-text">Ler testemunho</span>
+      <span class="link-arrow">→</span>
+    </a>
+
+  </div>
+
+</article>

@@ -1,0 +1,172 @@
+<aside
+  class="admin-sidebar"
+  [class.is-open]="isOpen"
+>
+
+  <!-- MARCA -->
+  <div class="sidebar-brand">
+
+    <a
+      routerLink="/admin"
+      class="sidebar-logo"
+      (click)="closeMenu()"
+    >
+
+      <div class="sidebar-logo-wrapper">
+        <img
+          src="/brand/logo-church-connect.jpg"
+          alt="Logo da Igreja Internacional da Graça de Deus"
+        />
+      </div>
+
+      <div class="sidebar-brand-text">
+        <strong>Church Connect</strong>
+        <small>ADMINISTRAÇÃO</small>
+      </div>
+
+    </a>
+
+  </div>
+
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="sidebar-navigation">
+
+    <span class="navigation-label">
+      GERENCIAMENTO
+    </span>
+
+
+    <a
+      routerLink="/admin"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="closeMenu()"
+    >
+      <span class="navigation-icon">
+        <lucide-icon [img]="LayoutDashboard" [size]="18" />
+      </span>
+
+      <span class="navigation-text">
+        Dashboard
+      </span>
+    </a>
+
+
+    <a
+      routerLink="/admin/testemunhos"
+      routerLinkActive="active"
+      (click)="closeMenu()"
+    >
+      <span class="navigation-icon">
+        <lucide-icon [img]="MessageSquareQuote" [size]="18" />
+      </span>
+
+      <span class="navigation-text">
+        Testemunhos
+      </span>
+    </a>
+
+
+    <a
+      routerLink="/admin/missoes"
+      routerLinkActive="active"
+      (click)="closeMenu()"
+    >
+      <span class="navigation-icon">
+        <lucide-icon [img]="Globe2" [size]="18" />
+      </span>
+
+      <span class="navigation-text">
+        Obra missionária
+      </span>
+    </a>
+
+
+    <a
+      routerLink="/admin/ministerios"
+      routerLinkActive="active"
+      (click)="closeMenu()"
+    >
+      <span class="navigation-icon">
+        <lucide-icon [img]="HeartHandshake" [size]="18" />
+      </span>
+
+      <span class="navigation-text">
+        Ministérios
+      </span>
+    </a>
+
+
+    <a
+      routerLink="/admin/membros"
+      routerLinkActive="active"
+      (click)="closeMenu()"
+    >
+      <span class="navigation-icon">
+        <lucide-icon [img]="Users" [size]="18" />
+      </span>
+
+      <span class="navigation-text">
+        Membros
+      </span>
+    </a>
+
+
+    <a
+      routerLink="/admin/oracoes"
+      routerLinkActive="active"
+      (click)="closeMenu()"
+    >
+      <span class="navigation-icon">
+        <lucide-icon [img]="HandHeart" [size]="18" />
+      </span>
+
+      <span class="navigation-text">
+        Pedidos de oração
+      </span>
+    </a>
+
+
+    <div class="navigation-separator"></div>
+
+
+    <span class="navigation-label">
+      SISTEMA
+    </span>
+
+
+    <a
+      routerLink="/admin/configuracoes"
+      routerLinkActive="active"
+      (click)="closeMenu()"
+    >
+      <span class="navigation-icon">
+        <lucide-icon [img]="Settings" [size]="18" />
+      </span>
+
+      <span class="navigation-text">
+        Configurações
+      </span>
+    </a>
+
+  </nav>
+
+
+  <!-- RODAPÉ -->
+  <div class="sidebar-bottom">
+
+    <a
+      routerLink="/"
+      class="back-to-site"
+    >
+      <span class="navigation-icon">
+        <lucide-icon [img]="ExternalLink" [size]="17" />
+      </span>
+
+      <span>Voltar para o site</span>
+    </a>
+
+  </div>
+
+</aside>

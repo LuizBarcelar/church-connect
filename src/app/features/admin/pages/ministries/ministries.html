@@ -1,0 +1,361 @@
+<section class="ministries-page">
+
+  <header class="page-header">
+
+    <div class="page-heading">
+
+      <span class="section-label">
+        MINISTÉRIOS
+      </span>
+
+      <h1>
+        Gestão de ministérios
+      </h1>
+
+      <p>
+        Gerencie os ministérios, conteúdos,
+        atividades e informações exibidas
+        no site da igreja.
+      </p>
+
+    </div>
+
+    <button
+      type="button"
+      class="primary-button"
+      (click)="createMinistry()"
+    >
+      <lucide-icon
+        [img]="Plus"
+        [size]="18"
+      />
+
+      Novo ministério
+    </button>
+
+  </header>
+
+
+  <!-- RESUMO -->
+
+  <section class="stats-grid">
+
+    <article class="stat-card">
+
+      <div class="stat-icon">
+        <lucide-icon
+          [img]="UsersRound"
+          [size]="22"
+        />
+      </div>
+
+      <div>
+        <span class="stat-label">
+          Ministérios
+        </span>
+
+        <strong>
+          {{ totalMinistries }}
+        </strong>
+
+        <small>
+          cadastrados
+        </small>
+      </div>
+
+    </article>
+
+
+    <article class="stat-card">
+
+      <div class="stat-icon">
+        <lucide-icon
+          [img]="Layers3"
+          [size]="22"
+        />
+      </div>
+
+      <div>
+        <span class="stat-label">
+          Atividades
+        </span>
+
+        <strong>
+          {{ totalActivities }}
+        </strong>
+
+        <small>
+          registradas
+        </small>
+      </div>
+
+    </article>
+
+
+    <article class="stat-card">
+
+      <div class="stat-icon">
+        <lucide-icon
+          [img]="Image"
+          [size]="22"
+        />
+      </div>
+
+      <div>
+        <span class="stat-label">
+          Com imagem
+        </span>
+
+        <strong>
+          {{ ministriesWithImage }}
+        </strong>
+
+        <small>
+          ministérios
+        </small>
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- LISTAGEM -->
+
+  <section class="ministries-section">
+
+    <div class="list-header">
+
+      <div>
+        <span class="list-eyebrow">
+          CONTEÚDO
+        </span>
+
+        <h2>
+          Ministérios cadastrados
+        </h2>
+      </div>
+
+
+      <label class="search-field">
+
+        <lucide-icon
+          [img]="Search"
+          [size]="18"
+        />
+
+        <input
+          type="search"
+          name="searchTerm"
+          [(ngModel)]="searchTerm"
+          placeholder="Buscar ministério..."
+          autocomplete="off"
+        />
+
+      </label>
+
+    </div>
+
+
+    @if (filteredMinistries.length > 0) {
+
+      <div class="ministries-grid">
+
+        @for (
+          ministry of filteredMinistries;
+          track ministry.id
+        ) {
+
+          <article class="ministry-card">
+
+            <div class="ministry-image">
+
+              @if (hasImage(ministry)) {
+
+                <img
+                  [src]="ministry.imageUrl"
+                  [alt]="ministry.name"
+                />
+
+              } @else {
+
+                <div class="image-placeholder">
+
+                  <lucide-icon
+                    [img]="Church"
+                    [size]="36"
+                  />
+
+                  <span>
+                    Sem imagem
+                  </span>
+
+                </div>
+
+              }
+
+              <span class="activity-badge">
+                {{ getActivityLabel(ministry) }}
+              </span>
+
+            </div>
+
+
+            <div class="ministry-content">
+
+              <div class="ministry-top">
+
+                <span class="ministry-label">
+                  MINISTÉRIO
+                </span>
+
+                <span class="ministry-id">
+                  #{{ ministry.id }}
+                </span>
+
+              </div>
+
+
+              <h3>
+                {{ ministry.name }}
+              </h3>
+
+
+              <p class="ministry-description">
+                {{ ministry.description }}
+              </p>
+
+
+              <div class="headline-box">
+
+                <span>
+                  DESTAQUE
+                </span>
+
+                <p>
+                  {{ ministry.headline }}
+                </p>
+
+              </div>
+
+
+              <div class="route-box">
+
+                <span>
+                  Página pública
+                </span>
+
+                <code>
+                  {{ ministry.route }}
+                </code>
+
+              </div>
+
+
+              <footer class="card-footer">
+
+                <div class="activity-info">
+
+                  <lucide-icon
+                    [img]="Layers3"
+                    [size]="16"
+                  />
+
+                  {{ getActivityLabel(ministry) }}
+
+                </div>
+
+
+                <div class="card-actions">
+
+                  <a
+                    [href]="ministry.route"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-button view"
+                    title="Visualizar no site"
+                    aria-label="Visualizar ministério no site"
+                  >
+                    <lucide-icon
+                      [img]="Eye"
+                      [size]="16"
+                    />
+                  </a>
+
+
+                  <button
+                    type="button"
+                    class="action-button edit"
+                    (click)="editMinistry(ministry)"
+                    title="Editar"
+                    aria-label="Editar ministério"
+                  >
+                    <lucide-icon
+                      [img]="Edit3"
+                      [size]="16"
+                    />
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="action-button delete"
+                    (click)="deleteMinistry(ministry)"
+                    title="Excluir"
+                    aria-label="Excluir ministério"
+                  >
+                    <lucide-icon
+                      [img]="Trash2"
+                      [size]="16"
+                    />
+                  </button>
+
+                </div>
+
+              </footer>
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+
+    } @else {
+
+      <div class="empty-state">
+
+        <div class="empty-icon">
+          <lucide-icon
+            [img]="Search"
+            [size]="30"
+          />
+        </div>
+
+        <h3>
+          Nenhum ministério encontrado
+        </h3>
+
+        <p>
+          Tente alterar sua busca ou
+          cadastre um novo ministério.
+        </p>
+
+      </div>
+
+    }
+
+  </section>
+
+</section>
+
+@if (showForm) {
+
+  <app-ministry-form
+    [ministry]="selectedMinistry"
+    (save)="saveMinistry($event)"
+    (cancel)="closeForm()"
+  />
+
+}

@@ -1,0 +1,501 @@
+<section class="form-card">
+
+  <header class="form-card-header">
+
+    <div class="header-content">
+      <span class="section-label">
+        {{ testimonial ? 'EDITAR CONTEÚDO' : 'NOVO CONTEÚDO' }}
+      </span>
+
+      <h2>
+        {{ testimonial ? 'Editar testemunho' : 'Cadastrar testemunho' }}
+      </h2>
+
+      <p>
+        Preencha as informações abaixo para
+        {{ testimonial ? 'atualizar' : 'cadastrar' }}
+        um testemunho.
+      </p>
+    </div>
+
+  </header>
+
+
+  <form
+    class="testimonial-form"
+    (ngSubmit)="submitForm()"
+  >
+
+    <!-- =========================
+         INFORMAÇÕES PRINCIPAIS
+    ========================== -->
+
+    <div class="form-section">
+
+      <div class="form-section-heading">
+        <span class="form-section-number">
+          01
+        </span>
+
+        <div>
+          <h3>Informações principais</h3>
+
+          <p>
+            Identifique a pessoa e organize o testemunho.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="name">
+            Nome da pessoa
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="name"
+            name="name"
+            type="text"
+            [(ngModel)]="name"
+            placeholder="Ex.: Maria Oliveira"
+          />
+
+          @if (submitted && !name.trim()) {
+            <small class="form-error">
+              Informe o nome da pessoa.
+            </small>
+          }
+        </div>
+
+
+        <div class="form-group">
+          <label for="location">
+            Localização
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="location"
+            name="location"
+            type="text"
+            [(ngModel)]="location"
+            placeholder="Ex.: Brasília, DF"
+          />
+
+          @if (submitted && !location.trim()) {
+            <small class="form-error">
+              Informe a localização.
+            </small>
+          }
+        </div>
+
+
+        <div class="form-group">
+          <label for="category">
+            Categoria
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="category"
+            name="category"
+            type="text"
+            [(ngModel)]="category"
+            placeholder="Ex.: Cura, Família ou Vida espiritual"
+          />
+
+          @if (submitted && !category.trim()) {
+            <small class="form-error">
+              Informe uma categoria.
+            </small>
+          }
+        </div>
+
+
+        <div class="form-group">
+          <label for="initials">
+            Iniciais
+          </label>
+
+          <input
+            id="initials"
+            name="initials"
+            type="text"
+            maxlength="3"
+            [(ngModel)]="initials"
+            placeholder="Ex.: MO"
+          />
+
+          <small class="field-hint">
+            Se deixar vazio, as iniciais serão geradas automaticamente.
+          </small>
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+        <label for="title">
+          Título do testemunho
+          <span class="required">*</span>
+        </label>
+
+        <input
+          id="title"
+          name="title"
+          type="text"
+          [(ngModel)]="title"
+          placeholder="Ex.: Uma nova história começou"
+        />
+
+        @if (submitted && !title.trim()) {
+          <small class="form-error">
+            Informe o título do testemunho.
+          </small>
+        }
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         MÍDIA
+    ========================== -->
+
+    <div class="form-section">
+
+      <div class="form-section-heading">
+
+        <span class="form-section-number">
+          02
+        </span>
+
+        <div>
+          <h3>Imagem e vídeo</h3>
+
+          <p>
+            Adicione recursos visuais ao testemunho
+            e confira a prévia antes de salvar.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- IMAGEM -->
+
+      <div class="form-group">
+
+        <label for="imageUrl">
+          <lucide-icon
+            [img]="Image"
+            [size]="16"
+          />
+
+          Imagem
+        </label>
+
+        <input
+          id="imageUrl"
+          name="imageUrl"
+          type="text"
+          [(ngModel)]="imageUrl"
+          placeholder="/testimonials/maria.jpg"
+        />
+
+        <small class="field-hint">
+          Campo opcional. Informe o caminho de uma imagem
+          disponível no projeto.
+        </small>
+
+      </div>
+
+
+      <!-- VÍDEO -->
+
+      <div class="form-group">
+
+        <label for="videoUrl">
+          <lucide-icon
+            [img]="Video"
+            [size]="16"
+          />
+
+          Vídeo do relato
+        </label>
+
+        <input
+          id="videoUrl"
+          name="videoUrl"
+          type="url"
+          [(ngModel)]="videoUrl"
+          placeholder="https://www.youtube.com/watch?v=..."
+        />
+
+        <small class="field-hint">
+          Campo opcional. Informe um endereço do YouTube
+          ou outro vídeo público.
+        </small>
+
+      </div>
+
+
+      <!-- =========================
+          JANELA DE PRÉ-VISUALIZAÇÃO
+      ========================== -->
+
+      @if (imageUrl.trim() || videoUrl.trim()) {
+
+        <div class="media-preview-window">
+
+          <div class="media-preview-header">
+
+            <div>
+              <span class="preview-eyebrow">
+                PRÉ-VISUALIZAÇÃO
+              </span>
+
+              <h4>
+                Confira a mídia antes de salvar
+              </h4>
+            </div>
+
+            <span class="preview-status">
+              Prévia
+            </span>
+
+          </div>
+
+
+          <div
+            class="media-preview-content"
+            [class.single-preview]="
+              !imageUrl.trim() || !videoUrl.trim()
+            "
+          >
+
+            <!-- =========================
+                PRÉVIA DA IMAGEM
+            ========================== -->
+
+            @if (imageUrl.trim()) {
+
+              <div class="preview-item">
+
+                <div class="preview-item-heading">
+
+                  <span class="preview-item-icon">
+                    <lucide-icon
+                      [img]="Image"
+                      [size]="16"
+                    />
+                  </span>
+
+                  <span>
+                    Imagem
+                  </span>
+
+                </div>
+
+
+                <div class="preview-image">
+
+                  <img
+                    [src]="imageUrl"
+                    alt="Prévia da imagem do testemunho"
+                  />
+
+                </div>
+
+              </div>
+
+            }
+
+
+            <!-- =========================
+                PRÉVIA DO VÍDEO
+            ========================== -->
+
+            @if (videoUrl.trim()) {
+
+              <div class="preview-item">
+
+                <div class="preview-item-heading">
+
+                  <span class="preview-item-icon">
+                    <lucide-icon
+                      [img]="Video"
+                      [size]="16"
+                    />
+                  </span>
+
+                  <span>
+                    Vídeo
+                  </span>
+
+                </div>
+
+
+                @if (videoEmbedUrl) {
+
+                  <div class="preview-video">
+
+                    <iframe
+                      [src]="videoEmbedUrl"
+                      title="Prévia do vídeo do testemunho"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+
+                  </div>
+
+                } @else {
+
+                  <div class="preview-video-fallback">
+
+                    <span class="fallback-icon">
+                      <lucide-icon
+                        [img]="Video"
+                        [size]="25"
+                      />
+                    </span>
+
+                    <div class="fallback-content">
+
+                      <strong>
+                        Vídeo externo
+                      </strong>
+
+                      <p>
+                        Este endereço não pode ser reproduzido
+                        diretamente na prévia.
+                      </p>
+
+                    </div>
+
+                    <a
+                      [href]="videoUrl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="fallback-link"
+                    >
+                      Abrir vídeo
+
+                      <lucide-icon
+                        [img]="ExternalLink"
+                        [size]="15"
+                      />
+                    </a>
+
+                  </div>
+
+                }
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- =========================
+         RELATO
+    ========================== -->
+
+    <div class="form-section">
+
+      <div class="form-section-heading">
+
+        <span class="form-section-number">
+          03
+        </span>
+
+        <div>
+          <h3>Relato do testemunho</h3>
+
+          <p>
+            Escreva a história que será apresentada no site.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="content">
+          Relato
+          <span class="required">*</span>
+        </label>
+
+        <textarea
+          id="content"
+          name="content"
+          rows="9"
+          [(ngModel)]="content"
+          placeholder="Escreva o relato do testemunho. Separe os parágrafos com uma linha em branco."
+        ></textarea>
+
+        <small class="field-hint">
+          Utilize linhas em branco para separar os parágrafos.
+        </small>
+
+        @if (submitted && !content.trim()) {
+          <small class="form-error">
+            Escreva o conteúdo do testemunho.
+          </small>
+        }
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         AÇÕES
+    ========================== -->
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="cancel()"
+      >
+        <lucide-icon
+          [img]="ArrowLeft"
+          [size]="17"
+        />
+
+        Cancelar
+      </button>
+
+
+      <button
+        type="submit"
+        class="primary-button"
+      >
+        <span>
+          {{ testimonial ? 'Salvar alterações' : 'Cadastrar testemunho' }}
+        </span>
+
+        <lucide-icon
+          [img]="Save"
+          [size]="17"
+        />
+      </button>
+
+    </div>
+
+  </form>
+
+</section>

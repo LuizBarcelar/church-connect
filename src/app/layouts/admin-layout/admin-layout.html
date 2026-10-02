@@ -1,0 +1,29 @@
+<div class="admin-layout">
+
+  <app-admin-sidebar
+    [isOpen]="sidebarOpen"
+    (menuItemSelected)="closeSidebar()"
+  />
+
+  @if (sidebarOpen) {
+    <button
+      type="button"
+      class="sidebar-overlay"
+      aria-label="Fechar menu"
+      (click)="closeSidebar()"
+    ></button>
+  }
+
+  <div class="admin-main">
+
+    <app-admin-header
+      (menuToggle)="toggleSidebar()"
+    />
+
+    <main class="admin-content">
+      <router-outlet />
+    </main>
+
+  </div>
+
+</div>

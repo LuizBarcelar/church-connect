@@ -1,0 +1,254 @@
+<header class="admin-header">
+
+  <div class="header-left">
+
+    <button
+      type="button"
+      class="mobile-menu-button"
+      aria-label="Abrir menu administrativo"
+      (click)="toggleMenu()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="admin-header-title">
+
+      <div class="header-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span>PAINEL ADMINISTRATIVO</span>
+      </div>
+
+      <h1>Visão geral</h1>
+
+    </div>
+
+  </div>
+
+
+  <div class="admin-header-actions">
+
+    <!-- NOTIFICAÇÕES -->
+    <div
+      class="notification-wrapper"
+      (click)="$event.stopPropagation()"
+    >
+
+      <button
+        type="button"
+        class="notification-button"
+        aria-label="Abrir notificações"
+        [attr.aria-expanded]="notificationsOpen"
+        (click)="toggleNotifications($event)"
+      >
+
+        <lucide-icon
+          [img]="Bell"
+          [size]="19"
+        />
+
+        @if (unreadCount > 0) {
+          <span class="notification-count">
+            {{ unreadCount > 9 ? '9+' : unreadCount }}
+          </span>
+        }
+
+      </button>
+
+
+      @if (notificationsOpen) {
+
+        <div class="notification-dropdown">
+
+          <div class="notification-header">
+
+            <div>
+              <span class="notification-label">
+                CENTRAL
+              </span>
+
+              <h3>Notificações</h3>
+            </div>
+
+            @if (unreadCount > 0) {
+              <button
+                type="button"
+                class="mark-all-button"
+                (click)="markAllAsRead($event)"
+              >
+                <lucide-icon
+                  [img]="CheckCheck"
+                  [size]="15"
+                />
+
+                Marcar como lidas
+              </button>
+            }
+
+          </div>
+
+
+          <div class="notification-list">
+
+            @for (
+              notification of notifications;
+              track notification.id
+            ) {
+
+              <a
+                [routerLink]="notification.route"
+                class="notification-item"
+                [class.unread]="!notification.read"
+                (click)="markAsRead(notification)"
+              >
+
+                <div class="notification-icon">
+
+                  <lucide-icon
+                    [img]="notification.icon"
+                    [size]="19"
+                  />
+
+                </div>
+
+
+                <div class="notification-content">
+
+                  <div class="notification-title-row">
+
+                    <strong>
+                      {{ notification.title }}
+                    </strong>
+
+                    @if (!notification.read) {
+                      <span
+                        class="unread-indicator"
+                      ></span>
+                    }
+
+                  </div>
+
+                  <p>
+                    {{ notification.description }}
+                  </p>
+
+                  <span class="notification-time">
+                    {{ notification.time }}
+                  </span>
+
+                </div>
+
+              </a>
+
+            } @empty {
+
+              <div class="notification-empty">
+
+                <lucide-icon
+                  [img]="Bell"
+                  [size]="26"
+                />
+
+                <strong>
+                  Nenhuma notificação
+                </strong>
+
+                <span>
+                  Novas atualizações aparecerão aqui.
+                </span>
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <span class="header-divider"></span>
+
+
+    <!-- ADMINISTRADOR -->
+    <div
+      class="admin-user-wrapper"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        type="button"
+        class="admin-user"
+        aria-label="Abrir menu do administrador"
+        [attr.aria-expanded]="userMenuOpen"
+        (click)="toggleUserMenu($event)"
+      >
+        <div class="admin-user-avatar">
+          AD
+        </div>
+
+        <div class="admin-user-info">
+          <strong>Administrador</strong>
+          <span>Gestão da igreja</span>
+        </div>
+
+        <lucide-icon
+          class="user-chevron"
+          [class.open]="userMenuOpen"
+          [img]="ChevronDown"
+          [size]="16"
+        />
+      </button>
+
+      @if (userMenuOpen) {
+        <div class="admin-user-dropdown">
+          <div class="user-dropdown-header">
+            <div class="user-dropdown-avatar">
+              AD
+            </div>
+
+            <div>
+              <strong>Administrador</strong>
+              <span>Gestão da igreja</span>
+            </div>
+          </div>
+
+          <div class="user-dropdown-divider"></div>
+
+          <a
+            routerLink="/admin/configuracoes"
+            class="user-dropdown-item"
+            (click)="closeMenus()"
+          >
+            <lucide-icon
+              [img]="Settings"
+              [size]="17"
+            />
+
+            <span>Configurações</span>
+          </a>
+
+          <div class="user-dropdown-divider"></div>
+
+          <button
+            type="button"
+            class="user-dropdown-item logout-item"
+            (click)="logout()"
+          >
+            <lucide-icon
+              [img]="LogOut"
+              [size]="17"
+            />
+
+            <span>Sair</span>
+          </button>
+        </div>
+      }
+    </div>
+
+  </div>
+
+</header>

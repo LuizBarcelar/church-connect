@@ -1,0 +1,406 @@
+/* =========================
+   PRAYER
+========================= */
+
+.prayer {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 680px;
+
+  padding: 110px 0;
+
+  overflow: hidden;
+
+  background-image:
+    url('/images/prayer-home.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: #ffffff;
+}
+
+
+/* =========================
+   OVERLAY
+========================= */
+
+.prayer-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(6, 18, 29, 0.98) 0%,
+      rgba(8, 23, 36, 0.94) 30%,
+      rgba(8, 23, 36, 0.76) 52%,
+      rgba(8, 23, 36, 0.35) 75%,
+      rgba(8, 23, 36, 0.18) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   BRILHO DOURADO
+========================= */
+
+.prayer-glow {
+  position: absolute;
+
+  top: -180px;
+  left: -180px;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(212, 175, 55, 0.08);
+
+  filter: blur(90px);
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.prayer-content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 460px;
+}
+
+
+/* =========================
+   TEXTO
+========================= */
+
+.prayer-text {
+  width: 100%;
+  max-width: 600px;
+}
+
+
+/* =========================
+   LABEL
+========================= */
+
+.prayer-text .section-label {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 24px;
+
+  color: #d4af37;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+}
+
+.prayer-text .section-label::after {
+  content: '';
+
+  width: 48px;
+  height: 1px;
+
+  background: #d4af37;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.prayer-text h2 {
+  max-width: 580px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(
+    2.8rem,
+    5vw,
+    4.5rem
+  );
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -0.045em;
+}
+
+.prayer-text h2 span {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #d4af37;
+}
+
+
+/* =========================
+   DESCRIÇÃO
+========================= */
+
+.prayer-description {
+  max-width: 530px;
+
+  margin: 28px 0 0;
+
+  color: #c4cdd5;
+
+  font-size: 1rem;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   VERSÍCULO
+========================= */
+
+.prayer-message {
+  display: flex;
+
+  gap: 18px;
+
+  max-width: 530px;
+
+  margin-top: 38px;
+
+  padding: 22px 24px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-left:
+    3px solid #d4af37;
+
+  border-radius:
+    0 12px 12px 0;
+
+  background:
+    rgba(7, 21, 34, 0.52);
+
+  backdrop-filter:
+    blur(8px);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.quote-mark {
+  flex-shrink: 0;
+
+  color: #d4af37;
+
+  font-family: Georgia, serif;
+
+  font-size: 3rem;
+
+  line-height: 0.8;
+}
+
+.prayer-message p {
+  margin: 0;
+
+  color: #e4e8eb;
+
+  font-size: 0.9rem;
+
+  font-style: italic;
+
+  line-height: 1.7;
+}
+
+.prayer-message small {
+  display: block;
+
+  margin-top: 9px;
+
+  color: #d4af37;
+
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+
+/* =========================
+   BOTÃO
+========================= */
+
+.prayer-button {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  max-width: 530px;
+
+  min-height: 58px;
+
+  margin-top: 28px;
+
+  padding: 0 22px;
+
+  border:
+    1px solid #d4af37;
+
+  border-radius: 9px;
+
+  background:
+    #d4af37;
+
+  color: #0d1b2a;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.22);
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.button-icon {
+  margin-right: 12px;
+
+  font-size: 1.15rem;
+}
+
+.button-text {
+  font-size: 0.87rem;
+  font-weight: 800;
+}
+
+.button-arrow {
+  margin-left: auto;
+
+  font-size: 1.25rem;
+
+  transition:
+    transform 0.25s ease;
+}
+
+.prayer-button:hover {
+  transform: translateY(-3px);
+
+  background: #e4c44f;
+
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.3);
+}
+
+.prayer-button:hover .button-arrow {
+  transform: translateX(5px);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .prayer {
+    min-height: 620px;
+
+    padding: 90px 0;
+
+    background-position: 60% center;
+  }
+
+  .prayer-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(6, 18, 29, 0.98) 0%,
+        rgba(8, 23, 36, 0.92) 45%,
+        rgba(8, 23, 36, 0.58) 100%
+      );
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .prayer {
+    min-height: 650px;
+
+    padding: 70px 0;
+
+    background-position: 65% center;
+  }
+
+  .prayer-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(6, 18, 29, 0.94),
+        rgba(6, 18, 29, 0.82)
+      );
+  }
+
+  .prayer-content {
+    min-height: auto;
+  }
+
+  .prayer-text {
+    max-width: 100%;
+  }
+
+  .prayer-text h2 {
+    font-size:
+      clamp(
+        2.5rem,
+        12vw,
+        3.5rem
+      );
+  }
+
+  .prayer-text h2 span {
+    display: inline;
+  }
+
+  .prayer-description {
+    font-size: 0.95rem;
+  }
+
+  .prayer-message {
+    margin-top: 30px;
+
+    padding: 20px;
+  }
+
+  .prayer-button {
+    max-width: 100%;
+  }
+
+}

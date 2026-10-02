@@ -1,0 +1,1190 @@
+<div class="member-form-overlay">
+
+  <div class="member-form-modal">
+
+    <!-- =========================================
+         CABEÇALHO
+    ========================================== -->
+
+    <header class="form-header">
+
+      <div class="form-header-content">
+
+        <span class="section-label">
+          {{ member ? 'EDIÇÃO' : 'CADASTRO' }}
+        </span>
+
+        <h2>
+          {{
+            member
+              ? 'Editar membro'
+              : 'Novo membro'
+          }}
+        </h2>
+
+        <p>
+          {{
+            member
+              ? 'Atualize as informações do membro.'
+              : 'Preencha as informações para cadastrar um novo membro.'
+          }}
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-button"
+        aria-label="Fechar formulário"
+        title="Fechar"
+        (click)="cancelForm()"
+      >
+        <lucide-icon
+          [img]="X"
+          [size]="18"
+        />
+      </button>
+
+    </header>
+
+
+    <!-- =========================================
+         FORMULÁRIO
+    ========================================== -->
+
+    <form
+      class="member-form-content"
+      (ngSubmit)="submitForm()"
+    >
+
+      <!-- =======================================
+           01 - DADOS PESSOAIS
+      ======================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-number">
+            01
+          </div>
+
+          <div class="section-heading-icon">
+            <lucide-icon
+              [img]="UserRound"
+              [size]="18"
+            />
+          </div>
+
+          <div class="section-heading-content">
+            <h3>Dados pessoais</h3>
+
+            <p>
+              Informações básicas de identificação do membro.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <!-- NOME -->
+
+          <div class="form-group full">
+
+            <label for="fullName">
+              Nome completo
+              <span class="required">*</span>
+            </label>
+
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              [(ngModel)]="fullName"
+              placeholder="Digite o nome completo"
+              autocomplete="name"
+              required
+            />
+
+          </div>
+
+
+          <!-- NASCIMENTO -->
+
+          <div class="form-group">
+
+            <label for="birthDate">
+              Data de nascimento
+              <span class="required">*</span>
+            </label>
+
+            <div class="input-with-icon">
+
+              <lucide-icon
+                [img]="Cake"
+                [size]="16"
+              />
+
+              <input
+                id="birthDate"
+                name="birthDate"
+                type="date"
+                [(ngModel)]="birthDate"
+                required
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- FOTO URL -->
+
+          <div class="form-group">
+
+            <label for="photoUrl">
+              Foto do membro
+              <span class="optional">
+                opcional
+              </span>
+            </label>
+
+            <div class="input-with-icon">
+
+              <lucide-icon
+                [img]="Image"
+                [size]="16"
+              />
+
+              <input
+                id="photoUrl"
+                name="photoUrl"
+                type="url"
+                [(ngModel)]="photoUrl"
+                placeholder="https://exemplo.com/foto.jpg"
+              />
+
+            </div>
+
+            <small class="field-hint">
+              Cole o endereço da imagem para visualizar antes de salvar.
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             PREVIEW DA FOTO
+        ====================================== -->
+
+        <div class="photo-preview-section">
+
+          <div class="photo-preview-header">
+
+            <div>
+
+              <span class="preview-label">
+                PRÉ-VISUALIZAÇÃO
+              </span>
+
+              <h4>Foto do membro</h4>
+
+              <p>
+                Confira como a foto aparecerá no perfil.
+              </p>
+
+            </div>
+
+            @if (hasPhotoPreview()) {
+
+              <button
+                type="button"
+                class="remove-photo-button"
+                (click)="clearPhoto()"
+              >
+                <lucide-icon
+                  [img]="X"
+                  [size]="14"
+                />
+
+                Remover foto
+              </button>
+
+            }
+
+          </div>
+
+
+          <div
+            class="photo-preview"
+            [class.has-image]="hasPhotoPreview()"
+          >
+
+            <div class="photo-preview-avatar">
+
+              @if (hasPhotoPreview()) {
+
+                <img
+                  [src]="photoUrl"
+                  [alt]="fullName || 'Foto do membro'"
+                />
+
+              } @else {
+
+                <div class="photo-placeholder">
+
+                  <div class="photo-placeholder-icon">
+
+                    @if (fullName.trim()) {
+
+                      <span>
+                        {{ getPhotoInitials() }}
+                      </span>
+
+                    } @else {
+
+                      <lucide-icon
+                        [img]="Camera"
+                        [size]="25"
+                      />
+
+                    }
+
+                  </div>
+
+                  <strong>
+                    Nenhuma foto adicionada
+                  </strong>
+
+                  <p>
+                    Insira uma URL de imagem no campo acima.
+                  </p>
+
+                </div>
+
+              }
+
+            </div>
+
+
+            <div class="photo-preview-info">
+
+              <span class="preview-status">
+                <lucide-icon
+                  [img]="CircleUserRound"
+                  [size]="14"
+                />
+
+                Prévia do perfil
+              </span>
+
+              <strong>
+                {{
+                  fullName.trim()
+                    ? fullName
+                    : 'Nome do membro'
+                }}
+              </strong>
+
+              <p>
+                {{
+                  hasPhotoPreview()
+                    ? 'A imagem será utilizada no perfil e nas listagens.'
+                    : 'As iniciais serão utilizadas enquanto não houver uma foto.'
+                }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================
+           02 - CONTATO
+      ======================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-number">
+            02
+          </div>
+
+          <div class="section-heading-icon">
+            <lucide-icon
+              [img]="Phone"
+              [size]="18"
+            />
+          </div>
+
+          <div class="section-heading-content">
+
+            <h3>Informações de contato</h3>
+
+            <p>
+              Como podemos entrar em contato com o membro.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <!-- TELEFONE -->
+
+          <div class="form-group">
+
+            <label for="phone">
+              Telefone
+            </label>
+
+            <div class="input-with-icon">
+
+              <lucide-icon
+                [img]="Phone"
+                [size]="16"
+              />
+
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                [(ngModel)]="phone"
+                (input)="formatPhone()"
+                maxlength="15"
+                inputmode="numeric"
+                placeholder="(61) 99999-9999"
+                autocomplete="tel"
+              />
+
+            </div>
+
+            <small class="field-hint">
+              Informe o número com DDD.
+            </small>
+
+          </div>
+
+
+          <!-- WHATSAPP -->
+
+          <div class="form-group">
+
+            <label>
+              Possui WhatsApp?
+            </label>
+
+            <div class="radio-group">
+
+              <label
+                class="radio-option"
+                [class.selected]="hasWhatsApp"
+              >
+
+                <input
+                  type="radio"
+                  name="hasWhatsApp"
+                  [value]="true"
+                  [(ngModel)]="hasWhatsApp"
+                />
+
+                <span class="radio-indicator"></span>
+
+                <span>Sim</span>
+
+              </label>
+
+
+              <label
+                class="radio-option"
+                [class.selected]="!hasWhatsApp"
+              >
+
+                <input
+                  type="radio"
+                  name="hasWhatsApp"
+                  [value]="false"
+                  [(ngModel)]="hasWhatsApp"
+                />
+
+                <span class="radio-indicator"></span>
+
+                <span>Não</span>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="form-group full">
+
+            <label for="email">
+              E-mail
+              <span class="optional">
+                opcional
+              </span>
+            </label>
+
+            <div class="input-with-icon">
+
+              <lucide-icon
+                [img]="Mail"
+                [size]="16"
+              />
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                [(ngModel)]="email"
+                placeholder="exemplo@email.com"
+                autocomplete="email"
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================
+           03 - ENDEREÇO
+      ======================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-number">
+            03
+          </div>
+
+          <div class="section-heading-icon">
+            <lucide-icon
+              [img]="LocateFixed"
+              [size]="18"
+            />
+          </div>
+
+          <div class="section-heading-content">
+
+            <h3>Endereço</h3>
+
+            <p>
+              Informações de localização do membro.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <!-- CEP -->
+
+          <div class="form-group">
+
+            <label for="cep">
+              CEP
+
+              <span class="optional">
+                opcional
+              </span>
+            </label>
+
+            <div class="cep-wrapper">
+
+              <div class="input-with-icon">
+
+                <lucide-icon
+                  [img]="Search"
+                  [size]="16"
+                />
+
+                <input
+                  id="cep"
+                  name="cep"
+                  type="text"
+                  maxlength="9"
+                  [(ngModel)]="cep"
+                  (input)="formatCep()"
+                  (blur)="searchCep()"
+                  placeholder="00000-000"
+                  inputmode="numeric"
+                />
+
+              </div>
+
+              @if (loadingCep) {
+
+                <span class="cep-loading">
+                  Buscando...
+                </span>
+
+              }
+
+            </div>
+
+            @if (cepError) {
+
+              <small class="field-error">
+                {{ cepError }}
+              </small>
+
+            } @else {
+
+              <small class="field-hint">
+                Ao informar o CEP, tentaremos preencher parte do endereço.
+              </small>
+
+            }
+
+          </div>
+
+
+          <!-- ESTADO -->
+
+          <div class="form-group">
+
+            <label for="state">
+              Estado (UF)
+            </label>
+
+            <div class="select-wrapper">
+
+              <select
+                id="state"
+                name="state"
+                [(ngModel)]="state"
+                (ngModelChange)="onStateChange()"
+              >
+
+                <option value="">
+                  Selecione o estado
+                </option>
+
+                @for (
+                  item of states;
+                  track item.uf
+                ) {
+
+                  <option [value]="item.uf">
+                    {{ item.uf }} — {{ item.name }}
+                  </option>
+
+                }
+
+              </select>
+
+              <lucide-icon
+                class="select-icon"
+                [img]="ChevronDown"
+                [size]="15"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- CIDADE -->
+
+          <div class="form-group">
+
+            <label for="city">
+              Cidade
+            </label>
+
+            <div class="select-wrapper">
+
+              <select
+                id="city"
+                name="city"
+                [(ngModel)]="city"
+                [disabled]="!state"
+              >
+
+                <option value="">
+                  {{
+                    state
+                      ? 'Selecione a cidade'
+                      : 'Selecione primeiro o estado'
+                  }}
+                </option>
+
+                @for (
+                  cityName of cities;
+                  track cityName
+                ) {
+
+                  <option [value]="cityName">
+                    {{ cityName }}
+                  </option>
+
+                }
+
+              </select>
+
+              <lucide-icon
+                class="select-icon"
+                [img]="ChevronDown"
+                [size]="15"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- BAIRRO -->
+
+          <div class="form-group">
+
+            <label for="neighborhood">
+              Bairro
+            </label>
+
+            <div class="input-with-icon">
+
+              <lucide-icon
+                [img]="MapPin"
+                [size]="16"
+              />
+
+              <input
+                id="neighborhood"
+                name="neighborhood"
+                type="text"
+                [(ngModel)]="neighborhood"
+                placeholder="Bairro"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- QUADRA -->
+
+          <div class="form-group">
+
+            <label for="block">
+              Quadra
+            </label>
+
+            <input
+              id="block"
+              name="block"
+              type="text"
+              [(ngModel)]="block"
+              placeholder="Ex.: 10"
+            />
+
+          </div>
+
+
+          <!-- CONJUNTO -->
+
+          <div class="form-group">
+
+            <label for="set">
+              Conjunto
+            </label>
+
+            <input
+              id="set"
+              name="set"
+              type="text"
+              [(ngModel)]="set"
+              placeholder="Ex.: A"
+            />
+
+          </div>
+
+
+          <!-- CASA -->
+
+          <div class="form-group">
+
+            <label for="house">
+              Casa
+            </label>
+
+            <input
+              id="house"
+              name="house"
+              type="text"
+              [(ngModel)]="house"
+              placeholder="Número da casa"
+            />
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================
+           04 - VIDA CRISTÃ
+      ======================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-number">
+            04
+          </div>
+
+          <div class="section-heading-icon">
+            <lucide-icon
+              [img]="HeartHandshake"
+              [size]="18"
+            />
+          </div>
+
+          <div class="section-heading-content">
+
+            <h3>Vida cristã</h3>
+
+            <p>
+              Informações relacionadas à caminhada cristã.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="toggle-grid">
+
+          <!-- BATIZADO -->
+
+          <label
+            class="toggle-card"
+            [class.selected]="baptized"
+          >
+
+            <input
+              type="checkbox"
+              name="baptized"
+              [(ngModel)]="baptized"
+              (ngModelChange)="onBaptizedChange()"
+            />
+
+            <span class="toggle-check">
+
+              @if (baptized) {
+
+                <lucide-icon
+                  [img]="Check"
+                  [size]="14"
+                />
+
+              }
+
+            </span>
+
+            <span class="toggle-icon">
+
+              <lucide-icon
+                [img]="Droplets"
+                [size]="18"
+              />
+
+            </span>
+
+            <span class="toggle-content">
+
+              <strong>
+                É batizado?
+              </strong>
+
+              <small>
+                Batismo nas águas
+              </small>
+
+            </span>
+
+          </label>
+
+
+          <!-- ESPÍRITO SANTO -->
+
+          <label
+            class="toggle-card"
+            [class.selected]="baptizedInHolySpirit"
+          >
+
+            <input
+              type="checkbox"
+              name="baptizedInHolySpirit"
+              [(ngModel)]="baptizedInHolySpirit"
+            />
+
+            <span class="toggle-check">
+
+              @if (baptizedInHolySpirit) {
+
+                <lucide-icon
+                  [img]="Check"
+                  [size]="14"
+                />
+
+              }
+
+            </span>
+
+            <span class="toggle-icon">
+
+              <lucide-icon
+                [img]="HeartHandshake"
+                [size]="18"
+              />
+
+            </span>
+
+            <span class="toggle-content">
+
+              <strong>
+                Batizado no Espírito Santo?
+              </strong>
+
+              <small>
+                Informação declarada pelo membro
+              </small>
+
+            </span>
+
+          </label>
+
+        </div>
+
+
+        <!-- CAMPOS DE BATISMO -->
+
+        @if (baptized) {
+
+          <div class="baptism-fields">
+
+            <div class="conditional-heading">
+
+              <div class="conditional-icon">
+                <lucide-icon
+                  [img]="Droplets"
+                  [size]="16"
+                />
+              </div>
+
+              <div>
+                <strong>
+                  Informações do batismo
+                </strong>
+
+                <p>
+                  Preencha os dados disponíveis.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+              <div class="form-group">
+
+                <label for="baptismDate">
+                  Data do batismo
+                </label>
+
+                <input
+                  id="baptismDate"
+                  name="baptismDate"
+                  type="date"
+                  [(ngModel)]="baptismDate"
+                />
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="baptismPlace">
+                  Local do batismo
+                </label>
+
+                <input
+                  id="baptismPlace"
+                  name="baptismPlace"
+                  type="text"
+                  [(ngModel)]="baptismPlace"
+                  placeholder="Igreja ou local"
+                />
+
+              </div>
+
+            </div>
+
+          </div>
+
+        }
+
+      </section>
+
+
+      <!-- =======================================
+           05 - ATUAÇÃO NA OBRA
+      ======================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-number">
+            05
+          </div>
+
+          <div class="section-heading-icon">
+            <lucide-icon
+              [img]="Church"
+              [size]="18"
+            />
+          </div>
+
+          <div class="section-heading-content">
+
+            <h3>Atuação na obra</h3>
+
+            <p>
+              Funções e ministérios já exercidos pelo membro.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <label
+          class="toggle-card ministry-toggle"
+          [class.selected]="hasWorkedInMinistry"
+        >
+
+          <input
+            type="checkbox"
+            name="hasWorkedInMinistry"
+            [(ngModel)]="hasWorkedInMinistry"
+            (ngModelChange)="onMinistryChange()"
+          />
+
+          <span class="toggle-check">
+
+            @if (hasWorkedInMinistry) {
+
+              <lucide-icon
+                [img]="Check"
+                [size]="14"
+              />
+
+            }
+
+          </span>
+
+          <span class="toggle-icon">
+
+            <lucide-icon
+              [img]="Church"
+              [size]="18"
+            />
+
+          </span>
+
+          <span class="toggle-content">
+
+            <strong>
+              Já trabalhou na obra?
+            </strong>
+
+            <small>
+              Marque caso já tenha exercido alguma função.
+            </small>
+
+          </span>
+
+        </label>
+
+
+        @if (hasWorkedInMinistry) {
+
+          <div class="ministry-roles-section">
+
+            <div class="roles-header">
+
+              <div>
+
+                <span class="roles-label">
+                  FUNÇÕES MINISTERIAIS
+                </span>
+
+                <h4>
+                  Funções exercidas
+                </h4>
+
+                <p>
+                  Selecione todas as funções que o membro já exerceu.
+                </p>
+
+              </div>
+
+
+              <span class="roles-count">
+
+                {{ ministryRoles.length }}
+
+                {{
+                  ministryRoles.length === 1
+                    ? 'selecionada'
+                    : 'selecionadas'
+                }}
+
+              </span>
+
+            </div>
+
+
+            <div class="roles-grid">
+
+              @for (
+                role of availableMinistryRoles;
+                track role.value
+              ) {
+
+                <label
+                  class="role-card"
+                  [class.selected]="
+                    ministryRoles.includes(
+                      role.value
+                    )
+                  "
+                >
+
+                  <input
+                    type="checkbox"
+                    [checked]="
+                      ministryRoles.includes(
+                        role.value
+                      )
+                    "
+                    (change)="
+                      toggleMinistryRole(
+                        role.value
+                      )
+                    "
+                  />
+
+                  <span class="role-check">
+
+                    @if (
+                      ministryRoles.includes(
+                        role.value
+                      )
+                    ) {
+
+                      <lucide-icon
+                        [img]="Check"
+                        [size]="13"
+                      />
+
+                    }
+
+                  </span>
+
+                  <span class="role-content">
+                    <strong>
+                      {{ role.label }}
+                    </strong>
+                  </span>
+
+                </label>
+
+              }
+
+            </div>
+
+          </div>
+
+        }
+
+      </section>
+
+
+      <!-- =======================================
+           AÇÕES
+      ======================================== -->
+
+      <footer class="form-actions">
+
+        <div class="form-actions-info">
+
+          <span>
+            <span class="required">*</span>
+            Campos obrigatórios
+          </span>
+
+        </div>
+
+
+        <div class="form-actions-buttons">
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="cancelForm()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="primary-button"
+          >
+            <lucide-icon
+              [img]="Save"
+              [size]="16"
+            />
+
+            {{
+              member
+                ? 'Salvar alterações'
+                : 'Cadastrar membro'
+            }}
+          </button>
+
+        </div>
+
+      </footer>
+
+    </form>
+
+  </div>
+
+</div>

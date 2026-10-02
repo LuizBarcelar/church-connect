@@ -1,0 +1,73 @@
+<article class="mission-card">
+
+  <!-- IMAGEM -->
+  <div class="mission-image">
+
+    @if (mission().imageUrl) {
+
+      <img
+        [src]="mission().imageUrl"
+        [alt]="'Projeto missionário em ' + mission().country"
+      />
+
+    } @else {
+
+      <div class="image-placeholder">
+        <span>{{ mission().country }}</span>
+      </div>
+
+    }
+
+
+    <!-- LOCALIZAÇÃO SOBRE A FOTO -->
+    <div class="mission-location-badge">
+
+      <span class="location-dot"></span>
+
+      <span>
+        {{ mission().country }}
+      </span>
+
+    </div>
+
+
+    <!-- GRADIENTE -->
+    <div class="mission-image-overlay"></div>
+
+  </div>
+
+
+  <!-- CONTEÚDO -->
+  <div class="mission-content">
+
+    <span class="mission-region">
+      {{ mission().region }}
+    </span>
+
+    <h3>
+      {{ mission().title }}
+    </h3>
+
+    <p>
+      {{ mission().description }}
+    </p>
+
+
+    <a
+      class="mission-link"
+      [routerLink]="['/obra', mission().id]"
+    >
+
+      <span class="link-text">
+        Conhecer projeto
+      </span>
+
+      <span class="link-arrow">
+        →
+      </span>
+
+    </a>
+
+  </div>
+
+</article>

@@ -1,0 +1,689 @@
+:host {
+  display: block;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.event-hero {
+  position: relative;
+
+  min-height: 520px;
+
+  display: flex;
+  align-items: stretch;
+
+  overflow: hidden;
+
+  background-color: #071522;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.event-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3, 14, 24, 0.97) 0%,
+      rgba(3, 14, 24, 0.88) 20%,
+      rgba(3, 14, 24, 0.58) 39%,
+      rgba(3, 14, 24, 0.20) 59%,
+      rgba(3, 14, 24, 0.05) 78%,
+      rgba(3, 14, 24, 0.02) 100%
+    );
+}
+
+.event-hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.back-link {
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  color: rgba(255, 255, 255, 0.86);
+
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-link:hover {
+  color: #d4af37;
+  transform: translateX(-3px);
+}
+
+.hero-copy {
+  max-width: 680px;
+
+  margin-top: auto;
+  margin-bottom: 5px;
+}
+
+.event-label,
+.about-label,
+.contact-label {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.22em;
+}
+
+.event-label {
+  margin-bottom: 22px;
+
+  color: #d4af37;
+}
+
+.event-label span,
+.about-label span,
+.contact-label span {
+  width: 42px;
+  height: 2px;
+
+  flex-shrink: 0;
+
+  background: #d4af37;
+}
+
+.event-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin: 0;
+
+  width: fit-content;
+  max-width: 720px;
+
+  font-size: clamp(4rem, 7vw, 7.2rem);
+  font-weight: 800;
+
+  line-height: 0.78;
+  letter-spacing: -0.065em;
+}
+
+.event-title-main {
+  display: block;
+
+  color: #ffffff;
+}
+
+.event-title-highlight {
+  display: block;
+
+  margin-top: 0.12em;
+
+  color: #d4af37;
+}
+
+.hero-copy p {
+  max-width: 560px;
+
+  margin: 34px 0 0;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   DATA / HORÁRIO / LOCAL
+===================================================== */
+
+.event-information {
+  background: #fbfaf7;
+
+  border-bottom: 1px solid #e8e2d8;
+}
+
+.information-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.information-card {
+  position: relative;
+
+  min-height: 135px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 24px;
+
+  padding: 28px 42px;
+}
+
+.information-card:not(:last-child)::after {
+  content: '';
+
+  position: absolute;
+
+  top: 27px;
+  right: 0;
+  bottom: 27px;
+
+  width: 1px;
+
+  background: #ddd4c3;
+}
+
+.information-icon {
+  width: 58px;
+  height: 58px;
+
+  flex: 0 0 58px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 50%;
+
+  color: #b48d22;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f3efe6
+    );
+
+  box-shadow:
+    0 5px 18px
+    rgba(13, 27, 42, 0.06);
+}
+
+.information-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.information-content > span {
+  margin-bottom: 5px;
+
+  color: #b48d22;
+
+  font-size: 0.69rem;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+}
+
+.information-content strong {
+  color: #0d1b2a;
+
+  font-size: 1.13rem;
+  line-height: 1.25;
+}
+
+.information-content small {
+  margin-top: 4px;
+
+  color: #7d8085;
+
+  font-size: 0.82rem;
+}
+
+
+/* =====================================================
+   SOBRE O EVENTO
+===================================================== */
+
+.event-about {
+  padding: 75px 0 95px;
+
+  background: #f8f6f1;
+}
+
+.event-about-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(330px, 440px);
+
+  gap: 100px;
+
+  align-items: center;
+}
+
+.event-description {
+  max-width: 720px;
+}
+
+.about-label {
+  margin-bottom: 23px;
+
+  color: #9e7c24;
+}
+
+.event-description h2 {
+  margin: 0;
+
+  max-width: 700px;
+
+  color: #0d1b2a;
+
+  font-size: clamp(2.4rem, 4.2vw, 4.3rem);
+  font-weight: 700;
+  line-height: 1.02;
+
+  letter-spacing: -0.045em;
+}
+
+.event-description h2 strong {
+  display: block;
+
+  color: #c19a31;
+
+  font-weight: 700;
+}
+
+.event-description p {
+  max-width: 700px;
+
+  margin: 28px 0 0;
+
+  color: #686c73;
+
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.event-description .event-invitation {
+  margin-top: 25px;
+
+  color: #777b80;
+}
+
+
+/* =====================================================
+   CARD MAIS INFORMAÇÕES
+===================================================== */
+
+.event-contact-card {
+  position: relative;
+  min-height: 330px;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: 18px;
+
+  background-color: #071827;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 72% center;
+  box-shadow:
+    0 25px 60px
+    rgba(13, 27, 42, 0.16);
+}
+
+.contact-decoration {
+  position: absolute;
+
+  width: 240px;
+  height: 240px;
+
+  right: -70px;
+  bottom: -80px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(212, 175, 55, 0.11),
+      transparent 68%
+    );
+}
+
+.contact-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 18, 30, 0.99) 0%,
+      rgba(4, 18, 30, 0.96) 35%,
+      rgba(4, 18, 30, 0.78) 62%,
+      rgba(4, 18, 30, 0.52) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(4, 18, 30, 0.45),
+      rgba(4, 18, 30, 0.1)
+    );
+}
+
+.contact-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 38px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-label {
+  margin-bottom: 23px;
+
+  color: #d4af37;
+}
+
+.contact-label span {
+  width: 34px;
+}
+
+.event-contact-card h3 {
+  max-width: 300px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.8;
+  letter-spacing: -0.02em;
+}
+
+.event-contact-card p {
+  max-width: 340px;
+  margin: 17px 0 28px;
+
+  color: rgba(255, 255, 255, 0.74);
+
+  font-size: 0.89rem;
+  line-height: 1.65;
+}
+
+.contact-actions {
+  display: grid;
+
+  gap: 11px;
+  margin-top: auto;
+}
+
+.whatsapp-button,
+.maps-button {
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 12px 18px;
+
+  border-radius: 9px;
+
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.whatsapp-button {
+  color: #071522;
+
+  background:
+    linear-gradient(
+      90deg,
+      #e0ba4e,
+      #f0ce69
+    );
+}
+
+.whatsapp-button span,
+.maps-button span {
+  flex: 1;
+}
+
+.whatsapp-button:hover {
+  transform: translateY(-2px);
+}
+
+.maps-button {
+  color: #ffffff;
+
+  border: 1px solid rgba(212, 175, 55, 0.6);
+
+  background: transparent;
+}
+
+.maps-button:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.05);
+}
+
+
+/* =====================================================
+   EVENTO NÃO ENCONTRADO
+===================================================== */
+
+.event-not-found {
+  min-height: 75vh;
+
+  display: flex;
+  align-items: center;
+
+  padding: 160px 0 100px;
+
+  background: #f7f5f0;
+}
+
+.event-not-found > .container > span {
+  color: #d4af37;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+}
+
+.event-not-found h1 {
+  margin: 15px 0 20px;
+
+  color: #0d1b2a;
+
+  font-size: clamp(2.5rem, 6vw, 5rem);
+}
+
+.event-not-found p {
+  max-width: 550px;
+
+  color: #667085;
+
+  line-height: 1.8;
+}
+
+.event-not-found a {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 25px;
+
+  color: #0d1b2a;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+  .event-hero {
+    min-height: 540px;
+  }
+
+  .information-card {
+    padding: 26px 22px;
+  }
+
+  .event-about-grid {
+    grid-template-columns: 1fr;
+
+    gap: 55px;
+  }
+
+  .event-contact-card {
+    max-width: 600px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+  .event-hero {
+    min-height: 570px;
+
+    background-position: 62% center;
+  }
+
+  .event-hero-overlay {
+    background:
+      linear-gradient(
+        0deg,
+        rgba(3, 14, 24, 0.97) 0%,
+        rgba(3, 14, 24, 0.72) 45%,
+        rgba(3, 14, 24, 0.22) 78%,
+        rgba(3, 14, 24, 0.08) 100%
+      );
+  }
+
+  .event-hero-content {
+    padding-top: 35px;
+    padding-bottom: 45px;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+
+    margin-top: auto;
+  }
+
+  .hero-copy p {
+    font-size: 0.95rem;
+  }
+
+  .information-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .information-card {
+    min-height: auto;
+
+    padding: 24px 0;
+  }
+
+  .information-card:not(:last-child)::after {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: auto;
+    height: 1px;
+  }
+
+  .event-about {
+    padding: 65px 0 75px;
+  }
+
+  .event-description h2 {
+    font-size: clamp(2.35rem, 10vw, 3.4rem);
+  }
+
+  .event-title {
+    max-width: 100%;
+
+    font-size: clamp(3.2rem, 15vw, 5.2rem);
+
+    line-height: 0.82;
+  }
+
+  .event-title-highlight {
+    margin-top: 0.14em;
+  }
+}
+
+
+/* =====================================================
+   MOBILE PEQUENO
+===================================================== */
+
+@media (max-width: 520px) {
+  .event-hero {
+    min-height: 540px;
+  }
+
+  .event-label,
+  .about-label,
+  .contact-label {
+    letter-spacing: 0.16em;
+  }
+
+  .information-icon {
+    width: 50px;
+    height: 50px;
+
+    flex-basis: 50px;
+  }
+
+  .contact-content {
+    padding: 30px 24px;
+  }
+
+  .event-contact-card {
+    border-radius: 14px;
+  }
+}

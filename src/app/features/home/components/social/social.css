@@ -1,0 +1,482 @@
+/* =========================
+   SOCIAL
+========================= */
+
+.social {
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 110px 0 120px;
+
+  background: #f7f5f0;
+}
+
+
+/* =========================
+   DECORAÇÃO
+========================= */
+
+.social::before {
+  content: '';
+
+  position: absolute;
+
+  top: -180px;
+  left: 50%;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(212, 175, 55, 0.06);
+
+  filter: blur(70px);
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.social-header {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 760px;
+
+  margin: 0 auto 60px;
+
+  text-align: center;
+}
+
+
+/* LABEL */
+
+.social-header .section-label {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 20px;
+
+  color: #b18b20;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+}
+
+.social-header .section-label::before,
+.social-header .section-label::after {
+  content: '';
+
+  width: 35px;
+  height: 1px;
+
+  background: #d4af37;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.social-header h2 {
+  margin: 0;
+
+  color: #0d1b2a;
+
+  font-size: clamp(
+    2.4rem,
+    4.5vw,
+    3.7rem
+  );
+
+  font-weight: 700;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.035em;
+}
+
+.social-header h2 span {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #d4af37;
+}
+
+
+/* =========================
+   DESCRIÇÃO
+========================= */
+
+.social-header p {
+  max-width: 620px;
+
+  margin: 24px auto 0;
+
+  color: #697681;
+
+  font-size: 1rem;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.social-links {
+  position: relative;
+
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 25px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.social-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 310px;
+
+  padding: 30px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(13, 27, 42, 0.08);
+
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  color: #0d1b2a;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 8px 30px rgba(13, 27, 42, 0.05);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* detalhe dourado */
+
+.social-card::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 3px;
+
+  background: #d4af37;
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+/* HOVER */
+
+.social-card:hover {
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(212, 175, 55, 0.35);
+
+  box-shadow:
+    0 20px 45px rgba(13, 27, 42, 0.12);
+}
+
+.social-card:hover::after {
+  transform: scaleX(1);
+}
+
+
+/* =========================
+   TOPO DO CARD
+========================= */
+
+.social-card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 45px;
+}
+
+
+/* =========================
+   ÍCONE
+========================= */
+
+.social-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 54px;
+  height: 54px;
+
+  border-radius: 14px;
+
+  background: #0d1b2a;
+
+  color: #d4af37;
+
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+
+/* SVG */
+
+.social-icon svg {
+  width: 25px;
+  height: 25px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.social-icon svg .icon-fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+
+/* FACEBOOK */
+
+.facebook-icon {
+  font-family: Arial, sans-serif;
+
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+
+/* hover ícone */
+
+.social-card:hover .social-icon {
+  transform: scale(1.06);
+
+  background: #162b3f;
+}
+
+
+/* =========================
+   SETA
+========================= */
+
+.social-arrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  background: #f7f5f0;
+
+  color: #b18b20;
+
+  font-size: 1.05rem;
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.social-card:hover .social-arrow {
+  transform:
+    translate(3px, -3px);
+
+  background: #d4af37;
+
+  color: #0d1b2a;
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.social-card-content {
+  margin-top: auto;
+}
+
+.social-name {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #b18b20;
+
+  font-size: 0.7rem;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+}
+
+.social-card h3 {
+  margin: 0;
+
+  color: #0d1b2a;
+
+  font-size: 1.25rem;
+  font-weight: 700;
+
+  line-height: 1.3;
+
+  letter-spacing: -0.02em;
+}
+
+.social-card p {
+  margin: 13px 0 0;
+
+  color: #697681;
+
+  font-size: 0.88rem;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 950px) {
+
+  .social {
+    padding: 90px 0;
+  }
+
+  .social-links {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .social-card:last-child {
+    grid-column: 1 / -1;
+
+    width: 100%;
+    max-width: 520px;
+
+    justify-self: center;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .social {
+    padding: 70px 0;
+  }
+
+  .social-header {
+    margin-bottom: 40px;
+  }
+
+  .social-header .section-label::before,
+  .social-header .section-label::after {
+    width: 20px;
+  }
+
+  .social-header h2 {
+    font-size:
+      clamp(
+        2.2rem,
+        10vw,
+        3rem
+      );
+  }
+
+  .social-header h2 span {
+    display: inline;
+  }
+
+  .social-header p {
+    font-size: 0.95rem;
+  }
+
+  .social-links {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .social-card,
+  .social-card:last-child {
+    grid-column: auto;
+
+    width: 100%;
+    max-width: none;
+
+    min-height: 270px;
+
+    padding: 25px;
+  }
+
+  .social-card-top {
+    margin-bottom: 35px;
+  }
+
+}

@@ -1,0 +1,482 @@
+<section class="missions-page">
+
+  <!-- =====================================================
+       CABEÇALHO
+  ====================================================== -->
+
+  <header class="page-header">
+
+    <div class="page-title">
+
+      <span class="section-label">
+        OBRA MISSIONÁRIA
+      </span>
+
+      <h1>
+        Missões
+      </h1>
+
+      <p>
+        Gerencie as obras missionárias, acompanhe as ações
+        realizadas e mantenha atualizado o conteúdo apresentado
+        no site.
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="primary-button"
+      (click)="createMission()"
+    >
+      <lucide-icon
+        [img]="Plus"
+        [size]="17"
+      />
+
+      Nova missão
+    </button>
+
+  </header>
+
+
+  <!-- =====================================================
+       ESTATÍSTICAS
+  ====================================================== -->
+
+  <section class="stats-grid">
+
+    <!-- MISSÕES -->
+
+    <article class="stat-card">
+
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          OBRAS MISSIONÁRIAS
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="Globe2"
+            [size]="20"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ totalMissions }}
+      </strong>
+
+      <span class="stat-description">
+        Missões cadastradas
+      </span>
+
+    </article>
+
+
+    <!-- ATIVIDADES -->
+
+    <article class="stat-card activities">
+
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          ATIVIDADES
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="Church"
+            [size]="20"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ totalActivities }}
+      </strong>
+
+      <span class="stat-description">
+        Ações missionárias cadastradas
+      </span>
+
+    </article>
+
+
+    <!-- REGIÕES -->
+
+    <article class="stat-card regions">
+
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          REGIÕES
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="MapPin"
+            [size]="20"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ totalRegions }}
+      </strong>
+
+      <span class="stat-description">
+        Regiões alcançadas
+      </span>
+
+    </article>
+
+  </section>
+
+
+  <!-- =====================================================
+       LISTAGEM
+  ====================================================== -->
+
+  <section class="missions-list-card">
+
+    <!-- HEADER DA LISTA -->
+
+    <div class="list-header">
+
+      <div class="list-title">
+
+        <span class="card-label">
+          CONTEÚDO
+        </span>
+
+        <h2>
+          Obras missionárias
+        </h2>
+
+        <p>
+          Visualize e gerencie as missões apresentadas
+          na área pública do site.
+        </p>
+
+      </div>
+
+
+      <!-- PESQUISA -->
+
+      <label class="search-wrapper">
+
+        <lucide-icon
+          [img]="Search"
+          [size]="16"
+        />
+
+        <input
+          type="search"
+          [(ngModel)]="searchTerm"
+          placeholder="Buscar missão..."
+          aria-label="Buscar missão"
+        />
+
+      </label>
+
+    </div>
+
+
+    <!-- =====================================================
+         RESULTADOS
+    ====================================================== -->
+
+    @if (filteredMissions.length > 0) {
+
+      <div class="missions-grid">
+
+        @for (
+          mission of filteredMissions;
+          track mission.id
+        ) {
+
+          <article class="mission-card">
+
+            <!-- IMAGEM -->
+
+            <div class="mission-image">
+
+              @if (hasMissionImage(mission)) {
+
+                <img
+                  [src]="mission.imageUrl"
+                  [alt]="mission.country"
+                />
+
+              } @else {
+
+                <div class="mission-image-placeholder">
+
+                  <lucide-icon
+                    [img]="Image"
+                    [size]="28"
+                  />
+
+                  <span>
+                    Sem imagem
+                  </span>
+
+                </div>
+
+              }
+
+
+              <!-- PAÍS -->
+
+              <span class="mission-country-badge">
+                {{ mission.country }}
+              </span>
+
+            </div>
+
+
+            <!-- CONTEÚDO -->
+
+            <div class="mission-card-content">
+
+              <!-- REGIÃO -->
+
+              <div class="mission-region">
+
+                <lucide-icon
+                  [img]="MapPin"
+                  [size]="13"
+                />
+
+                <span>
+                  {{ mission.region }}
+                </span>
+
+              </div>
+
+
+              <!-- TÍTULO -->
+
+              <h3>
+                {{ mission.title }}
+              </h3>
+
+
+              <!-- DESCRIÇÃO -->
+
+              <p class="mission-description">
+                {{ mission.description }}
+              </p>
+
+
+              <!-- HEADLINE -->
+
+              @if (mission.headline) {
+
+                <div class="mission-headline">
+
+                  <span>
+                    DESTAQUE
+                  </span>
+
+                  <p>
+                    {{ mission.headline }}
+                  </p>
+
+                </div>
+
+              }
+
+
+              <!-- RODAPÉ -->
+
+              <div class="mission-card-footer">
+
+                <div class="activity-count">
+
+                  <span class="activity-count-icon">
+
+                    <lucide-icon
+                      [img]="Church"
+                      [size]="14"
+                    />
+
+                  </span>
+
+                  <div>
+
+                    <strong>
+                      {{ getActivityCount(mission) }}
+                    </strong>
+
+                    <span>
+                      {{
+                        getActivityCount(mission) === 1
+                          ? 'atividade'
+                          : 'atividades'
+                      }}
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <!-- AÇÕES -->
+
+                <div class="mission-actions">
+
+                  <!-- VISUALIZAR -->
+
+                  <a
+                    [href]="'/obra/' + mission.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-button view"
+                    title="Visualizar no site"
+                    aria-label="Visualizar missão no site"
+                  >
+                    <lucide-icon
+                      [img]="Eye"
+                      [size]="15"
+                    />
+                  </a>
+
+
+                  <!-- EDITAR -->
+
+                  <button
+                    type="button"
+                    class="action-button edit"
+                    title="Editar missão"
+                    aria-label="Editar missão"
+                    (click)="editMission(mission)"
+                  >
+                    <lucide-icon
+                      [img]="Edit3"
+                      [size]="15"
+                    />
+                  </button>
+
+
+                  <!-- EXCLUIR -->
+
+                  <button
+                    type="button"
+                    class="action-button delete"
+                    title="Excluir missão"
+                    aria-label="Excluir missão"
+                    (click)="deleteMission(mission)"
+                  >
+                    <lucide-icon
+                      [img]="Trash2"
+                      [size]="15"
+                    />
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+
+    } @else {
+
+      <!-- ===================================================
+           ESTADO VAZIO
+      ==================================================== -->
+
+      <div class="empty-missions">
+
+        <span class="empty-icon">
+
+          @if (searchTerm.trim()) {
+
+            <lucide-icon
+              [img]="Search"
+              [size]="25"
+            />
+
+          } @else {
+
+            <lucide-icon
+              [img]="Globe2"
+              [size]="27"
+            />
+
+          }
+
+        </span>
+
+
+        @if (searchTerm.trim()) {
+
+          <h3>
+            Nenhuma missão encontrada
+          </h3>
+
+          <p>
+            Não encontramos nenhuma obra missionária
+            para "{{ searchTerm }}".
+          </p>
+
+        } @else {
+
+          <h3>
+            Nenhuma obra missionária cadastrada
+          </h3>
+
+          <p>
+            Cadastre a primeira obra missionária
+            para começar a organizar esse conteúdo.
+          </p>
+
+
+          <button
+            type="button"
+            class="empty-create-button"
+            (click)="createMission()"
+          >
+            <lucide-icon
+              [img]="Plus"
+              [size]="16"
+            />
+
+            Cadastrar primeira missão
+          </button>
+
+        }
+
+      </div>
+
+    }
+
+  </section>
+
+</section>
+
+<!-- =====================================================
+     FORMULÁRIO DE MISSÃO
+====================================================== -->
+
+@if (showForm) {
+
+  <app-mission-form
+    [mission]="selectedMission"
+    (save)="saveMission($event)"
+    (cancel)="closeForm()"
+  />
+
+}

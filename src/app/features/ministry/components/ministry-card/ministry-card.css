@@ -1,0 +1,316 @@
+.ministry-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(13, 27, 42, 0.08);
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 30px rgba(13, 27, 42, 0.07);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.ministry-card:hover {
+  transform: translateY(-8px);
+
+  border-color: rgba(212, 175, 55, 0.35);
+
+  box-shadow:
+    0 20px 45px rgba(13, 27, 42, 0.14);
+}
+
+
+/* =========================
+   IMAGEM
+========================= */
+
+.ministry-image {
+  position: relative;
+
+  height: 240px;
+  flex: 0 0 240px;
+
+  overflow: hidden;
+
+  background: #0d1b2a;
+}
+
+.ministry-image::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 55%,
+      rgba(13, 27, 42, 0.48) 100%
+    );
+
+  pointer-events: none;
+}
+
+.ministry-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.ministry-card:hover .ministry-image img {
+  transform: scale(1.04);
+}
+
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+.image-placeholder {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #1b3852 0%,
+      #0d1b2a 70%
+    );
+
+  text-align: center;
+}
+
+.image-placeholder span {
+  color: #d4af37;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+}
+
+
+/* =========================
+   BADGE
+========================= */
+
+.ministry-badge {
+  position: absolute;
+
+  left: 22px;
+  bottom: 18px;
+
+  z-index: 2;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 30px;
+
+  padding: 0 13px;
+
+  border-radius: 20px;
+
+  background: #d4af37;
+  color: #0d1b2a;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.ministry-content {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  padding: 27px 25px 25px;
+}
+
+.ministry-content h3 {
+  margin: 0 0 14px;
+
+  color: #0d1b2a;
+
+  font-size: 1.35rem;
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  letter-spacing: -0.02em;
+}
+
+.ministry-content p {
+  display: -webkit-box;
+
+  margin: 0 0 20px;
+
+  overflow: hidden;
+
+  color: #68737d;
+
+  font-size: 0.92rem;
+
+  line-height: 1.7;
+
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+
+/* =========================
+   LINK
+========================= */
+
+.ministry-link {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: auto;
+  padding-top: 20px;
+
+  border-top: 1px solid #ece9e3;
+
+  color: #0d1b2a;
+
+  font-size: 0.84rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition: color 0.25s ease;
+}
+
+.link-text {
+  position: relative;
+}
+
+.link-text::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  bottom: -5px;
+
+  width: 0;
+  height: 2px;
+
+  background: #d4af37;
+
+  transition: width 0.25s ease;
+}
+
+.link-arrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #f5f1e7;
+
+  color: #d4af37;
+
+  font-size: 1rem;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* Hover */
+
+.ministry-link:hover {
+  color: #d4af37;
+}
+
+.ministry-link:hover .link-text::after {
+  width: 100%;
+}
+
+.ministry-link:hover .link-arrow {
+  background: #d4af37;
+  color: #0d1b2a;
+
+  transform: translateX(3px);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .ministry-card {
+    border-radius: 15px;
+  }
+
+  .ministry-image {
+    height: 230px;
+    flex-basis: 230px;
+  }
+
+  .ministry-badge {
+    left: 20px;
+    bottom: 18px;
+  }
+
+  .ministry-content {
+    padding: 24px 22px;
+  }
+
+  .ministry-content h3 {
+    font-size: 1.3rem;
+  }
+}

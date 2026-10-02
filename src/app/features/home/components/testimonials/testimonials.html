@@ -1,0 +1,47 @@
+<section class="testimonials-section">
+  <div class="container">
+
+    <div class="section-heading">
+
+      <span class="section-label">
+        TESTEMUNHOS
+      </span>
+
+      <h2>
+        Histórias que revelam
+        <span>o agir de Deus.</span>
+      </h2>
+
+      <p>
+        Conheça histórias de fé, superação e transformação
+        vividas por pessoas da nossa comunidade.
+      </p>
+
+    </div>
+
+    <div class="testimonials-grid">
+
+      @for (testimonial of testimonials; track testimonial.id) {
+
+        <app-testimonial-card
+          [testimonial]="testimonial"
+        />
+
+      }
+
+    </div>
+
+    <div class="testimonials-action">
+
+      <a
+        routerLink="/testemunhos"
+        class="testimonials-button"
+      >
+        Ver todos os testemunhos
+        <span>→</span>
+      </a>
+
+    </div>
+
+  </div>
+</section>

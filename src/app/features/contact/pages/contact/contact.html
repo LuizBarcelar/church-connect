@@ -1,0 +1,345 @@
+<main class="contact-page">
+
+    <!-- HERO -->
+    <section class="contact-hero">
+
+      <div class="hero-glow"></div>
+
+      <div class="container">
+
+        <a routerLink="/" class="back-link">
+          <span class="back-icon">←</span>
+          <span>Voltar para o início</span>
+        </a>
+
+        <div class="contact-label">
+          <span class="label-line"></span>
+          <span>Contato</span>
+        </div>
+
+        <div class="contact-hero-content">
+
+          <h1>
+            Estamos aqui para
+            <span>conversar.</span>
+          </h1>
+
+          <p>
+            Entre em contato com nossa comunidade.
+            Será uma alegria receber sua mensagem,
+            esclarecer suas dúvidas e caminhar com você.
+          </p>
+
+          <div class="hero-footer">
+
+            <span class="hero-message">
+              Acolher. Ouvir. Caminhar juntos.
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- INFORMAÇÕES DE CONTATO -->
+    <section class="contact-content-section">
+
+      <div class="container">
+
+        <div class="contact-grid">
+
+          <!-- INTRODUÇÃO -->
+          <div class="contact-intro">
+
+            <span class="section-label">
+              FALE CONOSCO
+            </span>
+
+            <h2>
+              Sua mensagem é
+              <span>bem-vinda.</span>
+            </h2>
+
+            <p>
+              Se você deseja conhecer melhor a igreja,
+              saber mais sobre nossas atividades ou
+              conversar com alguém da nossa equipe,
+              utilize um dos canais de contato abaixo.
+            </p>
+
+            <p>
+              Estamos à disposição para acolher você
+              com atenção, respeito e carinho.
+            </p>
+
+            <a
+              routerLink="/pedir-oracao"
+              class="prayer-link"
+            >
+              Fazer um pedido de oração
+              <span>→</span>
+            </a>
+
+          </div>
+
+
+          <!-- CARDS DE CONTATO -->
+          <div class="contact-cards">
+
+            <!-- ENDEREÇO -->
+            <article class="contact-card">
+
+              <div class="contact-card-icon">
+                ⌂
+              </div>
+
+              <div>
+
+                <span class="contact-card-label">
+                  ENDEREÇO
+                </span>
+
+                <h3>
+                  Nosso templo
+                </h3>
+
+                <p>
+                  {{ church.address.block }},
+                  {{ church.address.set }},
+                  {{ church.address.lot }}<br />
+
+                  {{ church.address.neighborhood }}<br />
+
+                  {{ church.address.city }} -
+                  {{ church.address.state }}<br />
+
+                  CEP: {{ church.address.cep }}
+                </p>
+
+              </div>
+
+            </article>
+
+
+            <!-- WHATSAPP -->
+            @if (church.contact.whatsapp) {
+
+              <article class="contact-card">
+
+                <div class="contact-card-icon">
+                  ◉
+                </div>
+
+                <div>
+
+                  <span class="contact-card-label">
+                    WHATSAPP
+                  </span>
+
+                  <h3>
+                    Fale com nossa equipe
+                  </h3>
+
+                  <p>
+                    Atendimento para informações
+                    e orientações.
+                  </p>
+
+                  <a
+                    [href]="getWhatsappUrl(church.contact.whatsapp)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="contact-card-link"
+                  >
+                    Conversar pelo WhatsApp
+                    <span>↗</span>
+                  </a>
+
+                </div>
+
+              </article>
+
+            }
+
+
+            <!-- E-MAIL -->
+            @if (church.contact.email) {
+
+              <article class="contact-card">
+
+                <div class="contact-card-icon">
+                  @
+                </div>
+
+                <div>
+
+                  <span class="contact-card-label">
+                    E-MAIL
+                  </span>
+
+                  <h3>
+                    Envie uma mensagem
+                  </h3>
+
+                  <p>
+                    {{ church.contact.email }}
+                  </p>
+
+                  <a
+                    [href]="'mailto:' + church.contact.email"
+                    class="contact-card-link"
+                  >
+                    Enviar e-mail
+                    <span>↗</span>
+                  </a>
+
+                </div>
+
+              </article>
+
+            }
+
+
+            <!-- HORÁRIOS -->
+            <article class="contact-card">
+
+              <div class="contact-card-icon">
+                ◷
+              </div>
+
+              <div>
+
+                <span class="contact-card-label">
+                  HORÁRIOS
+                </span>
+
+                <h3>
+                  Programação
+                </h3>
+
+                @for (
+                  service of church.services;
+                  track service.day
+                ) {
+
+                  <p class="schedule-line">
+
+                    <strong>
+                      {{ service.day }}:
+                    </strong>
+
+                    {{ service.times.join(' e ') }}
+
+                  </p>
+
+                }
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- REDES SOCIAIS -->
+    <section class="contact-social-section">
+
+      <div class="container">
+
+        <div class="social-box">
+
+          <div>
+
+            <span class="section-label">
+              REDES SOCIAIS
+            </span>
+
+            <h2>
+              Continue conectado
+              <span>com a gente.</span>
+            </h2>
+
+            <p>
+              Acompanhe nossas atividades,
+              mensagens e novidades pelas redes sociais.
+            </p>
+
+          </div>
+
+
+          <div class="social-links">
+
+            @if (church.contact.instagram) {
+
+              <a
+                [href]="church.contact.instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+                <span>↗</span>
+              </a>
+
+            }
+
+
+            @if (church.contact.youtube) {
+
+              <a
+                [href]="church.contact.youtube"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                YouTube
+                <span>↗</span>
+              </a>
+
+            }
+
+
+            @if (church.contact.facebook) {
+
+              <a
+                [href]="church.contact.facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Facebook
+                <span>↗</span>
+              </a>
+
+            }
+
+
+            @if (
+              !church.contact.instagram &&
+              !church.contact.youtube &&
+              !church.contact.facebook
+            ) {
+
+              <span class="social-empty">
+                Nossas redes sociais serão disponibilizadas em breve.
+              </span>
+
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+</main>
+

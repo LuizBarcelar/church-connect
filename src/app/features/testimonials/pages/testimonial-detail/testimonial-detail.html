@@ -1,0 +1,198 @@
+<section class="testimonial-detail">
+
+  @if (testimonial; as item) {
+
+    <div class="detail-hero">
+      <div class="container">
+
+        <a
+          routerLink="/testemunhos"
+          class="back-link"
+        >
+          <span>←</span>
+          Voltar para testemunhos
+        </a>
+
+        <div class="detail-category">
+          {{ item.category }}
+        </div>
+
+        <h1>
+          {{ item.title }}
+        </h1>
+
+        <p class="detail-intro">
+          Uma história de fé, transformação e esperança.
+        </p>
+
+      </div>
+    </div>
+
+
+    <div class="detail-content">
+      <div class="container">
+
+        <div class="detail-grid">
+
+          <!-- Mídias -->
+          <div class="detail-media">
+            @if (item.imageUrl) {
+              <div class="detail-image">
+                <img
+                  [src]="item.imageUrl"
+                  [alt]="'Foto de ' + item.name"
+                />
+              </div>
+            }
+
+            @if (safeVideoUrl) {
+              <div class="detail-video">
+                <div class="video-heading">
+                  <span class="video-icon">▶</span>
+                  <span>Relato em vídeo</span>
+                </div>
+
+                <div class="detail-video-player">
+                  <iframe
+                    [src]="safeVideoUrl"
+                    title="Relato em vídeo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            }
+
+            @if (!item.imageUrl && !safeVideoUrl) {
+              <div class="detail-image">
+                <div class="image-placeholder">
+                  Mídia não disponível
+                </div>
+              </div>
+            }
+          </div>
+
+
+          <!-- Conteúdo -->
+          <article class="detail-story">
+
+            <div class="author">
+
+              <div class="author-avatar">
+                {{ item.initials }}
+              </div>
+
+              <div class="author-info">
+
+                <strong>
+                  {{ item.name }}
+                </strong>
+
+                <span>
+                  {{ item.location }}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="story-divider"></div>
+
+
+            <div class="story-text">
+
+              @for (paragraph of item.content; track $index) {
+                <p>
+                  {{ paragraph }}
+                </p>
+              }
+
+            </div>
+
+
+            <div class="story-footer">
+
+              <span>
+                Compartilhado com fé e esperança.
+              </span>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- CTA -->
+    <section class="detail-cta">
+
+      <div class="container">
+
+        <div class="cta-content">
+
+          <span class="section-label">
+            SUA HISTÓRIA TAMBÉM IMPORTA
+          </span>
+
+          <h2>
+            O que Deus tem feito
+            <span>na sua vida?</span>
+          </h2>
+
+          <p>
+            Seu testemunho pode inspirar e fortalecer
+            outras pessoas.
+          </p>
+
+          <a
+            routerLink="/testemunhos"
+            class="cta-button"
+          >
+            Conhecer outros testemunhos
+            <span>→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+  @else {
+
+    <div class="not-found">
+
+      <div class="container">
+
+        <span class="section-label">
+          TESTEMUNHO
+        </span>
+
+        <h1>
+          Testemunho não encontrado
+        </h1>
+
+        <p>
+          Não encontramos o testemunho solicitado.
+        </p>
+
+        <a
+          routerLink="/testemunhos"
+          class="cta-button"
+        >
+          Voltar para testemunhos
+        </a>
+
+      </div>
+
+    </div>
+
+  }
+
+</section>

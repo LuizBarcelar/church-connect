@@ -1,0 +1,966 @@
+<section class="members-page">
+
+  <!-- =========================
+       CABEÇALHO
+  ========================== -->
+
+  <header class="page-header">
+
+    <div class="page-title">
+
+      <span class="section-label">
+        GESTÃO DE MEMBROS
+      </span>
+
+      <h1>
+        Membros
+      </h1>
+
+      <p>
+        Gerencie os membros da igreja, acompanhe aniversários
+        e mantenha os dados da comunidade organizados.
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="primary-button"
+      (click)="createMember()"
+    >
+      <lucide-icon
+        [img]="Plus"
+        [size]="17"
+      />
+
+      Novo membro
+    </button>
+
+  </header>
+
+
+  <!-- =========================
+       ESTATÍSTICAS
+  ========================== -->
+
+  <section class="stats-grid">
+
+    <!-- TOTAL -->
+
+    <article class="stat-card">
+
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          TOTAL DE MEMBROS
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="Users"
+            [size]="20"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ totalMembers }}
+      </strong>
+
+      <span class="stat-description">
+        Membros cadastrados
+      </span>
+
+    </article>
+
+
+    <!-- BATIZADOS -->
+
+    <article class="stat-card baptized">
+
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          BATIZADOS
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="Droplets"
+            [size]="20"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ baptizedMembersCount }}
+      </strong>
+
+      <span class="stat-description">
+        Membros batizados
+      </span>
+
+    </article>
+
+
+    <!-- OBRA -->
+
+    <article class="stat-card ministry">
+
+      <div class="stat-card-top">
+
+        <span class="stat-label">
+          TRABALHAM NA OBRA
+        </span>
+
+        <span class="stat-icon">
+          <lucide-icon
+            [img]="Church"
+            [size]="20"
+          />
+        </span>
+
+      </div>
+
+      <strong>
+        {{ ministryMembersCount }}
+      </strong>
+
+      <span class="stat-description">
+        Participam ou já participaram
+      </span>
+
+    </article>
+
+  </section>
+
+
+  <!-- =========================
+       ANIVERSARIANTES
+  ========================== -->
+
+  <section class="birthdays-card">
+
+    <!-- HEADER -->
+
+    <div class="birthdays-header">
+
+      <div class="birthdays-title">
+
+        <div class="birthdays-heading-icon">
+          <lucide-icon
+            [img]="Cake"
+            [size]="20"
+          />
+        </div>
+
+        <div>
+
+          <span class="card-label">
+            COMUNIDADE
+          </span>
+
+          <h2>
+            Aniversariantes
+          </h2>
+
+          <p>
+            Acompanhe os aniversários dos membros
+            e mantenha a comunidade mais próxima.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="birthdays-summary">
+
+        <div class="summary-item">
+
+          <strong>
+            {{ birthdayCount }}
+          </strong>
+
+          <span>
+            neste mês
+          </span>
+
+        </div>
+
+
+        <div class="summary-item today">
+
+          <strong>
+            {{ birthdayTodayCount }}
+          </strong>
+
+          <span>
+            hoje
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         ANIVERSÁRIOS DE HOJE
+    ========================== -->
+
+    @if (birthdayTodayMembers.length > 0) {
+
+      <div class="birthday-today-section">
+
+        <div class="birthday-section-heading">
+
+          <span class="birthday-section-icon">
+            <lucide-icon
+              [img]="Sparkles"
+              [size]="17"
+            />
+          </span>
+
+          <div>
+
+            <h3>
+              Aniversário hoje
+            </h3>
+
+            <p>
+              Não deixe de enviar uma mensagem especial.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="birthday-today-list">
+
+          @for (
+            member of birthdayTodayMembers;
+            track member.id
+          ) {
+
+            <article class="birthday-today-item">
+
+              <div class="birthday-person">
+
+                <div
+                  class="birthday-avatar
+                         birthday-avatar-highlight"
+                >
+
+                  @if (member.photoUrl) {
+
+                    <img
+                      [src]="member.photoUrl"
+                      [alt]="member.fullName"
+                    />
+
+                  } @else {
+
+                    <span>
+                      {{ getInitials(member.fullName) }}
+                    </span>
+
+                  }
+
+                </div>
+
+
+                <div class="birthday-info">
+
+                  <strong>
+                    {{ member.fullName }}
+                  </strong>
+
+                  <span class="birthday-date">
+
+                    <lucide-icon
+                      [img]="Cake"
+                      [size]="13"
+                    />
+
+                    {{ member.birthDate | date:'dd/MM' }}
+
+                  </span>
+
+                  <small>
+                    É aniversário hoje!
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <div class="birthday-actions">
+
+                <a
+                  [routerLink]="[
+                    '/admin/membros',
+                    member.id
+                  ]"
+                  class="birthday-profile-button"
+                >
+                  <lucide-icon
+                    [img]="Eye"
+                    [size]="15"
+                  />
+
+                  Ver perfil
+                </a>
+
+
+                @if (getWhatsAppLink(member)) {
+
+                  <a
+                    [href]="getWhatsAppLink(member)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="birthday-whatsapp"
+                  >
+                    <lucide-icon
+                      [img]="MessageCircle"
+                      [size]="15"
+                    />
+
+                    WhatsApp
+                  </a>
+
+                } @else {
+
+                  <span class="birthday-no-whatsapp">
+                    WhatsApp não cadastrado
+                  </span>
+
+                }
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- =========================
+         ANIVERSÁRIOS DO MÊS
+    ========================== -->
+
+    <div class="birthday-month-section">
+
+      <div class="birthday-month-header">
+
+        <button
+          type="button"
+          class="birthday-month-nav"
+          (click)="previousBirthdayMonth()"
+          [attr.aria-label]="
+            'Ver aniversariantes de ' +
+            previousBirthdayMonthName
+          "
+        >
+          <lucide-icon
+            [img]="ArrowLeft"
+            [size]="17"
+          />
+        </button>
+
+
+        <div class="birthday-month-current">
+
+          <span class="month-icon">
+            <lucide-icon
+              [img]="CalendarDays"
+              [size]="18"
+            />
+          </span>
+
+          <div>
+
+            <h3>
+              Aniversariantes de
+              {{ birthdayMonthName }}
+            </h3>
+
+            <p>
+              {{ birthdayCount }}
+
+              {{
+                birthdayCount === 1
+                  ? 'aniversariante'
+                  : 'aniversariantes'
+              }}
+
+              neste mês
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="birthday-month-nav"
+          (click)="nextBirthdayMonth()"
+          [attr.aria-label]="
+            'Ver aniversariantes de ' +
+            nextBirthdayMonthName
+          "
+        >
+          <lucide-icon
+            [img]="ArrowRight"
+            [size]="17"
+          />
+        </button>
+
+      </div>
+
+
+      @if (!isCurrentBirthdayMonth) {
+
+        <button
+          type="button"
+          class="current-month-button"
+          (click)="goToCurrentBirthdayMonth()"
+        >
+          <lucide-icon
+            [img]="LocateFixed"
+            [size]="14"
+          />
+
+          Voltar para este mês
+        </button>
+
+      }
+
+
+      @if (birthdayMembers.length > 0) {
+
+        <div class="birthdays-list">
+
+          @for (
+            member of birthdayMembers;
+            track member.id
+          ) {
+
+            <article
+              class="birthday-item"
+              [class.birthday-today]="
+                isBirthdayToday(member)
+              "
+            >
+
+              <div class="birthday-person">
+
+                <!-- DATA -->
+
+                <div class="birthday-day">
+
+                  <strong>
+                    {{ getBirthdayDay(member.birthDate) }}
+                  </strong>
+
+                  <span>
+                    {{ getBirthdayMonth(member.birthDate) }}
+                  </span>
+
+                </div>
+
+
+                <!-- AVATAR -->
+
+                <div class="birthday-avatar">
+
+                  @if (member.photoUrl) {
+
+                    <img
+                      [src]="member.photoUrl"
+                      [alt]="member.fullName"
+                    />
+
+                  } @else {
+
+                    <span>
+                      {{ getInitials(member.fullName) }}
+                    </span>
+
+                  }
+
+                </div>
+
+
+                <!-- INFORMAÇÕES -->
+
+                <div class="birthday-info">
+
+                  <strong>
+                    {{ member.fullName }}
+                  </strong>
+
+                  <span class="birthday-weekday">
+                    {{ getBirthdayWeekday(member.birthDate) }}
+                  </span>
+
+
+                  @if (isBirthdayToday(member)) {
+
+                    <small class="birthday-today-label">
+                      Aniversário hoje
+                    </small>
+
+                  }
+
+                </div>
+
+              </div>
+
+
+              <!-- AÇÕES -->
+
+              <div class="birthday-actions">
+
+                <a
+                  [routerLink]="[
+                    '/admin/membros',
+                    member.id
+                  ]"
+                  class="birthday-profile-button"
+                >
+                  <lucide-icon
+                    [img]="Eye"
+                    [size]="15"
+                  />
+
+                  Ver perfil
+                </a>
+
+
+                @if (getWhatsAppLink(member)) {
+
+                  <a
+                    [href]="getWhatsAppLink(member)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="birthday-whatsapp"
+                  >
+                    <lucide-icon
+                      [img]="MessageCircle"
+                      [size]="15"
+                    />
+
+                    WhatsApp
+                  </a>
+
+                } @else {
+
+                  <span class="birthday-no-whatsapp">
+                    WhatsApp não cadastrado
+                  </span>
+
+                }
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      } @else {
+
+        <div class="empty-birthdays">
+
+          <span class="empty-birthdays-icon">
+            <lucide-icon
+              [img]="Cake"
+              [size]="22"
+            />
+          </span>
+
+          <div>
+
+            <strong>
+              Nenhum aniversariante em
+              {{ birthdayMonthName }}
+            </strong>
+
+            <p>
+              Não há membros cadastrados com
+              aniversário neste mês.
+            </p>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MEMBROS CADASTRADOS
+  ========================== -->
+
+  <section class="members-list-card">
+
+    <!-- HEADER -->
+
+    <div class="list-header">
+
+      <div>
+
+        <span class="card-label">
+          CADASTRO
+        </span>
+
+        <h2>
+          Membros cadastrados
+        </h2>
+
+        <p>
+          Consulte, edite ou visualize os dados
+          dos membros da igreja.
+        </p>
+
+      </div>
+
+
+      <!-- BUSCA -->
+
+      <label class="search-wrapper">
+
+        <lucide-icon
+          [img]="Search"
+          [size]="16"
+        />
+
+        <input
+          type="search"
+          [(ngModel)]="searchTerm"
+          placeholder="Buscar membro..."
+          aria-label="Buscar membro"
+        />
+
+      </label>
+
+    </div>
+
+
+    <!-- =========================
+         TABELA
+    ========================== -->
+
+    @if (filteredMembers.length > 0) {
+
+      <div class="members-table-wrapper">
+
+        <table class="members-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Membro
+              </th>
+
+              <th>
+                Nascimento
+              </th>
+
+              <th>
+                Batizado
+              </th>
+
+              <th>
+                Obra
+              </th>
+
+              <th class="actions-column">
+                Ações
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              member of filteredMembers;
+              track member.id
+            ) {
+
+              <tr>
+
+                <!-- MEMBRO -->
+
+                <td>
+
+                  <div class="member-info">
+
+                    <div class="member-avatar">
+
+                      @if (member.photoUrl) {
+
+                        <img
+                          [src]="member.photoUrl"
+                          [alt]="member.fullName"
+                        />
+
+                      } @else {
+
+                        <span>
+                          {{ getInitials(member.fullName) }}
+                        </span>
+
+                      }
+
+                    </div>
+
+
+                    <div class="member-name">
+
+                      <a
+                        [routerLink]="[
+                          '/admin/membros',
+                          member.id
+                        ]"
+                        class="member-profile-link"
+                      >
+                        {{ member.fullName }}
+                      </a>
+
+
+                      <span class="member-location">
+
+                        @if (member.city) {
+                          {{ member.city }}
+                        }
+
+                        @if (member.city && member.state) {
+                          -
+                        }
+
+                        @if (member.state) {
+                          {{ member.state }}
+                        }
+
+                      </span>
+
+
+                      @if (member.phone) {
+
+                        <span class="member-phone">
+                          {{ member.phone }}
+                        </span>
+
+                      }
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- NASCIMENTO -->
+
+                <td>
+
+                  <span class="table-date">
+                    {{ member.birthDate | date:'dd/MM/yyyy' }}
+                  </span>
+
+                </td>
+
+
+                <!-- BATIZADO -->
+
+                <td>
+
+                  @if (member.baptized) {
+
+                    <span class="status-badge success">
+                      Sim
+                    </span>
+
+                  } @else {
+
+                    <span class="status-badge">
+                      Não
+                    </span>
+
+                  }
+
+                </td>
+
+
+                <!-- OBRA -->
+
+                <td>
+
+                  @if (member.hasWorkedInMinistry) {
+
+                    <span class="status-badge success">
+                      Sim
+                    </span>
+
+                  } @else {
+
+                    <span class="status-badge">
+                      Não
+                    </span>
+
+                  }
+
+                </td>
+
+
+                <!-- AÇÕES -->
+
+                <td>
+
+                  <div class="action-buttons">
+
+                    <a
+                      [routerLink]="[
+                        '/admin/membros',
+                        member.id
+                      ]"
+                      class="action-button view"
+                      title="Visualizar membro"
+                    >
+                      <lucide-icon
+                        [img]="Eye"
+                        [size]="15"
+                      />
+                    </a>
+
+
+                    <button
+                      type="button"
+                      class="action-button edit"
+                      title="Editar membro"
+                      (click)="editMember(member)"
+                    >
+                      <lucide-icon
+                        [img]="Edit3"
+                        [size]="15"
+                      />
+                    </button>
+
+
+                    <button
+                      type="button"
+                      class="action-button delete"
+                      title="Excluir membro"
+                      (click)="deleteMember(member.id)"
+                    >
+                      <lucide-icon
+                        [img]="Trash2"
+                        [size]="15"
+                      />
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    } @else {
+
+      <!-- =========================
+           VAZIO
+      ========================== -->
+
+      <div class="empty-members">
+
+        <span class="empty-members-icon">
+          <lucide-icon
+            [img]="Search"
+            [size]="23"
+          />
+        </span>
+
+        <h3>
+          Nenhum membro encontrado
+        </h3>
+
+        <p>
+          @if (searchTerm.trim()) {
+            Não encontramos membros para
+            "{{ searchTerm }}".
+          } @else {
+            Nenhum membro foi cadastrado ainda.
+          }
+        </p>
+
+        @if (!searchTerm.trim()) {
+
+          <button
+            type="button"
+            class="empty-create-button"
+            (click)="createMember()"
+          >
+            <lucide-icon
+              [img]="Plus"
+              [size]="16"
+            />
+
+            Cadastrar primeiro membro
+          </button>
+
+        }
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <!-- =========================
+       FORMULÁRIO
+  ========================== -->
+
+  @if (showForm) {
+
+    <app-member-form
+      [member]="selectedMember"
+      (save)="saveMember($event)"
+      (cancel)="closeForm()"
+    />
+
+  }
+
+</section>

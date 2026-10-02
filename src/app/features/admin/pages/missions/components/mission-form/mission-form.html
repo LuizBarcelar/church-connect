@@ -1,0 +1,806 @@
+<div class="mission-form-overlay">
+
+  <div
+    class="mission-form-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="mission-form-title"
+  >
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <header class="mission-form-header">
+
+      <div class="form-header-title">
+
+        <span class="form-label">
+          OBRA MISSIONÁRIA
+        </span>
+
+        <h2 id="mission-form-title">
+          {{ mission ? 'Editar missão' : 'Nova missão' }}
+        </h2>
+
+        <p>
+          {{
+            mission
+              ? 'Atualize as informações desta obra missionária.'
+              : 'Cadastre uma nova obra missionária para apresentar no site.'
+          }}
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="close-button"
+        aria-label="Fechar formulário"
+        title="Fechar"
+        (click)="cancelForm()"
+      >
+        <lucide-icon
+          [img]="X"
+          [size]="19"
+        />
+      </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         FORMULÁRIO
+    ====================================================== -->
+
+    <form
+      class="mission-form-content"
+      (ngSubmit)="submitForm()"
+    >
+
+      <!-- ===================================================
+           01 - LOCALIZAÇÃO
+      ==================================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            01
+          </span>
+
+          <div>
+            <h3>
+              Localização
+            </h3>
+
+            <p>
+              Informe onde esta obra missionária
+              está sendo realizada.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="form-grid two-columns">
+
+          <!-- PAÍS -->
+
+          <div class="form-group">
+
+            <label for="mission-country">
+              País
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="Globe2"
+                [size]="17"
+              />
+
+              <input
+                id="mission-country"
+                name="country"
+                type="text"
+                [(ngModel)]="country"
+                placeholder="Ex.: Haiti"
+                required
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- REGIÃO -->
+
+          <div class="form-group">
+
+            <label for="mission-region">
+              Região
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="MapPin"
+                [size]="17"
+              />
+
+              <input
+                id="mission-region"
+                name="region"
+                type="text"
+                [(ngModel)]="region"
+                placeholder="Ex.: Caribe"
+                required
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           02 - APRESENTAÇÃO
+      ==================================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            02
+          </span>
+
+          <div>
+            <h3>
+              Apresentação
+            </h3>
+
+            <p>
+              Defina as principais informações
+              que serão apresentadas ao visitante.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <!-- TÍTULO -->
+
+          <div class="form-group">
+
+            <label for="mission-title">
+              Título
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="Type"
+                [size]="17"
+              />
+
+              <input
+                id="mission-title"
+                name="title"
+                type="text"
+                [(ngModel)]="title"
+                placeholder="Título da obra missionária"
+                required
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- DESCRIÇÃO -->
+
+          <div class="form-group">
+
+            <label for="mission-description">
+              Descrição
+              <span>*</span>
+            </label>
+
+            <textarea
+              id="mission-description"
+              name="description"
+              [(ngModel)]="description"
+              rows="4"
+              placeholder="Faça uma breve apresentação da obra missionária..."
+              required
+            ></textarea>
+
+            <span class="field-help">
+              Esse texto pode ser utilizado nos cards
+              e nas apresentações resumidas da missão.
+            </span>
+
+          </div>
+
+
+          <!-- HEADLINE -->
+
+          <div class="form-group">
+
+            <label for="mission-headline">
+              Frase de destaque
+              <span>*</span>
+            </label>
+
+            <textarea
+              id="mission-headline"
+              name="headline"
+              [(ngModel)]="headline"
+              rows="3"
+              placeholder="Ex.: Levando esperança e a Palavra de Deus às famílias."
+              required
+            ></textarea>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           03 - IMAGEM PRINCIPAL
+      ==================================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            03
+          </span>
+
+          <div>
+            <h3>
+              Imagem principal
+            </h3>
+
+            <p>
+              Escolha a imagem que representará
+              esta missão no site.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="mission-image">
+            Caminho ou URL da imagem
+          </label>
+
+          <div class="input-wrapper">
+
+            <lucide-icon
+              [img]="Image"
+              [size]="17"
+            />
+
+            <input
+              id="mission-image"
+              name="imageUrl"
+              type="text"
+              [(ngModel)]="imageUrl"
+              placeholder="/missions/haiti.jpg"
+            />
+
+          </div>
+
+          <span class="field-help">
+            Você pode informar um caminho da pasta public
+            ou uma URL externa.
+          </span>
+
+        </div>
+
+
+        <!-- PREVIEW -->
+
+        @if (hasImagePreview()) {
+
+          <div class="main-image-preview">
+
+            <div class="preview-image">
+
+              <img
+                [src]="imageUrl"
+                [alt]="country || 'Preview da missão'"
+              />
+
+            </div>
+
+
+            <div class="preview-information">
+
+              <span class="preview-label">
+                PREVIEW
+              </span>
+
+              <strong>
+                {{ country || 'Obra missionária' }}
+              </strong>
+
+              <p>
+                Visualização da imagem principal.
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="remove-preview-button"
+              title="Remover imagem"
+              aria-label="Remover imagem"
+              (click)="clearImage()"
+            >
+              <lucide-icon
+                [img]="X"
+                [size]="16"
+              />
+            </button>
+
+          </div>
+
+        } @else {
+
+          <div class="image-empty-preview">
+
+            <span class="image-empty-icon">
+              <lucide-icon
+                [img]="Image"
+                [size]="23"
+              />
+            </span>
+
+            <div>
+              <strong>
+                Nenhuma imagem informada
+              </strong>
+
+              <p>
+                O preview aparecerá aqui quando
+                você informar o caminho da imagem.
+              </p>
+            </div>
+
+          </div>
+
+        }
+
+      </section>
+
+
+      <!-- ===================================================
+           04 - CONTEÚDO
+      ==================================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading section-heading-action">
+
+          <div class="section-heading-main">
+
+            <span class="section-number">
+              04
+            </span>
+
+            <div>
+              <h3>
+                Conteúdo
+              </h3>
+
+              <p>
+                Escreva os parágrafos que aparecerão
+                na página detalhada da missão.
+              </p>
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="addParagraph()"
+          >
+            <lucide-icon
+              [img]="Plus"
+              [size]="15"
+            />
+
+            Adicionar parágrafo
+          </button>
+
+        </div>
+
+
+        <div class="paragraph-list">
+
+          @for (
+            paragraph of content;
+            track $index;
+            let index = $index
+          ) {
+
+            <article class="paragraph-card">
+
+              <div class="paragraph-header">
+
+                <div class="paragraph-title">
+
+                  <span class="paragraph-icon">
+                    <lucide-icon
+                      [img]="BookOpenText"
+                      [size]="16"
+                    />
+                  </span>
+
+                  <strong>
+                    Parágrafo {{ index + 1 }}
+                  </strong>
+
+                </div>
+
+
+                <button
+                  type="button"
+                  class="remove-item-button"
+                  title="Remover parágrafo"
+                  aria-label="Remover parágrafo"
+                  (click)="removeParagraph(index)"
+                >
+                  <lucide-icon
+                    [img]="Trash2"
+                    [size]="15"
+                  />
+                </button>
+
+              </div>
+
+
+              <textarea
+                [name]="'content-' + index"
+                [ngModel]="paragraph"
+                (ngModelChange)="updateParagraph(index, $event)"
+                rows="5"
+                placeholder="Digite o conteúdo deste parágrafo..."
+              ></textarea>
+
+            </article>
+
+          }
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           05 - ATIVIDADES
+      ==================================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading section-heading-action">
+
+          <div class="section-heading-main">
+
+            <span class="section-number">
+              05
+            </span>
+
+            <div>
+              <h3>
+                Atividades missionárias
+              </h3>
+
+              <p>
+                Cadastre as principais ações
+                realizadas nesta missão.
+              </p>
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="addActivity()"
+          >
+            <lucide-icon
+              [img]="Plus"
+              [size]="15"
+            />
+
+            Adicionar atividade
+          </button>
+
+        </div>
+
+
+        @if (activities.length > 0) {
+
+          <div class="activities-list">
+
+            @for (
+              activity of activities;
+              track $index;
+              let index = $index
+            ) {
+
+              <article class="activity-card">
+
+                <!-- HEADER -->
+
+                <div class="activity-header">
+
+                  <div class="activity-title">
+
+                    <span class="activity-icon">
+                      <lucide-icon
+                        [img]="Activity"
+                        [size]="16"
+                      />
+                    </span>
+
+                    <div>
+                      <span>
+                        ATIVIDADE
+                      </span>
+
+                      <strong>
+                        {{ index + 1 }}
+                      </strong>
+                    </div>
+
+                  </div>
+
+
+                  <button
+                    type="button"
+                    class="remove-item-button"
+                    title="Remover atividade"
+                    aria-label="Remover atividade"
+                    (click)="removeActivity(index)"
+                  >
+                    <lucide-icon
+                      [img]="Trash2"
+                      [size]="15"
+                    />
+                  </button>
+
+                </div>
+
+
+                <!-- CAMPOS -->
+
+                <div class="activity-fields">
+
+                  <!-- TÍTULO -->
+
+                  <div class="form-group">
+
+                    <label
+                      [for]="'activity-title-' + index"
+                    >
+                      Título
+                    </label>
+
+                    <input
+                      [id]="'activity-title-' + index"
+                      [name]="'activity-title-' + index"
+                      type="text"
+                      [(ngModel)]="activity.title"
+                      placeholder="Ex.: Evangelização"
+                    />
+
+                  </div>
+
+
+                  <!-- DESCRIÇÃO -->
+
+                  <div class="form-group">
+
+                    <label
+                      [for]="'activity-description-' + index"
+                    >
+                      Descrição
+                    </label>
+
+                    <textarea
+                      [id]="'activity-description-' + index"
+                      [name]="'activity-description-' + index"
+                      [(ngModel)]="activity.description"
+                      rows="4"
+                      placeholder="Descreva a atividade realizada..."
+                    ></textarea>
+
+                  </div>
+
+
+                  <!-- IMAGEM -->
+
+                  <div class="form-group">
+
+                    <label
+                      [for]="'activity-image-' + index"
+                    >
+                      Imagem
+                    </label>
+
+                    <div class="input-wrapper">
+
+                      <lucide-icon
+                        [img]="Image"
+                        [size]="16"
+                      />
+
+                      <input
+                        [id]="'activity-image-' + index"
+                        [name]="'activity-image-' + index"
+                        type="text"
+                        [(ngModel)]="activity.imageUrl"
+                        placeholder="/missions/activities/atividade.jpg"
+                      />
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- PREVIEW DA ATIVIDADE -->
+
+                  @if (hasActivityImage(activity)) {
+
+                    <div class="activity-image-preview">
+
+                      <img
+                        [src]="activity.imageUrl"
+                        [alt]="activity.title || 'Preview da atividade'"
+                      />
+
+
+                      <div class="activity-preview-overlay">
+
+                        <span>
+                          {{
+                            activity.title ||
+                            'Atividade missionária'
+                          }}
+                        </span>
+
+
+                        <button
+                          type="button"
+                          title="Remover imagem"
+                          aria-label="Remover imagem da atividade"
+                          (click)="clearActivityImage(index)"
+                        >
+                          <lucide-icon
+                            [img]="X"
+                            [size]="14"
+                          />
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  }
+
+                </div>
+
+              </article>
+
+            }
+
+          </div>
+
+        } @else {
+
+          <div class="empty-activities">
+
+            <span class="empty-activities-icon">
+              <lucide-icon
+                [img]="Activity"
+                [size]="24"
+              />
+            </span>
+
+            <div>
+              <strong>
+                Nenhuma atividade cadastrada
+              </strong>
+
+              <p>
+                Adicione ações como evangelização,
+                assistência às famílias, ensino e
+                trabalhos comunitários.
+              </p>
+            </div>
+
+
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="addActivity()"
+            >
+              <lucide-icon
+                [img]="Plus"
+                [size]="15"
+              />
+
+              Adicionar atividade
+            </button>
+
+          </div>
+
+        }
+
+      </section>
+
+
+      <!-- ===================================================
+           RODAPÉ
+      ==================================================== -->
+
+      <footer class="mission-form-footer">
+
+        <button
+          type="button"
+          class="cancel-button"
+          (click)="cancelForm()"
+        >
+          Cancelar
+        </button>
+
+
+        <button
+          type="submit"
+          class="save-button"
+          [disabled]="!isFormValid()"
+        >
+          <lucide-icon
+            [img]="Save"
+            [size]="16"
+          />
+
+          {{
+            mission
+              ? 'Salvar alterações'
+              : 'Cadastrar missão'
+          }}
+        </button>
+
+      </footer>
+
+    </form>
+
+  </div>
+
+</div>

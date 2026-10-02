@@ -1,0 +1,91 @@
+.ministries-page {
+  background: #f7f5f0;
+}
+
+.ministries-hero {
+  padding: 110px 0 90px;
+  background: #0d1b2a;
+}
+
+.ministries-hero h1 {
+  max-width: 800px;
+  margin: 0;
+
+  color: #ffffff;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.ministries-hero h1 span {
+  color: #d4af37;
+}
+
+.ministries-hero p {
+  max-width: 650px;
+  margin: 25px 0 0;
+
+  color: #d8dde2;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.ministries-list {
+  padding: 100px 0;
+}
+
+.section-heading {
+  max-width: 700px;
+  margin-bottom: 55px;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #0d1b2a;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.15;
+}
+
+.section-heading h2 span {
+  color: #d4af37;
+}
+
+.section-heading p {
+  max-width: 620px;
+  margin: 20px 0 0;
+
+  color: #6c757d;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.ministries-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+}
+
+app-ministry-card {
+  display: block;
+  height: 100%;
+}
+
+@media (max-width: 700px) {
+  .ministries-hero {
+    padding: 80px 0 70px;
+  }
+
+  .ministries-list {
+    padding: 70px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 35px;
+  }
+
+  .ministries-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}

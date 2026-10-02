@@ -1,0 +1,225 @@
+.world-mission-section {
+  position: relative;
+  padding: 100px 0;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 75% 50%,
+      rgba(40, 72, 105, 0.55) 0%,
+      rgba(13, 27, 42, 0) 45%
+    ),
+    linear-gradient(
+      135deg,
+      #0a1622 0%,
+      #0d1b2a 50%,
+      #13283d 100%
+    );
+}
+
+/* Layout */
+
+.world-mission-content {
+  display: grid;
+
+  grid-template-columns: 0.8fr 1.5fr;
+
+  align-items: center;
+
+  gap: 40px;
+
+  min-height: 520px;
+}
+
+/* Texto */
+
+.mission-info {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 480px;
+}
+
+.section-label {
+  display: inline-block;
+
+  margin-bottom: 20px;
+
+  color: #d4af37;
+
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.mission-info h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(2.3rem, 4vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.mission-info h2 span {
+  display: block;
+  margin-top: 8px;
+  color: #d4af37;
+}
+
+.mission-info p {
+  max-width: 450px;
+  margin: 28px 0 34px;
+  color: #c5ccd3;
+
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* Mapa */
+
+.map-area {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.map-area img {
+  display: block;
+
+  width: 125%;
+  max-width: none;
+
+  height: auto;
+
+  transform: translateX(3%);
+
+  object-fit: contain;
+}
+
+/* Botão */
+
+.missions-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  min-height: 50px;
+  padding: 0 26px;
+
+  border: 1px solid #d4af37;
+  border-radius: 6px;
+
+  background: #d4af37;
+  color: #0d1b2a;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+
+  text-decoration: none;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    gap 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.missions-button span {
+  color: #0d1b2a;
+
+  font-size: 1.15rem;
+}
+
+.missions-button:hover {
+  gap: 17px;
+
+  background: #e4c44f;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+
+  .world-mission-section {
+    padding: 80px 0;
+  }
+
+  .world-mission-content {
+    grid-template-columns: 1fr;
+
+    gap: 50px;
+
+    min-height: auto;
+  }
+
+  .mission-info {
+    max-width: 650px;
+  }
+
+  .map-area img {
+    width: 100%;
+
+    transform: none;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .world-mission-section {
+    padding: 65px 0;
+  }
+
+  .world-mission-content {
+    gap: 40px;
+  }
+
+  .mission-info {
+    text-align: center;
+  }
+
+  .mission-info h2 {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
+  .mission-info p {
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 0.95rem;
+  }
+
+  .missions-button {
+    width: 100%;
+
+    max-width: 320px;
+  }
+
+  .map-area {
+    width: 115%;
+
+    margin-left: -7.5%;
+  }
+
+  .map-area img {
+    width: 100%;
+  }
+}

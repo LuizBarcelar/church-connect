@@ -1,0 +1,637 @@
+/* =========================
+   CHURCH LOCATION
+========================= */
+
+.church-location {
+  position: relative;
+  overflow: hidden;
+
+  padding: 110px 0 120px;
+
+  background: #f7f5f0;
+}
+
+
+/* detalhe decorativo */
+
+.church-location::before {
+  content: '';
+
+  position: absolute;
+
+  top: -150px;
+  right: -150px;
+
+  width: 450px;
+  height: 450px;
+
+  border-radius: 50%;
+
+  background: rgba(212, 175, 55, 0.06);
+
+  filter: blur(50px);
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.location-header {
+  position: relative;
+  z-index: 2;
+
+  max-width: 720px;
+
+  margin-bottom: 60px;
+}
+
+.location-header .section-label {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+
+  color: #b18b20;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+}
+
+.location-header .section-label::after {
+  content: '';
+
+  width: 48px;
+  height: 1px;
+
+  background: #d4af37;
+}
+
+.location-header h2 {
+  margin: 0;
+
+  color: #0d1b2a;
+
+  font-size: clamp(2.4rem, 4.5vw, 3.7rem);
+
+  font-weight: 700;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.035em;
+}
+
+.location-header h2 span {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #d4af37;
+}
+
+.location-header p {
+  max-width: 600px;
+
+  margin: 24px 0 0;
+
+  color: #697681;
+
+  font-size: 1rem;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.location-grid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.8fr)
+    minmax(0, 1.2fr);
+
+  gap: 55px;
+
+  align-items: stretch;
+}
+
+
+/* =========================
+   INFO
+========================= */
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.location-card {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 18px;
+
+  padding: 24px;
+
+  border: 1px solid rgba(13, 27, 42, 0.08);
+
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 7px 25px rgba(13, 27, 42, 0.04);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.location-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(212, 175, 55, 0.3);
+
+  box-shadow:
+    0 14px 35px rgba(13, 27, 42, 0.09);
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.location-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 46px;
+
+  width: 46px;
+  height: 46px;
+
+  border: 1px solid rgba(212, 175, 55, 0.25);
+
+  border-radius: 12px;
+
+  background: rgba(212, 175, 55, 0.08);
+
+  color: #b18b20;
+
+  font-size: 1.35rem;
+}
+
+.location-card-content {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+/* =========================
+   TEXTOS
+========================= */
+
+.location-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #b18b20;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+.location-card h3 {
+  margin: 0 0 11px;
+
+  color: #0d1b2a;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  line-height: 1.4;
+}
+
+.location-card p {
+  margin: 3px 0;
+
+  color: #687682;
+
+  font-size: 0.84rem;
+
+  line-height: 1.55;
+}
+
+.location-card small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #929ba3;
+
+  font-size: 0.75rem;
+}
+
+
+/* =========================
+   HORÁRIOS
+========================= */
+
+.schedule-content {
+  width: 100%;
+}
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-top: 16px;
+}
+
+.schedule-item {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 11px 13px;
+
+  border-radius: 8px;
+
+  background: #f7f5f0;
+
+  transition: background 0.2s ease;
+}
+
+.schedule-item:hover {
+  background: #f1ede3;
+}
+
+.schedule-item strong {
+  color: #0d1b2a;
+
+  font-size: 0.8rem;
+}
+
+.schedule-item span {
+  color: #697681;
+
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  text-align: right;
+}
+
+
+/* =========================
+   CONTATO
+========================= */
+
+.contact-title {
+  margin-top: 12px !important;
+}
+
+.contact-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 3px;
+
+  color: #a07c13;
+
+  font-size: 0.84rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    gap 0.2s ease,
+    color 0.2s ease;
+}
+
+.contact-link:hover {
+  gap: 10px;
+
+  color: #0d1b2a;
+}
+
+
+/* =========================
+   BOTÃO MAPS
+========================= */
+
+.maps-button {
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  min-height: 54px;
+
+  margin-top: 4px;
+
+  padding: 0 20px;
+
+  border: 1px solid #0d1b2a;
+
+  border-radius: 10px;
+
+  background: #0d1b2a;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 8px 22px rgba(13, 27, 42, 0.12);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.maps-icon {
+  margin-right: 11px;
+
+  color: #d4af37;
+
+  font-size: 1.25rem;
+}
+
+.maps-button > span:nth-child(2) {
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.maps-arrow {
+  margin-left: auto;
+
+  color: #d4af37;
+
+  font-size: 1.2rem;
+
+  transition: transform 0.25s ease;
+}
+
+.maps-button:hover {
+  transform: translateY(-2px);
+
+  background: #162b3f;
+
+  box-shadow:
+    0 12px 28px rgba(13, 27, 42, 0.18);
+}
+
+.maps-button:hover .maps-arrow {
+  transform: translateX(5px);
+}
+
+
+/* =========================
+   MAP
+========================= */
+
+.map-wrapper {
+  position: relative;
+
+  min-height: 570px;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+
+  min-height: 570px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(13, 27, 42, 0.1);
+
+  border-radius: 20px;
+
+  background: #e8e6df;
+
+  box-shadow:
+    0 18px 45px rgba(13, 27, 42, 0.1);
+}
+
+.map-container iframe {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 570px;
+
+  border: 0;
+}
+
+
+/* =========================
+   CARD SOBRE MAPA
+========================= */
+
+.map-info {
+  position: absolute;
+
+  left: 25px;
+  bottom: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  max-width: calc(100% - 50px);
+
+  padding: 15px 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 12px;
+
+  background: rgba(13, 27, 42, 0.92);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.2);
+
+  backdrop-filter: blur(10px);
+}
+
+.map-info-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 38px;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 9px;
+
+  background: rgba(212, 175, 55, 0.12);
+
+  color: #d4af37;
+
+  font-size: 1.2rem;
+}
+
+.map-info strong {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 0.82rem;
+}
+
+.map-info small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #aeb8c0;
+
+  font-size: 0.72rem;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 950px) {
+
+  .church-location {
+    padding: 90px 0;
+  }
+
+  .location-grid {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+  }
+
+  .location-info {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .maps-button {
+    grid-column: 1 / -1;
+  }
+
+  .map-wrapper,
+  .map-container,
+  .map-container iframe {
+    min-height: 450px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .church-location {
+    padding: 70px 0;
+  }
+
+  .location-header {
+    margin-bottom: 40px;
+  }
+
+  .location-header h2 {
+    font-size: clamp(
+      2.2rem,
+      10vw,
+      3rem
+    );
+  }
+
+  .location-header h2 span {
+    display: inline;
+  }
+
+  .location-info {
+    display: flex;
+  }
+
+  .location-card {
+    padding: 20px;
+  }
+
+  .schedule-item {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 5px;
+  }
+
+  .schedule-item span {
+    text-align: left;
+  }
+
+  .map-wrapper,
+  .map-container,
+  .map-container iframe {
+    min-height: 370px;
+  }
+
+  .map-container {
+    border-radius: 15px;
+  }
+
+  .map-info {
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+
+    max-width: none;
+  }
+
+}

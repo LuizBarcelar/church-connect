@@ -1,0 +1,1608 @@
+/* =========================================================
+   MEMBERS ADMIN
+========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.members-page {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  color: #0d1b2a;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 30px;
+}
+
+.page-title {
+  min-width: 0;
+}
+
+.section-label {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 11px;
+  padding-left: 30px;
+
+  color: #a78319;
+
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.section-label::before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  width: 21px;
+  height: 2px;
+
+  border-radius: 10px;
+
+  background: #d4af37;
+
+  transform: translateY(-50%);
+}
+
+.page-title h1 {
+  margin: 0 0 10px;
+
+  color: #0d1b2a;
+
+  font-size: clamp(1.85rem, 3vw, 2.5rem);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.page-title p {
+  max-width: 620px;
+  margin: 0;
+
+  color: #7a8794;
+
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   BOTÃO NOVO MEMBRO
+========================================================= */
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: 43px;
+  padding: 0 16px;
+
+  flex-shrink: 0;
+
+  border: 1px solid #0d1b2a;
+  border-radius: 8px;
+
+  background: #0d1b2a;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(13, 27, 42, 0.08);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primary-button lucide-icon {
+  display: flex;
+  color: #d4af37;
+}
+
+.primary-button:hover {
+  border-color: #183149;
+  background: #183149;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px rgba(13, 27, 42, 0.13);
+}
+
+
+/* =========================================================
+   ESTATÍSTICAS
+========================================================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 22px;
+}
+
+.stat-card {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 155px;
+  padding: 21px 22px;
+
+  border: 1px solid #e7e9ec;
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 4px 16px rgba(13, 27, 42, 0.025);
+}
+
+.stat-card::after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 3px;
+
+  background: #d4af37;
+}
+
+.stat-card:nth-child(2)::after {
+  background: #567c89;
+}
+
+.stat-card:nth-child(3)::after {
+  background: #557a64;
+}
+
+.stat-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.stat-label {
+  color: #7d8995;
+
+  font-size: 0.61rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 41px;
+  height: 41px;
+
+  border-radius: 10px;
+
+  background: #f7f4e9;
+  color: #a78319;
+}
+
+.stat-card:nth-child(2) .stat-icon {
+  background: #eef5f6;
+  color: #567c89;
+}
+
+.stat-card:nth-child(3) .stat-icon {
+  background: #edf4ef;
+  color: #557a64;
+}
+
+.stat-value {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #0d1b2a;
+
+  font-size: 2.15rem;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.stat-description {
+  color: #8a96a3;
+
+  font-size: 0.71rem;
+}
+
+
+/* =========================================================
+   CARD DE ANIVERSARIANTES
+========================================================= */
+
+.birthdays-card {
+  overflow: hidden;
+
+  margin-bottom: 22px;
+
+  border: 1px solid #e7e9ec;
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 4px 16px rgba(13, 27, 42, 0.025);
+}
+
+
+/* =========================================================
+   CABEÇALHO ANIVERSARIANTES
+========================================================= */
+
+.birthdays-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 22px 25px;
+
+  border-bottom: 1px solid #edf0f2;
+}
+
+.birthdays-header-main {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+}
+
+.birthdays-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+
+  flex: 0 0 43px;
+
+  border-radius: 10px;
+
+  background: #f7f4e9;
+  color: #a78319;
+}
+
+.birthdays-header h2 {
+  margin: 0 0 4px;
+
+  color: #0d1b2a;
+
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.birthdays-header p {
+  margin: 0;
+
+  color: #8a96a3;
+
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   RESUMO ANIVERSÁRIOS
+========================================================= */
+
+.birthdays-summary {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+}
+
+.summary-item {
+  min-width: 82px;
+
+  padding: 9px 12px;
+
+  border: 1px solid #e5e8eb;
+  border-radius: 9px;
+
+  background: #fafaf8;
+
+  text-align: center;
+}
+
+.summary-item strong {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #0d1b2a;
+
+  font-size: 1.05rem;
+  font-weight: 750;
+  line-height: 1;
+}
+
+.summary-item span {
+  color: #8a96a3;
+
+  font-size: 0.58rem;
+  font-weight: 650;
+}
+
+.summary-item.today {
+  border-color: rgba(212, 175, 55, 0.35);
+
+  background: rgba(212, 175, 55, 0.07);
+}
+
+.summary-item.today strong {
+  color: #a78319;
+}
+
+
+/* =========================================================
+   ANIVERSARIANTES DE HOJE
+========================================================= */
+
+.birthday-today-section {
+  padding: 22px 25px 0;
+}
+
+.birthday-section-title {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-bottom: 13px;
+}
+
+.birthday-section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  border-radius: 8px;
+
+  background: #fff5d7;
+  color: #a78319;
+}
+
+.birthday-section-title h3 {
+  margin: 0 0 3px;
+
+  color: #0d1b2a;
+
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.birthday-section-title p {
+  margin: 0;
+
+  color: #8a96a3;
+
+  font-size: 0.67rem;
+}
+
+.birthday-today-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.birthday-today-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 22px;
+
+  padding: 14px 15px;
+
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(212, 175, 55, 0.075),
+      rgba(212, 175, 55, 0.018)
+    );
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO DE MESES
+========================================================= */
+
+.birthday-month-section {
+  margin-top: 22px;
+  padding: 21px 25px 24px;
+
+  border-top: 1px solid #edf0f2;
+}
+
+.birthday-month-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 15px;
+}
+
+.birthday-month-current {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+
+  gap: 10px;
+
+  flex: 1;
+}
+
+.month-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  flex: 0 0 36px;
+
+  border-radius: 8px;
+
+  background: #f5f3ed;
+  color: #6e7a86;
+}
+
+.birthday-month-current h3 {
+  margin: 0 0 2px;
+
+  color: #0d1b2a;
+
+  font-size: 0.84rem;
+  font-weight: 700;
+
+  text-align: center;
+
+  text-transform: capitalize;
+}
+
+.birthday-month-current p {
+  margin: 0;
+
+  color: #8a96a3;
+
+  font-size: 0.65rem;
+
+  text-align: center;
+}
+
+.birthday-month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 37px;
+  height: 37px;
+
+  flex: 0 0 37px;
+
+  padding: 0;
+
+  border: 1px solid #dfe3e7;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #536170;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.birthday-month-nav:hover {
+  border-color: #d4af37;
+
+  background: #fffaf0;
+  color: #8c6c12;
+
+  transform: translateY(-1px);
+}
+
+.current-month-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  min-height: 32px;
+
+  margin: 0 auto 15px;
+  padding: 0 10px;
+
+  border: 1px solid #e1e5e8;
+  border-radius: 7px;
+
+  background: #ffffff;
+  color: #667380;
+
+  font-family: inherit;
+  font-size: 0.61rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.current-month-button lucide-icon {
+  display: flex;
+}
+
+.current-month-button:hover {
+  border-color: #d4af37;
+
+  background: #fffaf0;
+  color: #8c6c12;
+}
+
+
+/* =========================================================
+   LISTA DE ANIVERSARIANTES
+========================================================= */
+
+.birthdays-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.birthday-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 12px 14px;
+
+  border: 1px solid #eceef0;
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.birthday-item:hover {
+  border-color: #ddd5bc;
+
+  background: #fdfcf9;
+
+  transform: translateY(-1px);
+}
+
+.birthday-item.birthday-today {
+  border-color: rgba(212, 175, 55, 0.38);
+
+  background: #fffdf6;
+}
+
+
+/* =========================================================
+   PESSOA / AVATAR
+========================================================= */
+
+.birthday-person {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  gap: 12px;
+}
+
+.birthday-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #10263b,
+      #0d1b2a
+    );
+
+  color: #d4af37;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.birthday-avatar-highlight {
+  width: 45px;
+  height: 45px;
+
+  flex-basis: 45px;
+
+  border: 2px solid #d4af37;
+}
+
+.birthday-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.birthday-info {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  gap: 3px;
+}
+
+.birthday-info strong {
+  overflow: hidden;
+
+  color: #0d1b2a;
+
+  font-size: 0.77rem;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.birthday-info > span {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: #7d8995;
+
+  font-size: 0.65rem;
+}
+
+.birthday-info > span lucide-icon {
+  display: flex;
+
+  color: #a78319;
+}
+
+.birthday-today-label {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 4px;
+
+  color: #a78319;
+
+  font-size: 0.6rem;
+  font-weight: 750;
+}
+
+
+/* =========================================================
+   AÇÕES ANIVERSÁRIOS
+========================================================= */
+
+.birthday-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  flex-shrink: 0;
+}
+
+.birthday-profile-button,
+.birthday-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  min-height: 34px;
+  padding: 0 10px;
+
+  border-radius: 7px;
+
+  font-size: 0.62rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.birthday-profile-button lucide-icon,
+.birthday-whatsapp lucide-icon {
+  display: flex;
+}
+
+.birthday-profile-button {
+  border: 1px solid #dfe3e7;
+
+  background: #ffffff;
+  color: #536170;
+}
+
+.birthday-profile-button:hover {
+  border-color: #0d1b2a;
+
+  background: #0d1b2a;
+  color: #ffffff;
+
+  transform: translateY(-1px);
+}
+
+.birthday-whatsapp {
+  border: 1px solid #d6e4da;
+
+  background: #edf5ef;
+  color: #477057;
+}
+
+.birthday-whatsapp:hover {
+  border-color: #557a64;
+
+  background: #557a64;
+  color: #ffffff;
+
+  transform: translateY(-1px);
+}
+
+.birthday-no-whatsapp {
+  color: #98a2ad;
+
+  font-size: 0.61rem;
+  font-style: italic;
+}
+
+
+/* =========================================================
+   ANIVERSARIANTES VAZIO
+========================================================= */
+
+.empty-birthdays {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 20px;
+
+  border: 1px dashed #dfe3e7;
+  border-radius: 9px;
+
+  background: #fafaf8;
+}
+
+.empty-birthdays-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 39px;
+  height: 39px;
+
+  flex: 0 0 39px;
+
+  border-radius: 9px;
+
+  background: #f7f4e9;
+  color: #a78319;
+}
+
+.empty-birthdays strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #0d1b2a;
+
+  font-size: 0.75rem;
+}
+
+.empty-birthdays p {
+  margin: 0;
+
+  color: #8a96a3;
+
+  font-size: 0.66rem;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   LISTA DE MEMBROS
+========================================================= */
+
+.members-list-card {
+  overflow: hidden;
+
+  border: 1px solid #e7e9ec;
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 4px 16px rgba(13, 27, 42, 0.025);
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 22px;
+
+  min-height: 88px;
+
+  padding: 20px 25px;
+
+  border-bottom: 1px solid #edf0f2;
+}
+
+.list-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #a78319;
+
+  font-size: 0.59rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.list-header h2 {
+  margin: 0;
+
+  color: #0d1b2a;
+
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.list-tools {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.member-count {
+  padding: 6px 9px;
+
+  border-radius: 20px;
+
+  background: #f5f3ed;
+  color: #6e7a86;
+
+  font-size: 0.61rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   BUSCA
+========================================================= */
+
+.search-wrapper {
+  position: relative;
+
+  width: min(280px, 40vw);
+}
+
+.search-icon {
+  position: absolute;
+
+  top: 50%;
+  left: 12px;
+
+  display: flex;
+
+  color: #98a2ad;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+}
+
+.search-wrapper input {
+  width: 100%;
+  height: 38px;
+
+  padding: 0 12px 0 37px;
+
+  border: 1px solid #dfe3e7;
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #344454;
+
+  font-family: inherit;
+  font-size: 0.7rem;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.search-wrapper input::placeholder {
+  color: #a4adb7;
+}
+
+.search-wrapper input:focus {
+  border-color: #d4af37;
+
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.09);
+}
+
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.members-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+.members-table {
+  width: 100%;
+  min-width: 790px;
+
+  border-collapse: collapse;
+}
+
+.members-table th {
+  padding: 11px 22px;
+
+  border-bottom: 1px solid #e9ecef;
+
+  background: #fafaf8;
+  color: #7d8995;
+
+  font-size: 0.59rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.members-table th:last-child {
+  text-align: right;
+}
+
+.members-table td {
+  padding: 13px 22px;
+
+  border-bottom: 1px solid #edf0f2;
+
+  color: #667380;
+
+  font-size: 0.7rem;
+
+  vertical-align: middle;
+}
+
+.members-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.members-table tbody tr {
+  transition:
+    background 0.2s ease;
+}
+
+.members-table tbody tr:hover {
+  background: #fcfcfa;
+}
+
+
+/* =========================================================
+   MEMBRO NA TABELA
+========================================================= */
+
+.member-info {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+.member-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 39px;
+  height: 39px;
+
+  flex: 0 0 39px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #10263b,
+      #0d1b2a
+    );
+
+  color: #d4af37;
+
+  font-size: 0.64rem;
+  font-weight: 800;
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.member-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 0;
+
+  gap: 2px;
+}
+
+.member-profile-link {
+  overflow: hidden;
+
+  max-width: 280px;
+
+  color: #0d1b2a;
+
+  font-size: 0.73rem;
+  font-weight: 700;
+
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  transition:
+    color 0.2s ease;
+}
+
+.member-profile-link:hover {
+  color: #a78319;
+}
+
+.member-location {
+  color: #98a2ad;
+
+  font-size: 0.61rem;
+}
+
+.member-contact {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-top: 3px;
+}
+
+.member-phone {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 4px;
+
+  color: #7d8995;
+
+  font-size: 0.59rem;
+}
+
+.member-phone lucide-icon {
+  display: flex;
+}
+
+.whatsapp-status {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 3px;
+
+  padding: 3px 6px;
+
+  border-radius: 20px;
+
+  background: #edf5ef;
+  color: #477057;
+
+  font-size: 0.55rem;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 5px 8px;
+
+  border-radius: 20px;
+
+  background: #f1f3f5;
+  color: #7d8995;
+
+  font-size: 0.59rem;
+  font-weight: 700;
+}
+
+.status-badge.success {
+  background: #e9f3ec;
+  color: #4f715b;
+}
+
+.status-badge lucide-icon {
+  display: flex;
+}
+
+
+/* =========================================================
+   AÇÕES DA TABELA
+========================================================= */
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 6px;
+}
+
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  min-height: 34px;
+  padding: 0 9px;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  font-family: inherit;
+  font-size: 0.6rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.action-button lucide-icon {
+  display: flex;
+}
+
+.action-button.view {
+  border: 1px solid #dfe3e7;
+
+  color: #536170;
+}
+
+.action-button.view:hover {
+  border-color: #0d1b2a;
+
+  background: #0d1b2a;
+  color: #ffffff;
+}
+
+.action-button.edit {
+  border: 1px solid #ded9c9;
+
+  color: #82691e;
+}
+
+.action-button.edit:hover {
+  border-color: #d4af37;
+
+  background: #fffaf0;
+}
+
+.action-button.delete {
+  border: 1px solid #ead7d7;
+
+  color: #a85b5b;
+}
+
+.action-button.delete:hover {
+  border-color: #a85b5b;
+
+  background: #a85b5b;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   LISTA VAZIA
+========================================================= */
+
+.empty-members {
+  padding: 65px 30px;
+
+  text-align: center;
+}
+
+.empty-members-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 55px;
+  height: 55px;
+
+  margin: 0 auto 15px;
+
+  border-radius: 50%;
+
+  background: #f7f4e9;
+  color: #a78319;
+}
+
+.empty-members h3 {
+  margin: 0 0 7px;
+
+  color: #0d1b2a;
+
+  font-size: 0.87rem;
+}
+
+.empty-members p {
+  max-width: 400px;
+
+  margin: 0 auto;
+
+  color: #8a96a3;
+
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    min-height: 135px;
+  }
+
+  .birthdays-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .birthdays-summary {
+    width: 100%;
+  }
+
+  .summary-item {
+    flex: 1;
+  }
+
+  .birthday-today-item,
+  .birthday-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .birthday-actions {
+    width: 100%;
+    justify-content: flex-start;
+
+    padding-left: 54px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .page-header {
+    align-items: stretch;
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+
+  .list-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .list-tools {
+    width: 100%;
+  }
+
+  .search-wrapper {
+    width: 100%;
+
+    flex: 1;
+  }
+
+  .birthday-month-section {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .birthday-today-section {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - CELULAR
+========================================================= */
+
+@media (max-width: 520px) {
+
+  .page-title h1 {
+    font-size: 1.7rem;
+  }
+
+  .stats-grid {
+    gap: 12px;
+  }
+
+  .stat-card {
+    min-height: 142px;
+
+    padding: 19px;
+  }
+
+  .birthdays-header {
+    padding: 19px;
+  }
+
+  .birthdays-header-main {
+    align-items: flex-start;
+  }
+
+  .birthdays-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .summary-item {
+    min-width: 0;
+  }
+
+  .birthday-today-section {
+    padding-top: 18px;
+  }
+
+  .birthday-month-section {
+    margin-top: 18px;
+    padding-top: 18px;
+  }
+
+  .month-icon {
+    display: none;
+  }
+
+  .birthday-month-header {
+    gap: 7px;
+  }
+
+  .birthday-month-current {
+    gap: 0;
+  }
+
+  .birthday-month-current h3 {
+    font-size: 0.73rem;
+  }
+
+  .birthday-month-current p {
+    font-size: 0.58rem;
+  }
+
+  .birthday-month-nav {
+    width: 34px;
+    height: 34px;
+
+    flex-basis: 34px;
+  }
+
+  .birthday-today-item,
+  .birthday-item {
+    padding: 13px;
+  }
+
+  .birthday-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    padding-left: 0;
+  }
+
+  .birthday-profile-button,
+  .birthday-whatsapp {
+    width: 100%;
+  }
+
+  .birthday-no-whatsapp {
+    grid-column: 1 / -1;
+
+    width: 100%;
+  }
+
+  .list-header {
+    padding: 19px;
+  }
+
+  .list-tools {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .member-count {
+    align-self: flex-start;
+  }
+
+  .empty-members {
+    padding: 50px 20px;
+  }
+
+}
+
+
+/* =========================================================
+   TELAS MUITO PEQUENAS
+========================================================= */
+
+@media (max-width: 390px) {
+
+  .birthdays-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .birthday-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .birthday-person {
+    width: 100%;
+  }
+
+}

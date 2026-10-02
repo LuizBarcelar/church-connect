@@ -1,0 +1,131 @@
+<header class="site-header">
+
+  <div class="container header-container">
+
+    <!-- MARCA -->
+    <a
+      routerLink="/"
+      class="brand"
+      aria-label="Church Connect - Início"
+      (click)="closeMenu()"
+    >
+
+      <div class="brand-logo-wrapper">
+
+        <img
+          src="/brand/logo-church-connect.jpg"
+          alt="Igreja Internacional da Graça de Deus"
+          class="brand-logo"
+        />
+
+      </div>
+
+      <span class="brand-text">
+
+        <strong>
+          CHURCH
+        </strong>
+
+        <span>
+          CONNECT
+        </span>
+
+      </span>
+
+    </a>
+
+
+    <!-- BOTÃO MOBILE -->
+    <button
+      type="button"
+      class="menu-toggle"
+      [class.active]="menuOpen"
+      [attr.aria-expanded]="menuOpen"
+      aria-label="Abrir menu de navegação"
+      (click)="toggleMenu()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+
+    <!-- NAVEGAÇÃO -->
+    <nav
+      class="main-navigation"
+      [class.open]="menuOpen"
+      aria-label="Navegação principal"
+    >
+
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeMenu()"
+      >
+        Início
+      </a>
+
+      <a
+        routerLink="/testemunhos"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+      >
+        Testemunhos
+      </a>
+
+      <a
+        routerLink="/obra"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+      >
+        A Obra
+      </a>
+
+      <a
+        routerLink="/ministerio"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+      >
+        Ministérios
+      </a>
+
+      <a
+        routerLink="/pedir-oracao"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+      >
+        Pedir oração
+      </a>
+
+      <a
+        routerLink="/contato"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+      >
+        Contato
+      </a>
+
+
+      <!-- ADMIN -->
+      <a
+        routerLink="/login"
+        class="admin-access"
+        (click)="closeMenu()"
+      >
+
+        <span class="admin-icon">
+          ♙
+        </span>
+
+        <span>
+          Área administrativa
+        </span>
+
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>

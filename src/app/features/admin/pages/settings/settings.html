@@ -1,0 +1,1059 @@
+<section class="settings-page">
+
+  <!-- CABEÇALHO -->
+
+  <header class="page-header">
+
+    <div class="page-heading">
+
+      <span class="section-label">
+        CONFIGURAÇÕES
+      </span>
+
+      <h1>
+        Configurações da igreja
+      </h1>
+
+      <p>
+        Gerencie as informações institucionais, endereço,
+        contatos, redes sociais e horários dos cultos.
+      </p>
+
+    </div>
+
+    <div class="header-icon">
+      <lucide-icon
+        [img]="Settings2"
+        [size]="26"
+      />
+    </div>
+
+  </header>
+
+
+  @if (saved) {
+    <div
+      #successMessage
+      class="success-message"
+    >
+
+      <div class="success-icon">
+        <lucide-icon
+          [img]="Save"
+          [size]="18"
+        />
+      </div>
+
+      <div>
+        <strong>
+          Configurações salvas
+        </strong>
+
+        <span>
+          As informações da igreja foram atualizadas.
+        </span>
+      </div>
+
+    </div>
+
+  }
+
+
+  @if (settings) {
+
+    <form
+      class="settings-form"
+      (ngSubmit)="saveSettings()"
+    >
+
+      <!-- 01 - INFORMAÇÕES DA IGREJA -->
+
+      <section class="settings-card">
+
+        <div class="card-heading">
+
+          <div class="heading-icon">
+            <lucide-icon
+              [img]="Building2"
+              [size]="21"
+            />
+          </div>
+
+          <div>
+            <span class="card-number">
+              01
+            </span>
+
+            <h2>
+              Informações da igreja
+            </h2>
+
+            <p>
+              Dados principais utilizados na identificação
+              da igreja no site.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="fields-grid">
+
+          <label class="field full">
+
+            <span class="field-label">
+              Nome da igreja
+            </span>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="Building2"
+                [size]="17"
+              />
+
+              <input
+                type="text"
+                name="churchName"
+                [(ngModel)]="settings.name"
+                placeholder="Nome da igreja"
+                required
+              />
+
+            </div>
+
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- 02 - ENDEREÇO -->
+
+      <section class="settings-card">
+
+        <div class="card-heading">
+
+          <div class="heading-icon">
+            <lucide-icon
+              [img]="MapPin"
+              [size]="21"
+            />
+          </div>
+
+          <div>
+            <span class="card-number">
+              02
+            </span>
+
+            <h2>
+              Endereço
+            </h2>
+
+            <p>
+              Informe a localização utilizada na página
+              de contato e nas informações da igreja.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="fields-grid">
+
+          <!-- CEP -->
+
+          <label class="field">
+
+            <span class="field-label">
+              CEP
+            </span>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="MapPin"
+                [size]="17"
+              />
+
+              <input
+                type="text"
+                name="cep"
+                [(ngModel)]="settings.address.cep"
+                (input)="formatCep()"
+                placeholder="00000-000"
+                maxlength="9"
+              />
+
+            </div>
+
+          </label>
+
+
+          <!-- BAIRRO -->
+
+          <label class="field">
+
+            <span class="field-label">
+              Bairro
+            </span>
+
+            <input
+              type="text"
+              name="neighborhood"
+              [(ngModel)]="settings.address.neighborhood"
+              placeholder="Bairro"
+            />
+
+          </label>
+
+
+          <!-- QUADRA -->
+
+          <label class="field">
+
+            <span class="field-label">
+              Quadra
+            </span>
+
+            <input
+              type="text"
+              name="block"
+              [(ngModel)]="settings.address.block"
+              placeholder="Ex.: Quadra 1"
+            />
+
+          </label>
+
+
+          <!-- CONJUNTO -->
+
+          <label class="field">
+
+            <span class="field-label">
+              Conjunto
+            </span>
+
+            <input
+              type="text"
+              name="set"
+              [(ngModel)]="settings.address.set"
+              placeholder="Ex.: Conjunto J"
+            />
+
+          </label>
+
+
+          <!-- LOTE -->
+
+          <label class="field">
+
+            <span class="field-label">
+              Lote
+            </span>
+
+            <input
+              type="text"
+              name="lot"
+              [(ngModel)]="settings.address.lot"
+              placeholder="Ex.: Lote 25"
+            />
+
+          </label>
+
+
+          <!-- CIDADE -->
+
+          <label class="field">
+
+            <span class="field-label">
+              Cidade
+            </span>
+
+            <input
+              type="text"
+              name="city"
+              [(ngModel)]="settings.address.city"
+              placeholder="Cidade"
+            />
+
+          </label>
+
+
+          <!-- ESTADO -->
+
+          <label class="field">
+
+            <span class="field-label">
+              Estado / UF
+            </span>
+
+            <input
+              type="text"
+              name="state"
+              [(ngModel)]="settings.address.state"
+              placeholder="DF"
+              maxlength="2"
+            />
+
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- 03 - CONTATO -->
+
+      <section class="settings-card">
+
+        <div class="card-heading">
+
+          <div class="heading-icon">
+            <lucide-icon
+              [img]="MessageCircle"
+              [size]="21"
+            />
+          </div>
+
+          <div>
+            <span class="card-number">
+              03
+            </span>
+
+            <h2>
+              Contato e redes sociais
+            </h2>
+
+            <p>
+              Configure os canais utilizados pelos visitantes
+              para entrar em contato e acompanhar a igreja.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="fields-grid">
+
+          <!-- WHATSAPP -->
+
+          <label class="field">
+
+            <span class="field-label">
+              WhatsApp
+            </span>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="MessageCircle"
+                [size]="17"
+              />
+
+              <input
+                type="text"
+                name="whatsapp"
+                [(ngModel)]="settings.contact.whatsapp"
+                (input)="formatWhatsapp()"
+                placeholder="(61) 99999-9999"
+              />
+
+            </div>
+
+            <small>
+              Informe o número com DDD.
+            </small>
+
+          </label>
+
+
+          <!-- EMAIL -->
+
+          <label class="field">
+
+            <span class="field-label">
+              E-mail
+            </span>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="Mail"
+                [size]="17"
+              />
+
+              <input
+                type="email"
+                name="email"
+                [(ngModel)]="settings.contact.email"
+                placeholder="contato@igreja.com.br"
+              />
+
+            </div>
+
+          </label>
+
+
+          <!-- INSTAGRAM -->
+
+          <label class="field">
+
+            <span class="field-label">
+              Instagram
+            </span>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="Instagram"
+                [size]="17"
+              />
+
+              <input
+                type="text"
+                name="instagram"
+                [(ngModel)]="settings.contact.instagram"
+                placeholder="https://instagram.com/..."
+              />
+
+            </div>
+
+          </label>
+
+
+          <!-- FACEBOOK -->
+
+          <label class="field">
+
+            <span class="field-label">
+              Facebook
+            </span>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="Facebook"
+                [size]="17"
+              />
+
+              <input
+                type="text"
+                name="facebook"
+                [(ngModel)]="settings.contact.facebook"
+                placeholder="https://facebook.com/..."
+              />
+
+            </div>
+
+          </label>
+
+
+          <!-- YOUTUBE -->
+
+          <label class="field full">
+
+            <span class="field-label">
+              YouTube
+            </span>
+
+            <div class="input-wrapper">
+
+              <lucide-icon
+                [img]="Youtube"
+                [size]="17"
+              />
+
+              <input
+                type="text"
+                name="youtube"
+                [(ngModel)]="settings.contact.youtube"
+                placeholder="https://youtube.com/@..."
+              />
+
+            </div>
+
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- 04 - CULTOS -->
+
+      <section class="settings-card">
+
+        <div class="card-heading schedule-heading">
+
+          <div class="heading-main">
+
+            <div class="heading-icon">
+              <lucide-icon
+                [img]="CalendarDays"
+                [size]="21"
+              />
+            </div>
+
+            <div>
+              <span class="card-number">
+                04
+              </span>
+
+              <h2>
+                Horários dos cultos
+              </h2>
+
+              <p>
+                Gerencie os dias e horários das reuniões
+                exibidos no site.
+              </p>
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="addSchedule()"
+          >
+            <lucide-icon
+              [img]="Plus"
+              [size]="16"
+            />
+
+            Adicionar dia
+          </button>
+
+        </div>
+
+
+        @if (settings.services.length > 0) {
+
+          <div class="schedule-list">
+
+            @for (
+              schedule of settings.services;
+              track $index;
+              let scheduleIndex = $index
+            ) {
+
+              <article class="schedule-card">
+
+                <header class="schedule-card-header">
+
+                  <div class="schedule-number">
+
+                    <lucide-icon
+                      [img]="CalendarDays"
+                      [size]="17"
+                    />
+
+                    <span>
+                      DIA {{ scheduleIndex + 1 }}
+                    </span>
+
+                  </div>
+
+
+                  <button
+                    type="button"
+                    class="delete-button"
+                    (click)="removeSchedule(scheduleIndex)"
+                    aria-label="Remover dia"
+                    title="Remover dia"
+                  >
+                    <lucide-icon
+                      [img]="Trash2"
+                      [size]="16"
+                    />
+                  </button>
+
+                </header>
+
+
+                <div class="schedule-content">
+
+                  <label class="field">
+
+                    <span class="field-label">
+                      Dia da semana
+                    </span>
+
+                    <input
+                      type="text"
+                      [name]="'service-day-' + scheduleIndex"
+                      [(ngModel)]="schedule.day"
+                      placeholder="Ex.: Domingo"
+                    />
+
+                  </label>
+
+
+                  <div class="times-section">
+
+                    <div class="times-header">
+
+                      <span>
+                        <lucide-icon
+                          [img]="Clock3"
+                          [size]="16"
+                        />
+
+                        Horários
+                      </span>
+
+
+                      <button
+                        type="button"
+                        class="add-time-button"
+                        (click)="addTime(schedule)"
+                      >
+                        <lucide-icon
+                          [img]="Plus"
+                          [size]="14"
+                        />
+
+                        Horário
+                      </button>
+
+                    </div>
+
+
+                    <div class="times-grid">
+
+                      @for (
+                        time of schedule.times;
+                        track $index;
+                        let timeIndex = $index
+                      ) {
+
+                        <div class="time-field">
+
+                          <lucide-icon
+                            [img]="Clock3"
+                            [size]="15"
+                          />
+
+                          <input
+                            type="text"
+                            [name]="
+                              'service-time-' +
+                              scheduleIndex +
+                              '-' +
+                              timeIndex
+                            "
+                            [ngModel]="time"
+                            (ngModelChange)="
+                              updateTime(
+                                schedule,
+                                timeIndex,
+                                $event
+                              )
+                            "
+                            placeholder="19h30"
+                          />
+
+
+                          <button
+                            type="button"
+                            (click)="
+                              removeTime(
+                                schedule,
+                                timeIndex
+                              )
+                            "
+                            aria-label="Remover horário"
+                            title="Remover horário"
+                          >
+                            <lucide-icon
+                              [img]="Trash2"
+                              [size]="14"
+                            />
+                          </button>
+
+                        </div>
+
+                      }
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+            }
+
+          </div>
+
+        } @else {
+
+          <div class="empty-schedule">
+
+            <div>
+              <lucide-icon
+                [img]="CalendarDays"
+                [size]="30"
+              />
+            </div>
+
+            <strong>
+              Nenhum horário cadastrado
+            </strong>
+
+            <p>
+              Adicione os dias e horários em que
+              acontecem os cultos da igreja.
+            </p>
+
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="addSchedule()"
+            >
+              <lucide-icon
+                [img]="Plus"
+                [size]="16"
+              />
+
+              Adicionar dia
+            </button>
+
+          </div>
+
+        }
+
+      </section>
+
+      <!-- 05 - PROGRAMAÇÃO DA SEMANA -->
+
+      <section class="settings-card">
+
+        <div class="card-heading schedule-heading">
+
+          <div class="heading-main">
+
+            <div class="heading-icon">
+              <lucide-icon
+                [img]="CalendarDays"
+                [size]="21"
+              />
+            </div>
+
+            <div>
+              <span class="card-number">
+                05
+              </span>
+
+              <h2>
+                Programação da semana
+              </h2>
+
+              <p>
+                Cadastre cultos, reuniões e eventos especiais
+                que acontecerão durante a semana.
+              </p>
+            </div>
+
+          </div>
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="addWeeklyEvent()"
+          >
+            <lucide-icon
+              [img]="Plus"
+              [size]="16"
+            />
+
+            Adicionar programação
+          </button>
+
+        </div>
+
+
+        @if (settings.weeklyEvents.length > 0) {
+
+          <div class="weekly-events">
+
+            @for (
+              event of settings.weeklyEvents;
+              track event.id;
+              let eventIndex = $index
+            ) {
+
+              <article class="weekly-event-card">
+
+                <header class="weekly-event-header">
+
+                  <div class="weekly-event-number">
+
+                    <lucide-icon
+                      [img]="CalendarDays"
+                      [size]="17"
+                    />
+
+                    <span>
+                      PROGRAMAÇÃO {{ eventIndex + 1 }}
+                    </span>
+
+                  </div>
+
+                  <button
+                    type="button"
+                    class="delete-button"
+                    (click)="removeWeeklyEvent(eventIndex)"
+                    aria-label="Remover programação"
+                    title="Remover programação"
+                  >
+                    <lucide-icon
+                      [img]="Trash2"
+                      [size]="16"
+                    />
+                  </button>
+
+                </header>
+
+
+                <div class="weekly-event-content">
+
+                  <label class="field weekly-title">
+                    <span class="field-label">
+                      Nome da programação
+                    </span>
+
+                    <input
+                      type="text"
+                      [name]="'weekly-title-' + eventIndex"
+                      [(ngModel)]="event.title"
+                      placeholder="Ex.: Culto de Jovens"
+                    />
+                  </label>
+
+
+                  <div class="weekly-date-time">
+
+                    <label class="field">
+                      <span class="field-label">
+                        Data
+                      </span>
+
+                      <div class="input-wrapper">
+                        <lucide-icon
+                          [img]="CalendarDays"
+                          [size]="17"
+                        />
+
+                        <input
+                          type="date"
+                          [name]="'weekly-date-' + eventIndex"
+                          [(ngModel)]="event.date"
+                        />
+                      </div>
+                    </label>
+
+
+                    <label class="field">
+                      <span class="field-label">
+                        Horário
+                      </span>
+
+                      <div class="input-wrapper">
+                        <lucide-icon
+                          [img]="Clock3"
+                          [size]="17"
+                        />
+
+                        <input
+                          type="text"
+                          [name]="'weekly-time-' + eventIndex"
+                          [(ngModel)]="event.time"
+                          placeholder="Ex.: 19h30"
+                        />
+                      </div>
+                    </label>
+
+                  </div>
+
+                  <label class="field weekly-description">
+                    <span class="field-label">
+                      Descrição
+                    </span>
+
+                    <textarea
+                      [name]="'weekly-description-' + eventIndex"
+                      [(ngModel)]="event.description"
+                      placeholder="Ex.: Uma noite especial de comunhão, louvor e palavra."
+                      rows="4"
+                    ></textarea>
+
+                    <small>
+                      Uma breve descrição que poderá aparecer
+                      na programação pública do site.
+                    </small>
+                  </label>
+
+                  <!-- IMAGEM DO EVENTO -->
+                  <label class="field weekly-image">
+                    <span class="field-label">
+                      Imagem do evento
+                    </span>
+
+                    <input
+                      type="text"
+                      [name]="'weekly-image-' + eventIndex"
+                      [(ngModel)]="event.imageUrl"
+                      placeholder="/events/culto-jovens.jpg"
+                    />
+
+                    <small>
+                      Imagem utilizada como banner do evento na página inicial.
+                    </small>
+                  </label>
+
+                  @if (event.imageUrl) {
+                    <div class="weekly-image-preview">
+                      <img
+                        [src]="event.imageUrl"
+                        [alt]="event.title || 'Prévia do evento'"
+                      />
+                    </div>
+                  }
+
+                  <!-- WHATSAPP DO RESPONSÁVEL -->
+                <label class="field weekly-whatsapp">
+                  <span class="field-label">
+                    WhatsApp do responsável
+                  </span>
+
+                  <div class="input-wrapper">
+                    <lucide-icon
+                      [img]="MessageCircle"
+                      [size]="17"
+                    />
+
+                    <input
+                      type="text"
+                      [name]="'weekly-whatsapp-' + eventIndex"
+                      [(ngModel)]="event.whatsapp"
+                      (input)="formatEventWhatsapp(event)"
+                      placeholder="(61) 99999-9999"
+                      maxlength="15"
+                    />
+                  </div>
+
+                  <small>
+                    Este número será utilizado para visitantes
+                    solicitarem mais informações sobre o evento.
+                  </small>
+                </label>
+
+                </div>
+
+              </article>
+
+            }
+
+          </div>
+
+        } @else {
+
+          <div class="empty-schedule">
+
+            <div>
+              <lucide-icon
+                [img]="CalendarDays"
+                [size]="30"
+              />
+            </div>
+
+            <strong>
+              Nenhuma programação especial
+            </strong>
+
+            <p>
+              Quando houver um culto, reunião ou evento especial
+              nesta semana, você poderá cadastrá-lo aqui.
+            </p>
+
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="addWeeklyEvent()"
+            >
+              <lucide-icon
+                [img]="Plus"
+                [size]="16"
+              />
+
+              Adicionar programação
+            </button>
+
+          </div>
+
+        }
+
+      </section>
+
+
+      <!-- AÇÕES -->
+
+      <footer class="form-actions">
+
+        <div class="actions-info">
+
+          <lucide-icon
+            [img]="Globe2"
+            [size]="18"
+          />
+
+          <span>
+            As alterações poderão ser utilizadas
+            nas páginas públicas do site.
+          </span>
+
+        </div>
+
+
+        <div class="actions-buttons">
+
+          <button
+            type="button"
+            class="reset-button"
+            (click)="resetSettings()"
+          >
+            <lucide-icon
+              [img]="RotateCcw"
+              [size]="16"
+            />
+
+            Restaurar
+          </button>
+
+
+          <button
+            type="submit"
+            class="save-button"
+          >
+            <lucide-icon
+              [img]="Save"
+              [size]="17"
+            />
+
+            Salvar alterações
+          </button>
+
+        </div>
+
+      </footer>
+
+    </form>
+
+  }
+
+</section>

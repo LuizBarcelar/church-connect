@@ -1,0 +1,230 @@
+<section class="login-page">
+
+  <!-- =========================
+       ÁREA VISUAL
+  ========================== -->
+
+  <div class="login-visual">
+
+    <div class="login-visual-content">
+
+      <a routerLink="/" class="back-home">
+        <span class="back-icon">←</span>
+        <span>Voltar para o site</span>
+      </a>
+
+      <div class="login-message">
+
+        <div class="admin-label">
+          <span class="label-line"></span>
+          <span>Área administrativa</span>
+        </div>
+
+        <h1>
+          Cuidando de pessoas,
+          <span>servindo com propósito.</span>
+        </h1>
+
+        <p>
+          Acesse o painel administrativo para gerenciar conteúdos,
+          acompanhar pedidos de oração e fortalecer a conexão com
+          a comunidade.
+        </p>
+
+      </div>
+
+      <div class="login-quote">
+
+        <span class="quote-mark">“</span>
+
+        <div>
+          <p>
+            Sirvam uns aos outros, cada um conforme o dom que recebeu.
+          </p>
+
+          <small>1 Pedro 4:10</small>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       LOGIN
+  ========================== -->
+
+  <div class="login-form-area">
+
+    <div class="login-form-wrapper">
+
+      <!-- MARCA -->
+
+      <div class="login-brand">
+
+        <div class="logo-wrapper">
+          <img
+            src="/brand/logo-igreja.jpg"
+            alt="Logo da Igreja Internacional da Graça de Deus"
+            class="login-logo"
+          />
+        </div>
+
+        <div class="brand-name">
+          <strong>Church</strong>
+          <span>Connect</span>
+        </div>
+
+      </div>
+
+
+      <!-- CABEÇALHO -->
+
+      <div class="login-heading">
+
+        <div class="form-label">
+          <span></span>
+          <strong>Bem-vindo de volta</strong>
+        </div>
+
+        <h2>Entrar no painel</h2>
+
+        <p>
+          Informe seus dados para acessar a área administrativa.
+        </p>
+
+      </div>
+
+
+      <!-- FORMULÁRIO -->
+
+      <form
+        class="login-form"
+        (ngSubmit)="submitLogin()"
+      >
+
+        <div class="form-group">
+
+          <label for="email">
+            E-mail
+          </label>
+
+          <input
+            id="email"
+            name="email"
+            type="email"
+            [(ngModel)]="email"
+            placeholder="seu@email.com"
+            autocomplete="email"
+          />
+
+        </div>
+
+
+        <div class="form-group">
+
+          <div class="form-label-row">
+
+            <label for="password">
+              Senha
+            </label>
+
+            <span class="forgot-password">
+              Esqueci minha senha
+            </span>
+
+          </div>
+
+
+          <div class="password-input-wrapper">
+
+            <input
+              id="password"
+              name="password"
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="password"
+              placeholder="Digite sua senha"
+              autocomplete="current-password"
+            />
+
+            <button
+              type="button"
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="showPassword ? 'Ocultar senha' : 'Mostrar senha'"
+            >
+
+              @if (showPassword) {
+                <lucide-icon
+                  [img]="EyeOff"
+                  [size]="19"
+                />
+              } @else {
+                <lucide-icon
+                  [img]="Eye"
+                  [size]="19"
+                />
+              }
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        @if (submitted && (!email.trim() || !password.trim())) {
+
+          <p class="form-error">
+            Preencha seu e-mail e sua senha para continuar.
+          </p>
+
+        }
+
+
+        @if (errorMessage) {
+
+          <p class="form-error">
+            {{ errorMessage }}
+          </p>
+
+        }
+
+
+        <button
+          type="submit"
+          class="login-button"
+        >
+
+          <span class="button-text">
+            Entrar no painel
+          </span>
+
+          <span class="button-arrow">
+            →
+          </span>
+
+        </button>
+
+      </form>
+
+
+      <div class="login-footer">
+
+        <span class="footer-line"></span>
+
+        <a routerLink="/" class="return-link">
+          Voltar para a página inicial
+        </a>
+
+        <span class="footer-line"></span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

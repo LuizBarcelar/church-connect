@@ -1,0 +1,403 @@
+/* =========================
+   SIDEBAR
+========================= */
+
+:host {
+  display: block;
+}
+
+.admin-sidebar {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 276px;
+  min-width: 276px;
+
+  min-height: 100vh;
+  height: auto;
+
+  overflow: visible;
+
+  align-self: stretch;
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(30, 77, 107, 0.32),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #10253a 0%,
+      #0d1b2a 45%,
+      #091521 100%
+    );
+
+  color: #ffffff;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+
+  box-shadow:
+    8px 0 30px rgba(5, 17, 28, 0.08);
+
+  transition:
+    transform 0.3s ease;
+
+  z-index: 1001;
+}
+
+
+/* =========================
+   SCROLL
+========================= */
+
+.admin-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.admin-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================
+   MARCA
+========================= */
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+
+  min-height: 104px;
+
+  padding: 20px 22px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.07);
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  width: 100%;
+
+  color: #ffffff;
+
+  text-decoration: none;
+}
+
+.sidebar-logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 49px;
+  height: 49px;
+
+  flex: 0 0 auto;
+
+  padding: 3px;
+
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.16);
+}
+
+.sidebar-logo img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.sidebar-brand-text strong {
+  color: #ffffff;
+
+  font-size: 0.94rem;
+  font-weight: 750;
+
+  line-height: 1;
+
+  letter-spacing: -0.025em;
+
+  white-space: nowrap;
+}
+
+.sidebar-brand-text small {
+  margin-top: 8px;
+
+  color: #d4af37;
+
+  font-size: 0.54rem;
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+}
+
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
+.sidebar-navigation {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  gap: 5px;
+
+  padding: 28px 15px;
+}
+
+.navigation-label {
+  display: block;
+
+  margin:
+    0
+    12px
+    11px;
+
+  color: #718598;
+
+  font-size: 0.61rem;
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+}
+
+.sidebar-navigation a {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  min-height: 48px;
+
+  padding: 0 14px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  color: #aab7c3;
+
+  font-size: 0.82rem;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-navigation a:hover {
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  transform: translateX(2px);
+}
+
+
+/* =========================
+   ITEM ATIVO
+========================= */
+
+.sidebar-navigation a.active {
+  color: #ffffff;
+
+  border-color: rgba(212, 175, 55, 0.13);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(212, 175, 55, 0.16),
+      rgba(212, 175, 55, 0.055)
+    );
+}
+
+.sidebar-navigation a.active::before {
+  content: "";
+
+  position: absolute;
+
+  top: 10px;
+  bottom: 10px;
+  left: 0;
+
+  width: 3px;
+
+  border-radius:
+    0
+    10px
+    10px
+    0;
+
+  background: #d4af37;
+
+  box-shadow:
+    0 0 12px rgba(212, 175, 55, 0.3);
+}
+
+
+/* =========================
+   ÍCONES
+========================= */
+
+.navigation-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 21px;
+  height: 21px;
+
+  flex: 0 0 auto;
+
+  color: #8799a9;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-navigation a:hover .navigation-icon {
+  color: #d4af37;
+}
+
+.sidebar-navigation a.active .navigation-icon {
+  color: #d4af37;
+}
+
+.navigation-text {
+  min-width: 0;
+}
+
+
+/* =========================
+   SEPARADOR
+========================= */
+
+.navigation-separator {
+  height: 1px;
+
+  margin: 22px 12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.02)
+    );
+}
+
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 17px 15px 21px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.07);
+}
+
+.back-to-site {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  min-height: 45px;
+
+  padding: 0 14px;
+
+  border-radius: 8px;
+
+  color: #8fa0af;
+
+  font-size: 0.79rem;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.back-to-site:hover {
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.back-to-site:hover .navigation-icon {
+  color: #d4af37;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 900px) {
+
+  .admin-sidebar {
+    position: fixed;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    min-height: 0;
+    height: 100dvh;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    align-self: auto;
+
+    transform: translateX(-100%);
+
+    box-shadow:
+      20px 0 50px rgba(5, 17, 28, 0.28);
+  }
+
+  .admin-sidebar.is-open {
+    transform: translateX(0);
+  }
+
+}

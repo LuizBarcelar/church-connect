@@ -1,0 +1,219 @@
+@if (ministry) {
+
+  <main class="ministry-detail">
+
+    <!-- HERO -->
+    <section class="ministry-hero">
+
+      <div class="hero-background">
+        @if (ministry.imageUrl) {
+          <img
+            [src]="ministry.imageUrl"
+            [alt]="'Ministério de ' + ministry.name"
+          />
+        }
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-container">
+
+        <a routerLink="/ministerio" class="back-link">
+          <span>←</span>
+          Voltar para ministérios
+        </a>
+
+        <div class="hero-content">
+
+          <span class="hero-badge">
+            MINISTÉRIO
+          </span>
+
+          <h1>
+            {{ ministry.name }}<span>.</span>
+          </h1>
+
+          <p>
+            {{ ministry.headline }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOBRE -->
+    <section class="about-section">
+
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div class="about-heading">
+
+            <span class="section-label">
+              SOBRE O MINISTÉRIO
+            </span>
+
+            <h2>
+              Servindo e crescendo
+              <span>juntos.</span>
+            </h2>
+
+          </div>
+
+          <div class="about-content">
+
+            @for (paragraph of ministry.content; track $index) {
+              <p>
+                {{ paragraph }}
+              </p>
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ATIVIDADES -->
+    <section class="activities-section">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-label">
+            O QUE FAZEMOS
+          </span>
+
+          <h2>
+            Conheça nossas
+            <span>atividades.</span>
+          </h2>
+
+          <p>
+            Momentos de comunhão, aprendizado e serviço que fazem
+            parte deste ministério.
+          </p>
+
+        </div>
+
+
+        <div class="activities-grid">
+
+          @for (activity of ministry.activities; track activity.title) {
+
+            <article class="activity-card">
+
+              <div class="activity-image">
+
+                <img
+                  [src]="activity.imageUrl"
+                  [alt]="activity.title"
+                />
+
+                <span class="activity-number">
+                  {{ $index + 1 | number: '2.0' }}
+                </span>
+
+              </div>
+
+              <div class="activity-content">
+
+                <h3>
+                  {{ activity.title }}
+                </h3>
+
+                <p>
+                  {{ activity.description }}
+                </p>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="ministry-cta">
+
+      <div class="container">
+
+        <div class="cta-content">
+
+          <span class="section-label">
+            FAÇA PARTE
+          </span>
+
+          <h2>
+            Existe um lugar para
+            <span>você.</span>
+          </h2>
+
+          <p>
+            Conheça os outros ministérios e encontre uma área
+            onde você possa participar, crescer e servir junto
+            com a nossa comunidade.
+          </p>
+
+          <a
+            routerLink="/ministerio"
+            class="cta-button"
+          >
+            Conhecer outros ministérios
+
+            <span>→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+} @else {
+
+  <section class="ministry-not-found">
+
+    <div class="container">
+
+      <span class="section-label">
+        MINISTÉRIO
+      </span>
+
+      <h1>
+        Ministério não encontrado.
+      </h1>
+
+      <p>
+        O ministério que você está procurando não existe
+        ou não está disponível.
+      </p>
+
+      <a
+        routerLink="/ministerio"
+        class="cta-button"
+      >
+        Voltar para ministérios
+      </a>
+
+    </div>
+
+  </section>
+
+}

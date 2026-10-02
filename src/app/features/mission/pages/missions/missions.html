@@ -1,0 +1,226 @@
+<section class="missions-page">
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="missions-hero">
+
+    <div class="missions-hero-glow"></div>
+
+    <div class="container">
+
+      <div class="missions-hero-content">
+
+        <span class="section-label">
+          A OBRA PELO MUNDO
+        </span>
+
+        <h1>
+          Uma missão que
+          <span>atravessa fronteiras.</span>
+        </h1>
+
+        <p>
+          Conheça projetos e ações que levam esperança,
+          cuidado e transformação para diferentes lugares
+          do mundo.
+        </p>
+
+        <div class="hero-line"></div>
+
+        <span class="hero-message">
+          Servindo pessoas. Transformando histórias.
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       INTRODUÇÃO
+  ========================== -->
+
+  <section class="missions-intro">
+
+    <div class="container">
+
+      <div class="missions-intro-grid">
+
+        <div class="intro-label">
+
+          <span class="section-label">
+            NOSSA MISSÃO
+          </span>
+
+        </div>
+
+
+        <div class="intro-content">
+
+          <h2>
+            Onde houver pessoas,
+            <span>há uma missão.</span>
+          </h2>
+
+          <div class="intro-description">
+
+            <p>
+              Acreditamos que a fé também se manifesta através
+              do cuidado, do serviço e da disposição de estar
+              presente onde existem pessoas que precisam de
+              esperança.
+            </p>
+
+            <p>
+              Cada projeto representa pessoas comprometidas em
+              servir suas comunidades e compartilhar uma mensagem
+              de fé, cuidado e transformação.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PROJETOS
+  ========================== -->
+
+  <section class="missions-list">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            NOSSOS PROJETOS
+          </span>
+
+          <h2>
+            Servindo onde
+            <span>somos chamados.</span>
+          </h2>
+
+        </div>
+
+        <p>
+          Conheça algumas das iniciativas e histórias
+          que fazem parte dessa caminhada.
+        </p>
+
+      </div>
+
+
+      <div class="missions-grid">
+
+        @for (mission of missions; track mission.id) {
+          <app-mission-card
+            [mission]="mission"
+          />
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       IMPACTO
+  ========================== -->
+
+  <section class="missions-impact">
+
+    <div class="impact-glow"></div>
+
+    <div class="container">
+
+      <div class="impact-content">
+
+        <div class="impact-heading">
+
+          <span class="section-label">
+            UMA MISSÃO CONTÍNUA
+          </span>
+
+          <h2>
+            Cada lugar representa
+            <span>uma história.</span>
+          </h2>
+
+          <p>
+            A obra continua através de pessoas dispostas
+            a servir, cuidar e compartilhar esperança.
+          </p>
+
+        </div>
+
+
+        <div class="impact-grid">
+
+          <div class="impact-item">
+
+            <strong>
+              {{ missions.length }}
+            </strong>
+
+            <span>
+              Projetos apresentados
+            </span>
+
+          </div>
+
+
+          <div class="impact-divider"></div>
+
+
+          <div class="impact-item">
+
+            <strong>
+              +
+            </strong>
+
+            <span>
+              Comunidades alcançadas
+            </span>
+
+          </div>
+
+
+          <div class="impact-divider"></div>
+
+
+          <div class="impact-item">
+
+            <strong>
+              ∞
+            </strong>
+
+            <span>
+              Histórias para contar
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</section>

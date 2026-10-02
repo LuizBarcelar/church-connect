@@ -1,0 +1,87 @@
+<section class="testimonials-page">
+
+  <!-- Hero da página -->
+  <section class="testimonials-hero">
+    <div class="container">
+      <span class="section-label">
+        HISTÓRIAS QUE TRANSFORMAM
+      </span>
+
+      <h1>
+        Deus continua
+        <span>escrevendo histórias.</span>
+      </h1>
+
+      <p>
+        Cada testemunho carrega uma história de fé,
+        superação e transformação. Conheça algumas
+        das vidas que foram alcançadas.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- Lista de testemunhos -->
+  <section class="testimonials-list">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="section-label">
+          TESTEMUNHOS
+        </span>
+
+        <h2>
+          Histórias reais.
+          <span>Vidas transformadas.</span>
+        </h2>
+      </div>
+
+
+      <div class="testimonials-grid">
+
+        @for (testimonial of testimonials; track testimonial.id) {
+          <app-testimonial-card
+            [testimonial]="testimonial"
+          />
+        }
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Chamada final -->
+  <section class="testimonials-cta">
+    <div class="container">
+
+      <div class="cta-content">
+
+        <span class="section-label">
+          SUA HISTÓRIA TAMBÉM IMPORTA
+        </span>
+
+        <h2>
+          O que Deus tem feito
+          <span>na sua vida?</span>
+        </h2>
+
+        <p>
+          Compartilhe sua história e inspire outras pessoas
+          através do seu testemunho.
+        </p>
+
+        <a
+          href="#"
+          class="cta-button"
+        >
+          Compartilhar testemunho
+          <span>→</span>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+</section>

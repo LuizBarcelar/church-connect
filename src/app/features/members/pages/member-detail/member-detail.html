@@ -1,0 +1,663 @@
+@if (member) {
+
+  @if (editing) {
+
+    <div class="member-detail-page">
+
+      <header class="detail-header">
+
+        <div>
+
+          <a
+            routerLink="/admin/membros"
+            class="back-link"
+          >
+            <lucide-icon
+              [img]="ArrowLeft"
+              [size]="15"
+            />
+            Voltar para membros
+          </a>
+
+          <span class="section-label">
+            EDITAR MEMBRO
+          </span>
+
+          <h1>Editar cadastro</h1>
+
+          <p>
+            Atualize as informações de
+            {{ member.fullName }}.
+          </p>
+
+        </div>
+
+      </header>
+
+      <app-member-form
+        [member]="member"
+        (save)="saveMember($event)"
+        (cancel)="cancelEditing()"
+      />
+
+    </div>
+
+  } @else {
+
+    <div class="member-detail-page">
+
+      <!-- CABEÇALHO -->
+
+      <header class="detail-header">
+
+        <div class="detail-heading">
+
+          <a
+            routerLink="/admin/membros"
+            class="back-link"
+          >
+            <lucide-icon
+              [img]="ArrowLeft"
+              [size]="15"
+            />
+            Voltar para membros
+          </a>
+
+          <span class="section-label">
+            PERFIL DO MEMBRO
+          </span>
+
+          <h1>
+            {{ member.fullName }}
+          </h1>
+
+          <p>
+            Informações completas do membro cadastrado.
+          </p>
+
+        </div>
+
+        <div class="header-actions">
+
+          <button
+            type="button"
+            class="edit-button"
+            (click)="startEditing()"
+          >
+            <lucide-icon
+              [img]="Edit3"
+              [size]="15"
+            />
+            Editar membro
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- ANIVERSÁRIO -->
+
+      @if (isBirthdayToday()) {
+
+        <section class="birthday-highlight">
+
+          <div class="birthday-icon">
+            <lucide-icon
+              [img]="Cake"
+              [size]="21"
+            />
+          </div>
+
+          <div class="birthday-content">
+
+            <span>
+              HOJE É ANIVERSÁRIO!
+            </span>
+
+            <strong>
+              {{ member.fullName }}
+            </strong>
+
+            <p>
+              Envie uma mensagem de felicitações pelo WhatsApp.
+            </p>
+
+          </div>
+
+          @if (getWhatsAppLink()) {
+
+            <a
+              class="whatsapp-button"
+              [href]="getWhatsAppLink()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <lucide-icon
+                [img]="MessageCircle"
+                [size]="15"
+              />
+              Enviar WhatsApp
+            </a>
+
+          } @else {
+
+            <span class="whatsapp-disabled">
+              WhatsApp não cadastrado
+            </span>
+
+          }
+
+        </section>
+
+      }
+
+
+      <!-- PERFIL -->
+
+      <section class="profile-card">
+
+        <div class="profile-photo">
+
+          @if (member.photoUrl) {
+
+            <img
+              [src]="member.photoUrl"
+              [alt]="member.fullName"
+            />
+
+          } @else {
+
+            <span>
+              {{ getInitials(member.fullName) }}
+            </span>
+
+          }
+
+        </div>
+
+        <div class="profile-main">
+
+          <span class="profile-label">
+            MEMBRO
+          </span>
+
+          <h2>
+            {{ member.fullName }}
+          </h2>
+
+          <div class="profile-meta">
+
+            <span>
+              <lucide-icon
+                [img]="Cake"
+                [size]="14"
+              />
+
+              {{
+                member.birthDate
+                  | date:'dd/MM/yyyy'
+              }}
+            </span>
+
+            <span>
+              <lucide-icon
+                [img]="MapPin"
+                [size]="14"
+              />
+
+              {{ member.city || 'Cidade não informada' }}
+
+              @if (member.state) {
+                - {{ member.state }}
+              }
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- GRID -->
+
+      <div class="detail-grid">
+
+
+        <!-- CONTATO -->
+
+        <section class="info-card">
+
+          <div class="card-heading">
+
+            <div class="card-icon">
+              <lucide-icon
+                [img]="Phone"
+                [size]="18"
+              />
+            </div>
+
+            <div>
+              <span>CONTATO</span>
+              <h3>Informações de contato</h3>
+            </div>
+
+          </div>
+
+          <div class="info-list">
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Telefone
+              </span>
+
+              <strong>
+                {{
+                  member.phone ||
+                  'Não informado'
+                }}
+              </strong>
+
+            </div>
+
+            <div class="info-item">
+
+              <span class="info-label">
+                WhatsApp
+              </span>
+
+              @if (member.hasWhatsApp) {
+
+                <strong class="status-positive">
+                  <lucide-icon
+                    [img]="Check"
+                    [size]="14"
+                  />
+                  Possui WhatsApp
+                </strong>
+
+              } @else {
+
+                <strong class="status-neutral">
+                  Não possui WhatsApp
+                </strong>
+
+              }
+
+            </div>
+
+            <div class="info-item">
+
+              <span class="info-label">
+                E-mail
+              </span>
+
+              <strong>
+                {{
+                  member.email ||
+                  'Não informado'
+                }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- DADOS PESSOAIS -->
+
+        <section class="info-card">
+
+          <div class="card-heading">
+
+            <div class="card-icon">
+              <lucide-icon
+                [img]="UserRound"
+                [size]="18"
+              />
+            </div>
+
+            <div>
+              <span>DADOS PESSOAIS</span>
+              <h3>Informações pessoais</h3>
+            </div>
+
+          </div>
+
+          <div class="info-list">
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Nome completo
+              </span>
+
+              <strong>
+                {{ member.fullName }}
+              </strong>
+
+            </div>
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Data de nascimento
+              </span>
+
+              <strong>
+                {{
+                  member.birthDate
+                    | date:'dd/MM/yyyy'
+                }}
+              </strong>
+
+            </div>
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Cadastro realizado em
+              </span>
+
+              <strong>
+                {{
+                  member.createdAt
+                    | date:'dd/MM/yyyy'
+                }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ENDEREÇO -->
+
+        <section class="info-card">
+
+          <div class="card-heading">
+
+            <div class="card-icon">
+              <lucide-icon
+                [img]="LocateFixed"
+                [size]="18"
+              />
+            </div>
+
+            <div>
+              <span>ENDEREÇO</span>
+              <h3>Localização</h3>
+            </div>
+
+          </div>
+
+          <div class="info-list">
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Estado
+              </span>
+
+              <strong>
+                {{
+                  member.state ||
+                  'Não informado'
+                }}
+              </strong>
+
+            </div>
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Cidade
+              </span>
+
+              <strong>
+                {{
+                  member.city ||
+                  'Não informado'
+                }}
+              </strong>
+
+            </div>
+
+            <div class="info-item">
+
+              <span class="info-label">
+                CEP
+              </span>
+
+              <strong>
+                {{
+                  member.cep ||
+                  'Não informado'
+                }}
+              </strong>
+
+            </div>
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Endereço
+              </span>
+
+              <strong>
+                {{
+                  getAddress() ||
+                  'Não informado'
+                }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- VIDA CRISTÃ -->
+
+        <section class="info-card">
+
+          <div class="card-heading">
+
+            <div class="card-icon">
+              <lucide-icon
+                [img]="HeartHandshake"
+                [size]="18"
+              />
+            </div>
+
+            <div>
+              <span>VIDA CRISTÃ</span>
+              <h3>Caminhada cristã</h3>
+            </div>
+
+          </div>
+
+          <div class="info-list">
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Batizado nas águas
+              </span>
+
+              @if (member.baptized) {
+
+                <strong class="status-positive">
+                  <lucide-icon
+                    [img]="Check"
+                    [size]="14"
+                  />
+                  Sim
+                </strong>
+
+              } @else {
+
+                <strong class="status-neutral">
+                  Não
+                </strong>
+
+              }
+
+            </div>
+
+            @if (member.baptized) {
+
+              <div class="info-item">
+
+                <span class="info-label">
+                  Data do batismo
+                </span>
+
+                <strong>
+                  {{
+                    member.baptismDate
+                      ? (
+                          member.baptismDate
+                          | date:'dd/MM/yyyy'
+                        )
+                      : 'Não informado'
+                  }}
+                </strong>
+
+              </div>
+
+              <div class="info-item">
+
+                <span class="info-label">
+                  Local do batismo
+                </span>
+
+                <strong>
+                  {{
+                    member.baptismPlace ||
+                    'Não informado'
+                  }}
+                </strong>
+
+              </div>
+
+            }
+
+            <div class="info-item">
+
+              <span class="info-label">
+                Batizado no Espírito Santo
+              </span>
+
+              @if (member.baptizedInHolySpirit) {
+
+                <strong class="status-positive">
+                  <lucide-icon
+                    [img]="Check"
+                    [size]="14"
+                  />
+                  Sim
+                </strong>
+
+              } @else {
+
+                <strong class="status-neutral">
+                  Não
+                </strong>
+
+              }
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ATUAÇÃO NA OBRA -->
+
+        <section class="info-card full-width">
+
+          <div class="card-heading">
+
+            <div class="card-icon">
+              <lucide-icon
+                [img]="Church"
+                [size]="18"
+              />
+            </div>
+
+            <div>
+              <span>ATUAÇÃO NA OBRA</span>
+              <h3>Funções e ministérios</h3>
+            </div>
+
+          </div>
+
+          @if (
+            member.hasWorkedInMinistry &&
+            member.ministryRoles.length
+          ) {
+
+            <div class="roles-list">
+
+              @for (
+                role of member.ministryRoles;
+                track role
+              ) {
+
+                <span class="role-badge">
+                  <lucide-icon
+                    [img]="Check"
+                    [size]="13"
+                  />
+
+                  {{ getMinistryRoleLabel(role) }}
+                </span>
+
+              }
+
+            </div>
+
+          } @else {
+
+            <div class="empty-role">
+
+              <div class="empty-role-icon">
+                <lucide-icon
+                  [img]="Church"
+                  [size]="18"
+                />
+              </div>
+
+              <div>
+                <strong>
+                  Nenhuma função registrada
+                </strong>
+
+                <p>
+                  Este membro ainda não possui atuação
+                  ministerial cadastrada.
+                </p>
+              </div>
+
+            </div>
+
+          }
+
+        </section>
+
+      </div>
+
+    </div>
+
+  }
+
+}

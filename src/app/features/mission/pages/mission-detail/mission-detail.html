@@ -1,0 +1,373 @@
+<section class="mission-detail">
+
+  @if (mission; as item) {
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="detail-hero">
+
+      <div class="hero-glow"></div>
+
+      <div class="container">
+
+        <a
+          routerLink="/obra"
+          class="back-link"
+        >
+          <span>←</span>
+          Voltar para projetos
+        </a>
+
+
+        <div class="hero-content">
+
+          <div class="detail-region">
+            <span class="region-dot"></span>
+            {{ item.region }}
+          </div>
+
+          <h1>
+            {{ item.title }}
+          </h1>
+
+          <div class="hero-location">
+
+            <span>
+              {{ item.country }}
+            </span>
+
+            <span class="hero-location-line"></span>
+
+            <small>
+              Projeto missionário
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         IMAGEM DE DESTAQUE
+    ========================== -->
+
+    <section class="detail-visual">
+
+      <div class="container">
+
+        <div class="detail-image">
+
+          @if (item.imageUrl) {
+
+            <img
+              [src]="item.imageUrl"
+              [alt]="'Projeto missionário em ' + item.country"
+            />
+
+          } @else {
+
+            <div class="image-placeholder">
+
+              <span>
+                {{ item.country }}
+              </span>
+
+            </div>
+
+          }
+
+
+          <div class="image-overlay"></div>
+
+
+          <div class="image-location">
+
+            <span class="image-location-label">
+              LOCAL
+            </span>
+
+            <strong>
+              {{ item.country }}
+            </strong>
+
+            <small>
+              {{ item.region }}
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SOBRE O PROJETO
+    ========================== -->
+
+    <section class="detail-content">
+
+      <div class="container">
+
+        <div class="detail-grid">
+
+          <!-- LADO ESQUERDO -->
+
+          <div class="detail-heading">
+
+            <span class="section-label">
+              SOBRE O PROJETO
+            </span>
+
+            <h2>
+              Servindo com
+              <span>propósito.</span>
+            </h2>
+
+          </div>
+
+
+          <!-- LADO DIREITO -->
+
+          <article class="detail-story">
+
+            <p class="story-intro">
+              {{ item.description }}
+            </p>
+
+
+            <p class="story-text">
+              Cada iniciativa nasce do desejo de estar presente,
+              servir pessoas e contribuir para comunidades através
+              de ações de cuidado, fé e esperança.
+            </p>
+
+
+            <div class="story-divider"></div>
+
+
+            <div class="project-info">
+
+              <div class="info-item">
+
+                <span class="info-number">
+                  01
+                </span>
+
+                <div>
+
+                  <span class="info-label">
+                    PAÍS
+                  </span>
+
+                  <strong>
+                    {{ item.country }}
+                  </strong>
+
+                </div>
+
+              </div>
+
+
+              <div class="info-item">
+
+                <span class="info-number">
+                  02
+                </span>
+
+                <div>
+
+                  <span class="info-label">
+                    REGIÃO
+                  </span>
+
+                  <strong>
+                    {{ item.region }}
+                  </strong>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="mission-activities">
+
+      <div class="container">
+
+        <div class="activities-heading">
+
+          <span class="section-label">
+            NOSSA ATUAÇÃO
+          </span>
+
+          <h2>
+            Como essa missão
+            <span>acontece na prática.</span>
+          </h2>
+
+        </div>
+
+
+        <div class="activities-grid">
+
+          @for (
+            activity of item.activities;
+            track activity.title
+          ) {
+
+            <article class="activity-card">
+
+              <div class="activity-image">
+
+                @if (activity.imageUrl) {
+
+                  <img
+                    [src]="activity.imageUrl"
+                    [alt]="activity.title"
+                  />
+
+                }
+
+              </div>
+
+              <div class="activity-content">
+
+                <span class="activity-number">
+                  {{ $index + 1 }}
+                </span>
+
+                <h3>
+                  {{ activity.title }}
+                </h3>
+
+                <p>
+                  {{ activity.description }}
+                </p>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         MENSAGEM FINAL
+    ========================== -->
+
+    <section class="detail-message">
+
+      <div class="message-glow"></div>
+
+      <div class="container">
+
+        <div class="message-content">
+
+          <span class="section-label">
+            UMA MISSÃO DE TODOS
+          </span>
+
+          <h2>
+            Cada lugar alcançado
+            <span>carrega uma história.</span>
+          </h2>
+
+          <p>
+            Através de pessoas, comunidades e projetos,
+            continuamos trabalhando para levar esperança,
+            cuidado e amor onde existe necessidade.
+          </p>
+
+
+          <a
+            routerLink="/obra"
+            class="cta-button"
+          >
+
+            <span class="cta-text">
+              Conhecer outros projetos
+            </span>
+
+            <span class="cta-arrow">
+              →
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  } @else {
+
+    <!-- =========================
+         NÃO ENCONTRADO
+    ========================== -->
+
+    <section class="not-found">
+
+      <div class="container">
+
+        <div class="not-found-content">
+
+          <span class="section-label">
+            PROJETO
+          </span>
+
+          <h1>
+            Projeto não encontrado
+          </h1>
+
+          <p>
+            Não encontramos o projeto solicitado.
+            Você pode voltar para conhecer os outros
+            projetos da nossa missão.
+          </p>
+
+          <a
+            routerLink="/obra"
+            class="cta-button"
+          >
+            <span class="cta-text">
+              Voltar para projetos
+            </span>
+
+            <span class="cta-arrow">
+              →
+            </span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+</section>

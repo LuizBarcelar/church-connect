@@ -1,0 +1,24 @@
+<section class="ministries-section">
+  <div class="container">
+
+    <div class="section-heading">
+      <span class="section-label">MINISTÉRIOS</span>
+
+      <h2>
+        Há um lugar para <span>você.</span>
+      </h2>
+
+      <p>
+        Caminhamos juntos, servindo, aprendendo e crescendo
+        em diferentes áreas da comunidade.
+      </p>
+    </div>
+
+    <div class="ministries-grid">
+      @for (ministry of ministries; track ministry.id) {
+        <app-ministry-card [ministry]="ministry" />
+      }
+    </div>
+
+  </div>
+</section>

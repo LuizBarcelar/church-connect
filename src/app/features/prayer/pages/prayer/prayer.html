@@ -1,0 +1,241 @@
+<main class="prayer-page">
+  <!-- HERO -->
+
+  <section class="prayer-hero">
+    <div class="container">
+      <a routerLink="/" class="back-link">
+        <span class="back-icon">←</span>
+        <span>Voltar para o início</span>
+      </a>
+
+      <div class="prayer-label">
+        <span class="label-line"></span>
+        <span>Pedir oração</span>
+      </div>
+
+      <h1>
+        Compartilhe seu pedido.
+        <span>Estamos com você.</span>
+      </h1>
+
+      <p>
+        A oração é uma forma de expressar nossa fé, esperança e confiança em
+        Deus. Compartilhe conosco aquilo que está em seu coração.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+
+  <section class="prayer-content-section">
+    <div class="container">
+      <div class="prayer-grid">
+        <!-- TEXTO LATERAL -->
+
+        <div class="prayer-intro">
+
+          <div class="prayer-image">
+
+            <img
+              src="/images/prayer-home.png"
+              alt="Momento de oração com Bíblia aberta"
+            />
+
+            <div class="prayer-image-overlay"></div>
+
+            <div class="prayer-image-content">
+
+              <span class="image-label">
+                UM MOMENTO DE FÉ
+              </span>
+
+              <h2>
+                Você não precisa
+                caminhar <span>sozinho.</span>
+              </h2>
+
+              <p>
+                Nossa comunidade está disponível para receber
+                seu pedido de oração com respeito, cuidado e
+                responsabilidade.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="bible-message">
+
+            <span class="bible-icon">✦</span>
+
+            <div>
+              <p>
+                “Lancem sobre ele toda a sua ansiedade,
+                porque ele tem cuidado de vocês.”
+              </p>
+
+              <small>
+                1 Pedro 5:7
+              </small>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- FORMULÁRIO -->
+
+        <div class="prayer-form-wrapper">
+          @if (!submitted) {
+            <div class="form-heading">
+              <span class="section-label">SEU PEDIDO</span>
+
+              <h2>Como podemos orar por você?</h2>
+
+              <p>
+                Preencha os campos abaixo. Os campos marcados como obrigatórios
+                precisam ser preenchidos.
+              </p>
+            </div>
+
+            <form
+              class="prayer-form"
+              #prayerForm="ngForm"
+              (ngSubmit)="submitPrayer()"
+            >
+              <div class="form-group">
+                <label for="name">
+                  Nome
+                  <span>*</span>
+                </label>
+
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Digite seu nome"
+                  [(ngModel)]="form.name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">
+                  E-mail
+                  <small>opcional</small>
+                </label>
+
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="seuemail@exemplo.com"
+                  [(ngModel)]="form.email"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="message">
+                  Pedido de oração
+                  <span>*</span>
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Escreva aqui seu pedido de oração..."
+                  [(ngModel)]="form.message"
+                  required
+                ></textarea>
+              </div>
+
+              <label class="privacy-option">
+                <input
+                  type="checkbox"
+                  name="isPrivate"
+                  [(ngModel)]="form.isPrivate"
+                />
+
+                <span class="custom-checkbox"></span>
+
+                <span class="privacy-text">
+                  Desejo que meu pedido seja tratado de forma privada.
+                </span>
+              </label>
+
+              <button
+                type="submit"
+                class="prayer-submit"
+                [disabled]="prayerForm.invalid"
+              >
+                Enviar pedido de oração
+                <span>→</span>
+              </button>
+
+              <p class="form-disclaimer">
+                Seus dados serão tratados com respeito e utilizados apenas para
+                o cuidado e acompanhamento do pedido de oração.
+              </p>
+            </form>
+          } @else {
+            <div class="success-message">
+              <div class="success-icon">✓</div>
+
+              <span class="section-label">PEDIDO RECEBIDO</span>
+
+              <h2>Obrigado por compartilhar.</h2>
+
+              <p>
+                Seu pedido de oração foi registrado nesta demonstração. Nossa
+                equipe poderá acolher sua mensagem e interceder por você.
+              </p>
+
+              <p>
+                Que você encontre força, paz e esperança em sua caminhada.
+              </p>
+
+              <button
+                type="button"
+                class="secondary-button"
+                (click)="resetForm()"
+              >
+                Enviar outro pedido
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP -->
+
+  <section class="prayer-contact">
+    <div class="container">
+      <div class="contact-box">
+        <div class="contact-text">
+          <span class="section-label">PRECISA CONVERSAR?</span>
+
+          <h2>Fale conosco pelo <span>WhatsApp.</span></h2>
+
+          <p>
+            Se preferir, entre em contato diretamente com nossa equipe. Estamos
+            disponíveis para ouvir você.
+          </p>
+        </div>
+
+        <a
+          [href]="'https://wa.me/' + church.contact.whatsapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="whatsapp-button"
+        >
+          <span class="whatsapp-icon">◉</span>
+          Falar pelo WhatsApp
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,260 @@
+<footer class="site-footer">
+
+  <div class="footer-glow"></div>
+
+  <div class="container">
+
+    <div class="footer-main">
+
+      <!-- MARCA -->
+      <div class="footer-brand">
+
+        <a
+          routerLink="/"
+          class="footer-logo"
+          aria-label="Voltar para o início"
+        >
+
+          <div class="footer-logo-wrapper">
+
+            <img
+              src="/brand/logo-church-connect.jpg"
+              [alt]="church.name"
+              class="footer-logo-image"
+            />
+
+          </div>
+
+          <span class="footer-logo-text">
+
+            <strong>
+              CHURCH
+            </strong>
+
+            <small>
+              CONNECT
+            </small>
+
+          </span>
+
+        </a>
+
+
+        <h2>
+          Conectados em fé,
+          <span>transformados pelo amor.</span>
+        </h2>
+
+        <p class="footer-description">
+          Uma comunidade que busca viver a fé,
+          cuidar de pessoas e levar esperança
+          para todos os lugares.
+        </p>
+
+
+        <!-- LOCALIZAÇÃO -->
+        <div class="footer-location">
+
+          <span class="footer-location-icon">
+            ⌖
+          </span>
+
+          <div>
+            <strong>
+              {{ church.address.neighborhood }}
+            </strong>
+
+            <small>
+              {{ church.address.city }} - {{ church.address.state }}
+            </small>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- NAVEGAÇÃO -->
+      <div class="footer-column">
+
+        <h3>
+          Navegação
+        </h3>
+
+        <nav aria-label="Navegação do rodapé">
+
+          <a routerLink="/">
+            <span>Início</span>
+            <small>→</small>
+          </a>
+
+          <a routerLink="/testemunhos">
+            <span>Testemunhos</span>
+            <small>→</small>
+          </a>
+
+          <a routerLink="/obra">
+            <span>A Obra</span>
+            <small>→</small>
+          </a>
+
+          <a routerLink="/ministerio">
+            <span>Ministérios</span>
+            <small>→</small>
+          </a>
+
+        </nav>
+
+      </div>
+
+
+      <!-- COMUNIDADE -->
+      <div class="footer-column">
+
+        <h3>
+          Comunidade
+        </h3>
+
+        <nav aria-label="Ministérios">
+
+          <a routerLink="/ministerio/criancas">
+            <span>Crianças</span>
+            <small>→</small>
+          </a>
+
+          <a routerLink="/ministerio/homens">
+            <span>Homens</span>
+            <small>→</small>
+          </a>
+
+          <a routerLink="/ministerio/mulheres">
+            <span>Mulheres</span>
+            <small>→</small>
+          </a>
+
+          <a routerLink="/ministerio/jovens">
+            <span>Jovens</span>
+            <small>→</small>
+          </a>
+
+        </nav>
+
+      </div>
+
+
+      <!-- CONECTE-SE -->
+      <div class="footer-column">
+
+        <h3>
+          Conecte-se
+        </h3>
+
+        <nav aria-label="Contato e redes sociais">
+
+          <a routerLink="/pedir-oracao">
+            <span>Pedir oração</span>
+            <small>→</small>
+          </a>
+
+
+          @if (church.contact.whatsapp) {
+
+            <a
+              [href]="'https://wa.me/' + church.contact.whatsapp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>WhatsApp</span>
+              <small>↗</small>
+            </a>
+
+          }
+
+
+          @if (church.contact.email) {
+
+            <a
+              [href]="'mailto:' + church.contact.email"
+            >
+              <span>E-mail</span>
+              <small>↗</small>
+            </a>
+
+          }
+
+
+          @if (church.contact.instagram) {
+
+            <a
+              [href]="church.contact.instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Instagram</span>
+              <small>↗</small>
+            </a>
+
+          }
+
+
+          @if (church.contact.facebook) {
+
+            <a
+              [href]="church.contact.facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Facebook</span>
+              <small>↗</small>
+            </a>
+
+          }
+
+
+          @if (church.contact.youtube) {
+
+            <a
+              [href]="church.contact.youtube"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>YouTube</span>
+              <small>↗</small>
+            </a>
+
+          }
+
+        </nav>
+
+      </div>
+
+    </div>
+
+
+    <!-- LINHA -->
+    <div class="footer-divider"></div>
+
+
+    <!-- RODAPÉ INFERIOR -->
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 {{ church.name }}.
+        Todos os direitos reservados.
+      </span>
+
+      <div class="footer-bottom-message">
+
+        <span class="footer-dot"></span>
+
+        <span>
+          Feito com fé e propósito.
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>

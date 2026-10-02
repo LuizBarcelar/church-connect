@@ -1,0 +1,620 @@
+<div class="form-overlay">
+
+  <section
+    class="form-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ministry-form-title"
+  >
+
+    <header class="form-header">
+
+      <div>
+
+        <span class="form-eyebrow">
+          MINISTÉRIOS
+        </span>
+
+        <h2 id="ministry-form-title">
+          {{ ministry ? 'Editar ministério' : 'Novo ministério' }}
+        </h2>
+
+        <p>
+          Configure as informações exibidas
+          na área pública da igreja.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="close-button"
+        (click)="cancelForm()"
+        aria-label="Fechar formulário"
+      >
+        <lucide-icon
+          [img]="X"
+          [size]="20"
+        />
+      </button>
+
+    </header>
+
+
+    <form
+      class="form-content"
+      (ngSubmit)="submitForm()"
+    >
+
+      <!-- 01 - INFORMAÇÕES -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            01
+          </span>
+
+          <div>
+            <h3>
+              Informações principais
+            </h3>
+
+            <p>
+              Defina o nome e a apresentação
+              do ministério.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="fields-grid">
+
+          <label class="field full">
+
+            <span>
+              <lucide-icon
+                [img]="UsersRound"
+                [size]="16"
+              />
+
+              Nome do ministério *
+            </span>
+
+            <input
+              type="text"
+              name="name"
+              [(ngModel)]="name"
+              (ngModelChange)="onNameChange()"
+              placeholder="Ex.: Intercessão"
+              required
+            />
+
+          </label>
+
+
+          <label class="field full">
+
+            <span>
+              <lucide-icon
+                [img]="Type"
+                [size]="16"
+              />
+
+              Descrição *
+            </span>
+
+            <textarea
+              name="description"
+              [(ngModel)]="description"
+              rows="4"
+              placeholder="Apresente brevemente o ministério..."
+              required
+            ></textarea>
+
+          </label>
+
+
+          <label class="field full">
+
+            <span>
+              <lucide-icon
+                [img]="BookOpenText"
+                [size]="16"
+              />
+
+              Frase de destaque *
+            </span>
+
+            <input
+              type="text"
+              name="headline"
+              [(ngModel)]="headline"
+              placeholder="Ex.: Unidos em oração e propósito."
+              required
+            />
+
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- 02 - ROTA -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            02
+          </span>
+
+          <div>
+            <h3>
+              Página pública
+            </h3>
+
+            <p>
+              Endereço utilizado para acessar
+              este ministério no site.
+            </p>
+          </div>
+
+        </div>
+
+
+        <label class="field">
+
+          <span>
+            <lucide-icon
+              [img]="Link2"
+              [size]="16"
+            />
+
+            Rota
+          </span>
+
+          <input
+            type="text"
+            name="route"
+            [(ngModel)]="route"
+            placeholder="/ministerio/intercessao"
+          />
+
+          <small>
+            Para novos ministérios, a rota é
+            criada automaticamente a partir do nome.
+          </small>
+
+        </label>
+
+      </section>
+
+
+      <!-- 03 - IMAGEM -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            03
+          </span>
+
+          <div>
+            <h3>
+              Imagem principal
+            </h3>
+
+            <p>
+              Informe o caminho da imagem usada
+              na apresentação do ministério.
+            </p>
+          </div>
+
+        </div>
+
+
+        <label class="field">
+
+          <span>
+            <lucide-icon
+              [img]="Image"
+              [size]="16"
+            />
+
+            Caminho da imagem
+          </span>
+
+          <input
+            type="text"
+            name="imageUrl"
+            [(ngModel)]="imageUrl"
+            placeholder="/ministries/intercessao.jpg"
+          />
+
+        </label>
+
+
+        <div class="image-preview">
+
+          @if (hasImagePreview()) {
+
+            <img
+              [src]="imageUrl"
+              [alt]="name || 'Prévia do ministério'"
+            />
+
+            <button
+              type="button"
+              class="remove-image"
+              (click)="clearImage()"
+              aria-label="Remover imagem"
+            >
+              <lucide-icon
+                [img]="X"
+                [size]="17"
+              />
+            </button>
+
+          } @else {
+
+            <div class="preview-empty">
+
+              <lucide-icon
+                [img]="Image"
+                [size]="30"
+              />
+
+              <span>
+                Prévia da imagem
+              </span>
+
+              <small>
+                Ex.: /ministries/intercessao.jpg
+              </small>
+
+            </div>
+
+          }
+
+        </div>
+
+      </section>
+
+
+      <!-- 04 - CONTEÚDO -->
+
+      <section class="form-section">
+
+        <div class="section-heading with-action">
+
+          <div class="section-heading-main">
+
+            <span class="section-number">
+              04
+            </span>
+
+            <div>
+              <h3>
+                Sobre o ministério
+              </h3>
+
+              <p>
+                Adicione os parágrafos exibidos
+                na página de detalhes.
+              </p>
+            </div>
+
+          </div>
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="addParagraph()"
+          >
+            <lucide-icon
+              [img]="Plus"
+              [size]="16"
+            />
+
+            Parágrafo
+          </button>
+
+        </div>
+
+
+        <div class="dynamic-list">
+
+          @for (
+            paragraph of content;
+            track $index;
+            let index = $index
+          ) {
+
+            <article class="dynamic-item">
+
+              <div class="dynamic-header">
+
+                <strong>
+                  Parágrafo {{ index + 1 }}
+                </strong>
+
+                <button
+                  type="button"
+                  class="icon-delete"
+                  (click)="removeParagraph(index)"
+                  aria-label="Remover parágrafo"
+                >
+                  <lucide-icon
+                    [img]="Trash2"
+                    [size]="16"
+                  />
+                </button>
+
+              </div>
+
+              <textarea
+                [name]="'content-' + index"
+                [ngModel]="paragraph"
+                (ngModelChange)="updateParagraph(index, $event)"
+                rows="5"
+                placeholder="Digite o conteúdo..."
+              ></textarea>
+
+            </article>
+
+          }
+
+        </div>
+
+      </section>
+
+
+      <!-- 05 - ATIVIDADES -->
+
+      <section class="form-section">
+
+        <div class="section-heading with-action">
+
+          <div class="section-heading-main">
+
+            <span class="section-number">
+              05
+            </span>
+
+            <div>
+              <h3>
+                Atividades
+              </h3>
+
+              <p>
+                Cadastre as principais atividades
+                realizadas pelo ministério.
+              </p>
+            </div>
+
+          </div>
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="addActivity()"
+          >
+            <lucide-icon
+              [img]="Plus"
+              [size]="16"
+            />
+
+            Atividade
+          </button>
+
+        </div>
+
+
+        @if (activities.length === 0) {
+
+          <div class="activities-empty">
+
+            <lucide-icon
+              [img]="Layers3"
+              [size]="30"
+            />
+
+            <strong>
+              Nenhuma atividade adicionada
+            </strong>
+
+            <p>
+              Clique em "Atividade" para adicionar
+              uma atividade ao ministério.
+            </p>
+
+          </div>
+
+        } @else {
+
+          <div class="activities-list">
+
+            @for (
+              activity of activities;
+              track $index;
+              let index = $index
+            ) {
+
+              <article class="activity-card">
+
+                <header class="activity-header">
+
+                  <div>
+
+                    <span>
+                      ATIVIDADE
+                    </span>
+
+                    <strong>
+                      {{ index + 1 }}
+                    </strong>
+
+                  </div>
+
+                  <button
+                    type="button"
+                    class="icon-delete"
+                    (click)="removeActivity(index)"
+                    aria-label="Remover atividade"
+                  >
+                    <lucide-icon
+                      [img]="Trash2"
+                      [size]="16"
+                    />
+                  </button>
+
+                </header>
+
+
+                <div class="fields-grid">
+
+                  <label class="field full">
+
+                    <span>
+                      <lucide-icon
+                        [img]="Activity"
+                        [size]="16"
+                      />
+
+                      Título
+                    </span>
+
+                    <input
+                      type="text"
+                      [name]="'activity-title-' + index"
+                      [(ngModel)]="activity.title"
+                      placeholder="Ex.: Encontro de oração"
+                    />
+
+                  </label>
+
+
+                  <label class="field full">
+
+                    <span>
+                      Descrição
+                    </span>
+
+                    <textarea
+                      [name]="'activity-description-' + index"
+                      [(ngModel)]="activity.description"
+                      rows="4"
+                      placeholder="Descreva a atividade..."
+                    ></textarea>
+
+                  </label>
+
+
+                  <label class="field full">
+
+                    <span>
+                      <lucide-icon
+                        [img]="Image"
+                        [size]="16"
+                      />
+
+                      Imagem
+                    </span>
+
+                    <input
+                      type="text"
+                      [name]="'activity-image-' + index"
+                      [(ngModel)]="activity.imageUrl"
+                      placeholder="/ministries/activities/atividade.jpg"
+                    />
+
+                  </label>
+
+                </div>
+
+
+                <div class="activity-image">
+
+                  @if (hasActivityImage(activity)) {
+
+                    <img
+                      [src]="activity.imageUrl"
+                      [alt]="activity.title || 'Atividade'"
+                    />
+
+                    <button
+                      type="button"
+                      class="remove-image"
+                      (click)="clearActivityImage(activity)"
+                      aria-label="Remover imagem"
+                    >
+                      <lucide-icon
+                        [img]="X"
+                        [size]="16"
+                      />
+                    </button>
+
+                  } @else {
+
+                    <div class="activity-image-empty">
+
+                      <lucide-icon
+                        [img]="Image"
+                        [size]="24"
+                      />
+
+                      Sem imagem
+
+                    </div>
+
+                  }
+
+                </div>
+
+              </article>
+
+            }
+
+          </div>
+
+        }
+
+      </section>
+
+
+      <footer class="form-footer">
+
+        <button
+          type="button"
+          class="cancel-button"
+          (click)="cancelForm()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="save-button"
+          [disabled]="!isFormValid"
+        >
+          <lucide-icon
+            [img]="Save"
+            [size]="17"
+          />
+
+          {{ ministry ? 'Salvar alterações' : 'Criar ministério' }}
+        </button>
+
+      </footer>
+
+    </form>
+
+  </section>
+
+</div>

@@ -1,0 +1,265 @@
+@if (event) {
+  <main class="event-detail">
+
+    <!-- HERO -->
+    <section
+      class="event-hero"
+      [style.background-image]="getHeroBackground()"
+    >
+      <div class="event-hero-overlay"></div>
+
+      <div class="container event-hero-content">
+
+        <a routerLink="/" class="back-link">
+          <lucide-icon
+            [img]="ArrowLeft"
+            [size]="17"
+          />
+          Voltar para início
+        </a>
+
+        <div class="hero-copy">
+
+          <div class="event-label">
+            <span></span>
+            EVENTO ESPECIAL
+          </div>
+
+          <h1 class="event-title">
+            <span class="event-title-main">
+              {{ titleFirstLine }}
+            </span>
+
+            @if (titleHighlight) {
+              <span class="event-title-highlight">
+                {{ titleHighlight }}
+              </span>
+            }
+          </h1>
+
+          @if (event.description) {
+            <p>
+              {{ event.description }}
+            </p>
+          }
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- DATA / HORÁRIO / LOCAL -->
+    <section class="event-information">
+
+      <div class="container information-grid">
+
+        <!-- DATA -->
+        <article class="information-card">
+
+          <div class="information-icon">
+            <lucide-icon
+              [img]="CalendarDays"
+              [size]="27"
+            />
+          </div>
+
+          <div class="information-content">
+            <span>DATA</span>
+
+            <strong>
+              {{ event.date | date:"dd 'de' MMMM":'':'pt-BR' }}
+            </strong>
+
+            <small>
+              {{ event.date | date:'EEEE':'':'pt-BR' }}
+            </small>
+          </div>
+
+        </article>
+
+
+        <!-- HORÁRIO -->
+        <article class="information-card">
+
+          <div class="information-icon">
+            <lucide-icon
+              [img]="Clock3"
+              [size]="28"
+            />
+          </div>
+
+          <div class="information-content">
+            <span>HORÁRIO</span>
+
+            <strong>
+              {{ event.time || 'A definir' }}
+            </strong>
+
+            <small>
+              Início do evento
+            </small>
+          </div>
+
+        </article>
+
+
+        <!-- LOCAL -->
+        <article class="information-card">
+
+          <div class="information-icon">
+            <lucide-icon
+              [img]="MapPin"
+              [size]="28"
+            />
+          </div>
+
+          <div class="information-content">
+            <span>LOCAL</span>
+
+            <strong>
+              {{ church.name }}
+            </strong>
+
+            <small>
+              {{ location }}
+            </small>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOBRE O EVENTO -->
+    <section class="event-about">
+
+      <div class="container event-about-grid">
+
+        <div class="event-description">
+
+          <div class="about-label">
+            <span></span>
+            SOBRE O EVENTO
+          </div>
+
+          <h2>
+            Um momento especial
+            <strong>
+              para vivermos juntos.
+            </strong>
+          </h2>
+
+          @if (event.description) {
+            <p>
+              {{ event.description }}
+            </p>
+          }
+
+          <p class="event-invitation">
+            Esperamos você!
+          </p>
+
+        </div>
+
+
+        <!-- CONTATO -->
+        <aside
+          class="event-contact-card"
+          [style.background-image]="getContactBackground()"
+        >
+          <div class="contact-overlay"></div>
+
+          <div class="contact-content">
+
+            <div class="contact-label">
+              <span></span>
+              MAIS INFORMAÇÕES
+            </div>
+
+            <h3>
+              Quer saber mais sobre
+              este evento?
+            </h3>
+
+            <p>
+              Entre em contato diretamente com o responsável
+              e tire suas dúvidas sobre a programação.
+            </p>
+
+            <div class="contact-actions">
+
+              @if (event.whatsapp) {
+                <a
+                  [href]="whatsappUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="whatsapp-button"
+                >
+                  <lucide-icon
+                    [img]="MessageCircle"
+                    [size]="20"
+                  />
+
+                  <span>
+                    Quero mais informações
+                  </span>
+                </a>
+              }
+
+              <a
+                [href]="mapsUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="maps-button"
+              >
+                <lucide-icon
+                  [img]="Navigation"
+                  [size]="19"
+                />
+
+                <span>
+                  Como chegar
+                </span>
+              </a>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+
+    </section>
+
+  </main>
+} @else {
+
+  <main class="event-not-found">
+    <div class="container">
+
+      <span>EVENTO</span>
+
+      <h1>
+        Evento não encontrado
+      </h1>
+
+      <p>
+        Esta programação pode ter sido removida
+        ou não está mais disponível.
+      </p>
+
+      <a routerLink="/">
+        <lucide-icon
+          [img]="ArrowLeft"
+          [size]="17"
+        />
+        Voltar para início
+      </a>
+
+    </div>
+  </main>
+
+}

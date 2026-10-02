@@ -1,0 +1,158 @@
+.ministries-section {
+  position: relative;
+
+  padding: 110px 0 120px;
+
+  background: #ffffff;
+
+  overflow: hidden;
+}
+
+
+/* Detalhe decorativo */
+
+.ministries-section::before {
+  content: '';
+
+  position: absolute;
+
+  top: 80px;
+  right: -140px;
+
+  width: 320px;
+  height: 320px;
+
+  border-radius: 50%;
+
+  background: rgba(212, 175, 55, 0.06);
+
+  filter: blur(20px);
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.section-heading {
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 720px;
+
+  margin: 0 auto 60px;
+
+  text-align: center;
+}
+
+.section-label {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  color: #d4af37;
+
+  font-size: 0.82rem;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #0d1b2a;
+
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 700;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.03em;
+}
+
+.section-heading h2 span {
+  color: #d4af37;
+}
+
+.section-heading p {
+  max-width: 600px;
+
+  margin: 22px auto 0;
+
+  color: #6c757d;
+
+  font-size: 1rem;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.ministries-grid {
+  position: relative;
+
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 25px;
+}
+
+app-ministry-card {
+  display: block;
+
+  height: 100%;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+
+  .ministries-section {
+    padding: 90px 0;
+  }
+
+  .ministries-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 28px;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .ministries-section {
+    padding: 70px 0 80px;
+  }
+
+  .section-heading {
+    margin-bottom: 40px;
+  }
+
+  .section-heading p {
+    font-size: 0.95rem;
+  }
+
+  .ministries-grid {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+}

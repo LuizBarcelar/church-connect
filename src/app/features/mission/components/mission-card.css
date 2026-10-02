@@ -1,0 +1,477 @@
+/* =========================
+   CARD
+========================= */
+
+.mission-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(13, 27, 42, 0.08);
+
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 30px rgba(13, 27, 42, 0.05);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+
+/* detalhe dourado inferior */
+
+.mission-card::after {
+  content: '';
+
+  position: absolute;
+
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 3px;
+
+  background: #d4af37;
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition:
+    transform 0.35s ease;
+}
+
+
+/* hover */
+
+.mission-card:hover {
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(212, 175, 55, 0.3);
+
+  box-shadow:
+    0 22px 50px rgba(13, 27, 42, 0.13);
+}
+
+.mission-card:hover::after {
+  transform: scaleX(1);
+}
+
+
+/* =========================
+   IMAGEM
+========================= */
+
+.mission-image {
+  position: relative;
+
+  flex: 0 0 330px;
+
+  height: 330px;
+
+  overflow: hidden;
+
+  background: #13283b;
+}
+
+.mission-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.6s ease;
+}
+
+.mission-card:hover
+.mission-image img {
+  transform: scale(1.055);
+}
+
+
+/* =========================
+   GRADIENTE DA FOTO
+========================= */
+
+.mission-image-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(6, 18, 29, 0.03) 30%,
+      rgba(6, 18, 29, 0.22) 70%,
+      rgba(6, 18, 29, 0.58) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+.image-placeholder {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0d1b2a,
+      #18344d
+    );
+
+  color: #d4af37;
+}
+
+.image-placeholder span {
+  font-size: 0.75rem;
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   LOCALIZAÇÃO
+========================= */
+
+.mission-location-badge {
+  position: absolute;
+
+  z-index: 3;
+
+  left: 24px;
+  bottom: 22px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding:
+    9px 14px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.2);
+
+  border-radius: 30px;
+
+  background:
+    rgba(7, 21, 34, 0.78);
+
+  color: #ffffff;
+
+  font-size: 0.73rem;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+
+  backdrop-filter:
+    blur(10px);
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ponto */
+
+.location-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #d4af37;
+
+  box-shadow:
+    0 0 7px
+    rgba(212, 175, 55, 0.6);
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.mission-content {
+  display: flex;
+
+  flex: 1;
+
+  flex-direction: column;
+
+  padding:
+    32px 32px 30px;
+}
+
+
+/* =========================
+   REGIÃO
+========================= */
+
+.mission-region {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #b18b20;
+
+  font-size: 0.7rem;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.mission-region::after {
+  content: '';
+
+  width: 32px;
+  height: 1px;
+
+  background:
+    rgba(212, 175, 55, 0.6);
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.mission-content h3 {
+  max-width: 480px;
+
+  margin:
+    15px 0 16px;
+
+  color: #0d1b2a;
+
+  font-size:
+    clamp(
+      1.45rem,
+      2.2vw,
+      1.8rem
+    );
+
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  letter-spacing: -0.025em;
+}
+
+
+/* =========================
+   DESCRIÇÃO
+========================= */
+
+.mission-content p {
+  display: -webkit-box;
+
+  overflow: hidden;
+
+  margin: 0;
+
+  color: #68747d;
+
+  font-size: 0.91rem;
+
+  line-height: 1.75;
+
+  line-clamp: 3;
+
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+
+/* =========================
+   LINK
+========================= */
+
+.mission-link {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  width: 100%;
+
+  margin-top: auto;
+
+  padding-top: 27px;
+
+  color: #0d1b2a;
+
+  text-decoration: none;
+}
+
+
+/* texto */
+
+.link-text {
+  font-size: 0.8rem;
+  font-weight: 800;
+
+  letter-spacing: 0.025em;
+}
+
+
+/* seta */
+
+.link-arrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 38px;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: #f7f5f0;
+
+  color: #b18b20;
+
+  font-size: 1.1rem;
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* hover */
+
+.mission-link:hover {
+  color: #b18b20;
+}
+
+.mission-link:hover
+.link-arrow {
+  transform: translateX(4px);
+
+  background: #d4af37;
+
+  color: #0d1b2a;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 950px) {
+
+  .mission-image {
+    flex-basis: 290px;
+
+    height: 290px;
+  }
+
+  .mission-content {
+    padding: 27px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .mission-image {
+    flex-basis: 270px;
+
+    height: 270px;
+  }
+
+  .mission-location-badge {
+    left: 20px;
+    bottom: 18px;
+  }
+
+  .mission-content {
+    padding:
+      25px 22px 23px;
+  }
+
+  .mission-content h3 {
+    font-size: 1.4rem;
+  }
+
+}
+
+
+/* =========================
+   MOBILE PEQUENO
+========================= */
+
+@media (max-width: 480px) {
+
+  .mission-card {
+    border-radius: 13px;
+  }
+
+  .mission-image {
+    flex-basis: 235px;
+
+    height: 235px;
+  }
+
+  .mission-location-badge {
+    left: 16px;
+    bottom: 15px;
+
+    padding:
+      8px 12px;
+  }
+
+  .mission-content {
+    padding:
+      23px 20px 21px;
+  }
+
+}
